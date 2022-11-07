@@ -16,7 +16,7 @@ const APIKEY = 'BRMbElnXrT3oySHJz4Eas16LjweZiaPt9dfcRQAS';
 //siis 2022-11-07T13:00:00Z
 
 export default function App() {
-  const [data, setData] = useState('')
+  const [data, setData] = useState([])
 
   useEffect(() => {
     fetch (URL, {
@@ -29,6 +29,7 @@ export default function App() {
     .then(response => response.json())
     .then((json) => {
       console.log(json)
+    
       setData(json)
     }, (error) => {
       console.log(error)
@@ -36,10 +37,12 @@ export default function App() {
   }, []);
      
   return (
-
-      <Text>jjiksrjnjt</Text>
-
-  )
+    <View style={styles.container}> 
+    {
+      data && data.length>0 && data.map((item)=><Text>{item.value}</Text>)
+    }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
