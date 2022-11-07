@@ -12,6 +12,9 @@ const APIKEY = 'D1fcMx4D0O6ua4wwnEGHZ9re1lFBsREE5G2tNZ8D';
 //start_time=2022-11-01T10%3A00%3A00Z&end_time=2022-11-01T11%3A00%3A00Z'; tässä on sitten se aikaväli, miltä hinta haetaan
 
 
+//jos haluaa ajan NYT, tai tietyllä hetkellä, sekä alku, että loppuaika pitää olla samat, muoto on 
+//siis 2022-11-07T13:00:00Z
+
 export default function App() {
   const [data, setData] = useState('')
 
