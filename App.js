@@ -21,23 +21,14 @@ export default function App() {
         'method': 'GET',
         'Content-Type': 'application/xml',
       },
-/*       parameter: {
-        //'TimeInterval': '2016-01-01T00:00Z/2016-01-02T00:00Z',
-        'documentType':'&documentType=A44&',
-        'in_Domain': 'in_Domain=10YFI-1--------U&',
-        'out_Domain': 'out_Domain=10YFI-1--------U&',
-        'periodStart': '202211082300&',
-        'periodEnd': '202211092300',
-      } */
     })
 
-    .then(response => response.xml())
-    .then((xml) => {
-      console.log(xml)
-      setData(xml)
-    }, (error) => {
+    .then(response => response.text())
+    .then((textResponse) =>  console.log('response is ', textResponse)) 
+    .catch((error) => {
       console.log(error)
     })
+
   }, []);
      
   return (
