@@ -8,14 +8,20 @@ const APIKEY2 = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
 const in_Domain = 'in_Domain=10YFI-1--------U&' // maakoodi
 const out_Domain = 'out_Domain=10YFI-1--------U&'
-const start = 'periodStart=202211082300&'
-const end = 'periodEnd=202211092300'
-//const loppu = '&documentType=A44&in_Domain=10YFI-1--------U&out_Domain=10YFI-1--------U&periodStart=202211082300&periodEnd=202211092300'
-// const [date, setDate] = useState(new Date());
+const start = 'periodStart=' + year + month + day + StartTime + '&'
+const end = 'periodEnd=' + year + month + day + EndTime + '&'
+const year= new Date().getFullYear()
+const month = new Date().getMonth()
+const day = new Date().getDay()
+const time = new Date().getHours() + '' + new Date().getMinutes()
+const StartTime = '0000'
+const EndTime = '2359'
 
 export default function App() {
   const [data, setData] = useState([])
   const [prices, setPrices] = useState([]);
+  const [date, setDate] = useState(new Date())
+  console.log(time)
 
   useEffect(() => {
     fetch(URL2 + APIKEY2 + documentType + in_Domain + out_Domain + start + end, {
@@ -33,9 +39,9 @@ export default function App() {
   .then(res => res.text())
   .then(data => {
       let json = new XMLParser().parseFromString(data);
-      console.log(json.getElementsByTagName('price'));
+      //console.log(json.getElementsByTagName('price'));
       setPrices(json.getElementsByTagName('price'));
-      console.log('hinnat' + prices[23].value); //megawattituntihinta, pitää muutta kilowattitunneiksi ja lisätä alv
+      console.log('hinnat' + prices[0].value); //megawattituntihinta, pitää muutta kilowattitunneiksi ja lisätä alv
     //  console.log(json)
       setData(json)
      // console.log('datan sisältö: ' + data)
