@@ -37,8 +37,10 @@ export default function App() {
         let json = new XMLParser().parseFromString(data);
         //console.log(json.getElementsByTagName('price'));
         setPrices(json.getElementsByTagName('price'))
-        console.log('hinta nyt: ' + prices[11].value); //megawattituntihinta, pitää muutta kilowattitunneiksi ja lisätä alv
-        console.log('indeksi, josta hinta haetaan: ' + index)  
+        let sum = parseFloat((prices[index].value) / 100 * 1.24).toFixed(3) // alv nyt, ennen 1.12.22
+        console.log('Hinta nyt, sis alv: ' + sum + 's/kWh')
+        //console.log('hinta nyt: ' + prices[index].value); //megawattituntihinta, pitää muutta kilowattitunneiksi ja lisätä alv
+        //console.log('indeksi, josta hinta haetaan: ' + index)  
       })
       .catch(err => console.log(err));
   }, [])
@@ -48,6 +50,7 @@ export default function App() {
       {
         data && data.length > 0 && data.map((item) => <Text>{item.value}</Text>)
       }
+
     </View>
   );
 }
