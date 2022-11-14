@@ -38,7 +38,7 @@ export default function App() {
         let json = new XMLParser().parseFromString(data);
         //console.log(json.getElementsByTagName('price'));
         setPrices(json.getElementsByTagName('price'))
-        let sum = parseFloat((prices[index].value) / 100 * 1.24).toFixed(3) // alv nyt, ennen 1.12.22
+        let sum = parseFloat((prices[index].value) / 10 * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
         setPriceNow(sum)
         console.log('Hinta nyt, sis alv: ' + sum + 's/kWh')
         //console.log('hinta nyt: ' + prices[index].value); //megawattituntihinta, pitää muutta kilowattitunneiksi ja lisätä alv
