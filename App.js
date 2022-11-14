@@ -11,14 +11,15 @@ const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 const day = new Date().getDate()
 const StartTime = '0000'
-const EndTime = '2359'
+const EndTime = '0000'
 const start = 'periodStart=' + year + month + day + StartTime + '&'
-const end = 'periodEnd=' + year + month + day + EndTime + '&'
+const end = 'periodEnd=' + year + month + (day+1) + EndTime 
 
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
   + start + end
-const time = new Date().getHours() + '' + new Date().getMinutes() // current time, tunti, täatä pitää vähentää 1, jota saadaan
+const time = new Date().getHours() // current time, tunti, täatä pitää vähentää 1, jota saadaan
     //oikea indeksi taulukosta
+const index = time -1 // hakee indexin,josta tämän hetken hinta haetaan
 
 export default function App() {
   const [data, setData] = useState([])
@@ -34,12 +35,10 @@ export default function App() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-        console.log(json.getElementsByTagName('price'));
-        setPrices(json.getElementsByTagName('price'));
-        //console.log('hinnat' + prices[0].value); //megawattituntihinta, pitää muutta kilowattitunneiksi ja lisätä alv
-        console.log(json)
-        setData(json)
-        // console.log('datan sisältö: ' + data)
+        //console.log(json.getElementsByTagName('price'));
+        setPrices(json.getElementsByTagName('price'))
+        console.log('hinta nyt: ' + prices[11].value); //megawattituntihinta, pitää muutta kilowattitunneiksi ja lisätä alv
+        console.log('indeksi, josta hinta haetaan: ' + index)  
       })
       .catch(err => console.log(err));
   }, [])
