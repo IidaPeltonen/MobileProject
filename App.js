@@ -11,9 +11,11 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const start = 'periodStart=202211082300&'
 const end = 'periodEnd=202211092300'
 //const loppu = '&documentType=A44&in_Domain=10YFI-1--------U&out_Domain=10YFI-1--------U&periodStart=202211082300&periodEnd=202211092300'
+// const [date, setDate] = useState(new Date());
 
 export default function App() {
   const [data, setData] = useState([])
+  const [prices, setPrices] = useState([]);
 
   useEffect(() => {
     fetch(URL2 + APIKEY2 + documentType + in_Domain + out_Domain + start + end, {
@@ -30,10 +32,13 @@ export default function App() {
   }, []); */
   .then(res => res.text())
   .then(data => {
-      let json = new XMLParser().parseFromString(data); 
-      console.log(json)
+      let json = new XMLParser().parseFromString(data);
+      console.log(json.getElementsByTagName('price'));
+      setPrices(json.getElementsByTagName('price'));
+      console.log('hinnat' + prices[23].value); //megawattituntihinta, pitää muutta kilowattitunneiksi ja lisätä alv
+    //  console.log(json)
       setData(json)
-      console.log('datan sisältö: ' + data)
+     // console.log('datan sisältö: ' + data)
   })
   .catch(err => console.log(err));
 }, [])
