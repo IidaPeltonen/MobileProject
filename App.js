@@ -48,7 +48,7 @@ export default function App() {
     //jos hinta nyt on sama kuin hinta tunnin päästä, kääntää nuolen oikealle ja muuttaa värin keltaiseksi
     if (priceNow === priceNextHour) {
       setArrow('right')
-      setColor('yellow')
+      setColor('black')
     }
     return arrow, color
   }
@@ -70,15 +70,11 @@ export default function App() {
     let smallPrice = 20000
     for(let i = 0; i < 24; i++) {
       let curValue = Number(prices[i].value)
-      console.log('curValue: ' + curValue)
-      console.log('smallPrice: ' + smallPrice)
       if (curValue < smallPrice) {
         smallPrice = curValue
       }
     }
     smallPrice = (smallPrice /10 * 1.24).toFixed(2) 
-    //console.log('curValue: ' + curValue)
-    //console.log('isoHinta: ' + isoHinta)
     setMinPrice(smallPrice)
   return minPrice
   } 
@@ -87,8 +83,6 @@ export default function App() {
     let average = 0
     for(let i = 0; i < 24; i++) {
       let price = Number(prices[i].value)
-      console.log('price: ' + price)
-      console.log('average nyt: ' + average) 
       average+= price
     }
     average = (average / 24 /10 * 1.24).toFixed(2) 
@@ -117,8 +111,6 @@ export default function App() {
         findMaxPrice(prices)
         findMinPrice(prices)
         findAvg(prices)
-        console.log('Haettava indeksi: ' + index) 
-        console.log('Seuraavan tunnin indeksi: ' + time)
         console.log('Seuraavan tunnin hinta: ' + priceNextHour)
         console.log('Hinta nyt, ei sis  alv: ' + noAlv + 'snt/kWh')
         console.log('Hinta nyt, sis alv: ' + sum + 'snt/kWh') 
