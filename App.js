@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import style from './style/style';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
