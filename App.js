@@ -20,15 +20,19 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
   + start + end
 const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
 const index = time - 1 // tästä taulukon indeksistä haetaan hinta
+//const maxPrice = 0
 
 export default function App() {
   const [data, setData] = useState([])
   const [prices, setPrices] = useState([]); //hinta-taulukko
-  const [priceNow, setPriceNow] = useState(''); //hinta juuri nyt
-  const [priceNextHour, setPriceNextHour] = useState(''); //hinta seuraavalla tunnilla
-  const [arrow, setArrow] = useState('') //nuolen suunnan määrittävä
-  const [color, setColor] = useState('') //nuolen värin määrittävä
-
+  const [priceNow, setPriceNow] = useState(0); //hinta juuri nyt
+  const [priceNextHour, setPriceNextHour] = useState(0); //hinta seuraavalla tunnilla
+  const [arrow, setArrow] = useState('right') //nuolen suunnan määrittävä
+  const [color, setColor] = useState('yellow') //nuolen värin määrittävä
+  const [maxPrice, setMaxPrice] = useState(0)
+  const [minPrice, setMinPrice] = useState(0)
+  const [avg, setAvg] = useState(0)
+ 
   function compare(priceNow, priceNextHour) {
     //jos hinta nyt on suurempi kuin hinta tunnin päästä, kääntää nuolen alas ja muuttaa värin vihreäksi
     if (priceNow > priceNextHour) {
@@ -45,12 +49,50 @@ export default function App() {
       setArrow('right')
       setColor('yellow')
     }
-
-/*     console.log('hinta nyt: ' + priceNow)
-    console.log('hinta tunnin päästä: ' + priceNextHour)    
-    console.log('arrow: ' + arrow)
-    console.log('color: ' + color) */
     return arrow, color
+  }
+ 
+  function findMaxPrice(prices) {
+    let bigPrice = 0
+    for(let i = 0; i < 24; i++) {
+      let curValue = Number(prices[i].value)
+      if (curValue > bigPrice) {
+        bigPrice = curValue
+      }
+    }
+    bigPrice = (bigPrice /10 * 1.24).toFixed(2) 
+    setMaxPrice(bigPrice)
+  return maxPrice
+  } 
+
+  function findMinPrice(prices) {
+    let smallPrice = 20000
+    for(let i = 0; i < 24; i++) {
+      let curValue = Number(prices[i].value)
+      console.log('curValue: ' + curValue)
+      console.log('smallPrice: ' + smallPrice)
+      if (curValue < smallPrice) {
+        smallPrice = curValue
+      }
+    }
+    smallPrice = (smallPrice /10 * 1.24).toFixed(2) 
+    //console.log('curValue: ' + curValue)
+    //console.log('isoHinta: ' + isoHinta)
+    setMinPrice(smallPrice)
+  return minPrice
+  } 
+
+  function findAvg(prices) {
+    let average = 0
+    for(let i = 0; i < 24; i++) {
+      let price = Number(prices[i].value)
+      console.log('price: ' + price)
+      console.log('average nyt: ' + average) 
+      average+= price
+    }
+    average = (average / 24 /10 * 1.24).toFixed(2) 
+    setAvg(average)
+    return avg
   }
 
   useEffect(() => {
@@ -65,20 +107,23 @@ export default function App() {
         let json = new XMLParser().parseFromString(data);
         //console.log(json.getElementsByTagName('price'));
         setPrices(json.getElementsByTagName('price'))
-        let noAlv = parseFloat((prices[index].value) / 10).toFixed(2)
-        let sum = parseFloat(noAlv * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
-        let priceNext = parseFloat((prices[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
+        let noAlv = Number((prices[index].value) / 10).toFixed(2) 
+        let sum = Number(noAlv * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
+        let priceNext = Number((prices[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
         setPriceNow(sum)
         setPriceNextHour(priceNext)
-        compare(priceNow, priceNextHour)
-        console.log('Taulukon aloitusaika: ' + start)
-        console.log('Taulukon lopetusaika: ' + end)
-        console.log('Kellonaika haettaessa: ' + time)
+        compare(sum, priceNext)
+        findMaxPrice(prices)
+        findMinPrice(prices)
+        findAvg(prices)
         console.log('Haettava indeksi: ' + index) 
         console.log('Seuraavan tunnin indeksi: ' + time)
         console.log('Seuraavan tunnin hinta: ' + priceNextHour)
         console.log('Hinta nyt, ei sis  alv: ' + noAlv + 'snt/kWh')
         console.log('Hinta nyt, sis alv: ' + sum + 'snt/kWh') 
+        console.log('Päivän korkein: ' + maxPrice + 'snt/kWh') 
+        console.log('Päivän matalin: ' + minPrice + 'snt/kWh') 
+        console.log('Päivän ka: ' + avg + 'snt/kWh') 
       })
       .catch(err => console.log(err));
   }, [])
@@ -89,12 +134,12 @@ export default function App() {
       <Text>Hinta nyt: {priceNow} </Text>
       <MaterialCommunityIcons
         name={'arrow-' + arrow + '-bold'}
-        color={'red'}
+        color={color}
         size={40}
       ></MaterialCommunityIcons>
-      <Text>Päivän ylin: 0 </Text>
-      <Text>Päivän alin: 0 </Text>
-      <Text>Päivän keskihinta: 0 </Text>
+      <Text>Päivän ylin: {maxPrice} </Text>
+      <Text>Päivän alin: {minPrice} </Text>
+      <Text>Päivän keskihinta: {avg} </Text>
     </View>
   );
 }
