@@ -16,15 +16,16 @@ export default StyleSheet.create({
       },
 
       logo:{
-      height: 90,
-      width: 90,
+        height: 90,
+        width: 90,
+        aspectRatio: 6 / 6
       },
 
       name: {
         marginTop: 30,
         fontSize: 30,
         fontFamily: 'RubikGlitch',
-        maxWidth: 280, 
+        maxWidth: 300, 
         maxHeight: 90
       },
 
