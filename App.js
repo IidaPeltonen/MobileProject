@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { LineChart } from "react-native-chart-kit";
 import style from './style/style';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
@@ -90,6 +91,19 @@ export default function App() {
     return avg
   }
 
+  const priceOfTheDay = //tähän tulee kaavio kaavioon, josta näkyy vuorokauden hintakaavio
+  {
+    labels: ["00", "01", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
+      "14", "15", "16", "17", "18", "19", "20", "21", "23"],
+    datasets: [
+      {
+        data: [
+          1, 22, 13, 4, 25, 6, 17, 8, 10, 0, 11, 24, 13, 4, 15, 26, 7, 18, 9, 0, 11, 24, 3
+        ]
+      }
+    ]
+  }
+
   useEffect(() => {
     fetch(URL, {
       headers: {
@@ -123,6 +137,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      
       <Text>Sähkön hinta tänään (snt/kWh,sis. Alv 24%)</Text>
       <Text>Hinta nyt: {priceNow} </Text>
       <MaterialCommunityIcons
