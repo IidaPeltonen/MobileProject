@@ -20,7 +20,6 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
   + start + end
 const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
 const index = time - 1 // tästä taulukon indeksistä haetaan hinta
-//const maxPrice = 0
 
 export default function App() {
   const [data, setData] = useState([])
@@ -115,7 +114,7 @@ export default function App() {
         console.log('Hinta nyt, sis alv: ' + sum + 'snt/kWh') 
         console.log('Päivän korkein: ' + maxPrice + 'snt/kWh') 
         console.log('Päivän matalin: ' + minPrice + 'snt/kWh') 
-        console.log('Päivän ka: ' + avg + 'snt/kWh') 
+        console.log('Päivän ka: ' + avg + 'snt/kWh') //
       })
       .catch(err => console.log(err));
   }, [])
