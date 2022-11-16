@@ -21,7 +21,7 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
 const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
 const index = time - 1 // tästä taulukon indeksistä haetaan hinta
 
-export default function App() {
+export default function Elepricenow() {
   const [data, setData] = useState([])
   const [prices, setPrices] = useState([]); //hinta-taulukko
   const [priceNow, setPriceNow] = useState(0); //hinta juuri nyt
