@@ -9,7 +9,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header></Header>
-      <Elepricenow></Elepricenow>
+      {/* <Elepricenow></Elepricenow> */}
+      <Elediagrams></Elediagrams>
       <Footer></Footer>
     </View>
   );

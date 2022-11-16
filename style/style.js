@@ -1,5 +1,8 @@
 ////npx expo install expo-font
 ///npm i react-native-vector-icons    npm i react-xml-parser
+///npx expo install react-native-svg@13.4.0
+///npm install react-native-chart-kit
+
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
