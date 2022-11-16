@@ -17,7 +17,7 @@ export default function Header() {
     <View>
       <View style={styles.header}>
       <Image source = {require('../assets/sp3.png')}
-      style={{flex: 1, height: 103 }} />
+      style={{maxWidth: 90, maxHeight: 90}} />
       <Text style={styles.name}>Sähköpäivystäjä</Text>
       </View>
       <Burger />
