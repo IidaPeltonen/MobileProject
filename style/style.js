@@ -12,12 +12,7 @@ export default StyleSheet.create({
       header: {
         margin: 10,
         paddingTop: 20,
-        flexDirection: 'row'
-      },
-
-      logo: {
-        height: 90,
-        width: 90
+        flexDirection: 'row',
       },
 
       name: {
