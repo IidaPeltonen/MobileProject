@@ -15,10 +15,17 @@ export default StyleSheet.create({
         flexDirection: 'row',
       },
 
+      logo:{
+      height: 90,
+      width: 90,
+      },
+
       name: {
         marginTop: 30,
         fontSize: 30,
-        fontFamily: 'RubikGlitch'
+        fontFamily: 'RubikGlitch',
+        maxWidth: 280, 
+        maxHeight: 90
       },
 
       burger: {
