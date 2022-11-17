@@ -1,8 +1,10 @@
 ////npx expo install expo-font
-///npm i react-native-vector-icons    npm i react-xml-parser
+///npm i react-native-vector-icons    
+///npm i react-xml-parser
 ///npx expo install react-native-svg@13.4.0
 ///npm install react-native-chart-kit
-/// npm install @react-navigation/material-top-tabs react-native-tab-view         npx expo install react-native-pager-view    
+/// npm install @react-navigation/material-top-tabs react-native-tab-view         
+///npx expo install react-native-pager-view    
 
 import { StyleSheet } from 'react-native';
 

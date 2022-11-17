@@ -21,9 +21,13 @@
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-native-chart-kit": "^6.12.0",
+<<<<<<< HEAD
     "react-native-gesture-handler": "~2.5.0",
     "react-native-pager-view": "5.4.24",
     "react-native-paper": "^4.12.5",
+=======
+    "react-native-pager-view": "5.4.24",
+>>>>>>> 9706acbfc093695357fcee4f9a096497e616125a
     "react-native-svg": "12.3.0",
     "react-native-tab-view": "^3.3.0",
     "react-native-vector-icons": "^9.2.0",

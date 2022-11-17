@@ -62,8 +62,8 @@ export default function ElediagramsDay() {
           chartConfig={chartConfig}
           bezier
           style={{
-            marginVertical: 8,
-            marginRight: 10,
+            paddingRight:35,
+            borderRadius: 16
           }}
         />
       )
@@ -74,12 +74,9 @@ export default function ElediagramsDay() {
     backgroundColor: "purple",
     backgroundGradientFrom: "blue",
     backgroundGradientTo: "pink",
-    decimalPlaces: 2, // optional, defaults to 2dp
+    decimalPlaces: 0, // optional, defaults to 2dp
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, //viivojen väri
-    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, //labeleiden väri
-    style: {
-      borderRadius: 16,
-    },
+    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, //labeleiden väri,
     propsForDots: {
       strokeWidth: "1",
       stroke: "purple" //palleroiden väri,
