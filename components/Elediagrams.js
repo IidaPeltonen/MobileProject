@@ -21,36 +21,55 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
 const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
 
 export default function Elediagrams() {
-  const [data, setData] = useState([])
   const [prices, setPrices] = useState([]); //hinta-taulukko
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
   function getPriceOfTheDay(prices) {
-    setNewPrices([])
+    const tempArr = []
     for (let i = 0; i < 24; i++) {
-      newPrices.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
+      tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
     }
-    console.log('newPrices: ' + newPrices)
-    return newPrices
+    setNewPrices(tempArr)
   }
-  
-  const priceOfTheDay =
-  {
-    labels: ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
-      "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
-    datasets: [
-      {
-        data: [
-         0, 1, 22, 13, 4, 25, 6, 17, 8, 10, 0, 11, 24, 13, 4, 15, 26, 7, 18, 9, 0, 11, 24, 3, 22
-        //newPrices
-        ]
-      }
-    ]
+
+  const priceOfTheDay = () => {
+    if (newPrices.length) {
+      console.log('length > 0')
+      return (
+        <LineChart
+          data={{
+            labels: ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
+              "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
+            datasets: [
+              {
+                data: newPrices.map(item => {
+                  return parseInt(item)
+                })
+              }
+            ]
+          }}
+          width={Dimensions.get("window").width - 10} // from react-native
+          height={220}
+          //yAxisSuffix="snt/kWh"
+          yAxisInterval={1} // optional, defaults to 1
+          fromZero='true' //näyttää y-akselin nollasta asti
+          //onDataPointClick	Function	Callback that takes {value, dataset, getColor}
+          //tähän voisi kikkailla sellaisen toiminnon, jolla nappulaa painamalla saisi 
+          //näkyviin tarkan ajan ja hinnan
+          chartConfig={chartConfig}
+          bezier
+          style={{
+            marginVertical: 8,
+            marginRight: 10,
+          }}
+        />
+      )
+    }
   }
 
   const chartConfig = {
     backgroundColor: "purple",
-    backgroundGradientFrom: "blue", 
+    backgroundGradientFrom: "blue",
     backgroundGradientTo: "pink",
     decimalPlaces: 2, // optional, defaults to 2dp
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, //viivojen väri
@@ -74,7 +93,6 @@ export default function Elediagrams() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-        //console.log(json.getElementsByTagName('price'));
         setPrices(json.getElementsByTagName('price'))
         const temp = json.getElementsByTagName('price')
         setNewPrices([])
@@ -84,28 +102,12 @@ export default function Elediagrams() {
   }, [])
 
   return (
-      <View style={styles.priceOfTheDay}>
-        <Text style={styles.head}>
-          Sähkön hintakehitys
-        </Text>
-        <LineChart
-          data={priceOfTheDay}
-          width={Dimensions.get("window").width - 10} // from react-native
-          height={220}
-          //yAxisSuffix="snt/kWh"
-          yAxisInterval={1} // optional, defaults to 1
-          fromZero='true' //näyttää y-akselin nollasta asti
-          //onDataPointClick	Function	Callback that takes {value, dataset, getColor}
-          //tähän voisi kikkailla sellaisen toiminnon, jolla nappulaa painamalla saisi 
-          //näkyviin tarkan ajan ja hinnan
-          chartConfig={chartConfig}
-          bezier
-          style={{
-            marginVertical: 8,
-            marginRight: 10,
-          }}
-        />
-      </View>
+    <View style={styles.priceOfTheDay}>
+      <Text style={styles.head}>
+        Sähkön hintakehitys
+      </Text>
+      {priceOfTheDay()}
+    </View>
   )
 }
 
