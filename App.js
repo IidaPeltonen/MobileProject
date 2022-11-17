@@ -13,8 +13,8 @@ export default function App() {
     <View style={styles.container}>
       <Header></Header>
       {/* <Elepricenow></Elepricenow> */}
-      <ElediagramsDay></ElediagramsDay>
-      {/* <ElediagramsWeek></ElediagramsWeek> */}
+      {/* <ElediagramsDay></ElediagramsDay> */}
+      <ElediagramsWeek></ElediagramsWeek>
       {/* <ElediagramsMonth></ElediagramsMonth> */}
       {/* <ElediagramsYear></ElediagramsYear> */}
       <Footer></Footer>
