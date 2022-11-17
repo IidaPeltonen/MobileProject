@@ -1,4 +1,4 @@
-import {  Text, View } from 'react-native';
+import {  Text, View, ScrollView } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -120,17 +120,22 @@ export default function Elepricenow() {
   }, [])
 
   return (
-    <View style={styles.container}>
-      <Text>Sähkön hinta tänään (snt/kWh,sis. Alv 24%)</Text>
-      <Text>Hinta nyt: {priceNow} </Text>
-      <MaterialCommunityIcons
-        name={'arrow-' + arrow + '-bold'}
-        color={color}
-        size={40}
-      ></MaterialCommunityIcons>
-      <Text>Päivän ylin: {maxPrice} </Text>
-      <Text>Päivän alin: {minPrice} </Text>
-      <Text>Päivän keskihinta: {avg} </Text>
+    <View>
+      <ScrollView>
+        <Text style={styles.title}>Sähkön hinta tänään (snt/kWh,sis. Alv 24%)</Text>
+        <View style={styles.square}>
+        <Text style={styles.important}>Hinta nyt: {priceNow}       
+        <MaterialCommunityIcons
+          name={'arrow-' + arrow + '-bold'}
+          color={color}
+          size={40}
+          style={styles.icon}
+        ></MaterialCommunityIcons></Text>
+        <Text style={styles.text}>Päivän ylin: {maxPrice} </Text>
+        <Text style={styles.text}>Päivän alin: {minPrice} </Text>
+        <Text style={styles.text}>Päivän keskihinta: {avg} </Text>
+        </View>
+        </ScrollView>
     </View>
   );
 }

@@ -2,6 +2,7 @@
 ///npm i react-native-vector-icons    npm i react-xml-parser
 ///npx expo install react-native-svg@13.4.0
 ///npm install react-native-chart-kit
+/// npm install @react-navigation/material-top-tabs react-native-tab-view         npx expo install react-native-pager-view    
 
 import { StyleSheet } from 'react-native';
 
@@ -15,21 +16,18 @@ export default StyleSheet.create({
       header: {
         margin: 10,
         paddingTop: 20,
-        flexDirection: 'row',
+        flexDirection: 'row'
       },
 
-      logo:{
+      logo: {
         height: 90,
-        width: 90,
-        aspectRatio: 6 / 6
+        width: 90
       },
 
       name: {
         marginTop: 30,
         fontSize: 30,
-        fontFamily: 'RubikGlitch',
-        maxWidth: 300, 
-        maxHeight: 90
+        fontFamily: 'RubikGlitch'
       },
 
       burger: {
@@ -37,12 +35,52 @@ export default StyleSheet.create({
       },
 
       footer: {
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 15,
       },
 
       team: {
-        fontSize:20,
+        fontSize:15,
         fontWeight: 'bold'
-      }
-});
+      },
 
+      title: {
+        paddingLeft: 20,
+        fontSize: 20,
+        backgroundColor: '#FFC300',
+        paddingTop: 20,
+      },
+
+      square: {
+        backgroundColor: '#5F5F5F',
+        borderColor: 'black',
+        borderRadius: 2,
+        borderWidth: 1,
+        paddingTop: 10,
+        paddingBottom: 20,
+        height: 555
+      },
+
+      important: {
+        paddingLeft: 20,
+        paddingBottom: 40,
+        fontSize: 20,
+        color: 'white',
+      },
+
+      text:{
+        paddingLeft: 20,
+        paddingTop: 20,
+        paddingBottom:20,
+        color: 'white',
+      },
+
+      icon:{
+        paddingBottom: 40,
+      },
+
+      View:{
+        backgroundColor: '#FFC300',
+        color: '#FFC300',
+      },
+});
