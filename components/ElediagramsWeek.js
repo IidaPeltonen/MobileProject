@@ -40,9 +40,10 @@ export default function ElediagramsWeek() {
       return (
         <LineChart
           data={{
-            labels: [sevenDaysAgoDay+'.'+month, (sevenDaysAgoDay+1)+'.'+month,  (sevenDaysAgoDay+2)+'.'+month, 
-                (sevenDaysAgoDay+3)+'.'+month, (sevenDaysAgoDay+4)+'.'+month, (sevenDaysAgoDay+5)+'.'+month, 
-                (sevenDaysAgoDay+6)+'.'+month, day+'.'+month], 
+            labels: [sevenDaysAgoDay+'.'+sevenDaysAgoMonth, (sevenDaysAgoDay+1)+'.'+sevenDaysAgoMonth,  
+            (sevenDaysAgoDay+2)+'.'+sevenDaysAgoMonth, (sevenDaysAgoDay+3)+'.'+sevenDaysAgoMonth, 
+            (sevenDaysAgoDay+4)+'.'+sevenDaysAgoMonth, (sevenDaysAgoDay+5)+'.'+sevenDaysAgoMonth, 
+            (sevenDaysAgoDay+6)+'.'+sevenDaysAgoMonth, day+'.'+month], 
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -96,9 +97,6 @@ export default function ElediagramsWeek() {
         const temp = json.getElementsByTagName('price')
         setNewPrices([])
         getPriceOfTheWeek(temp)
-        console.log('sevenDaysAgoDay: ' + sevenDaysAgoDay)
-        console.log('sevenDaysAgoMonth: ' + sevenDaysAgoMonth)
-        console.log('sevenDaysAgoYear: ' + sevenDaysAgoYear)
       })
       .catch(err => console.log(err));
   }, [])

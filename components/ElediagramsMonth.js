@@ -11,10 +11,12 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 const day = new Date().getDate()
-const MonthAgo= (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getDate() // pvm 30vrk sitten
+const monthAgoDay= (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getDate()
+const monthAgoMonth= (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getMonth() + 1
+const monthAgoYear= (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getFullYear()
 const StartTime = '0000'
 const EndTime = '0000'
-const start = 'periodStart=' + year + month + MonthAgo + StartTime + '&'
+const start = 'periodStart=' + monthAgoYear + monthAgoMonth + monthAgoDay + StartTime + '&'
 const end = 'periodEnd=' + year + month + day + EndTime
 
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
@@ -38,9 +40,12 @@ export default function ElediagramsMonth() {
       return (
         <LineChart
           data={{
-            labels: [MonthAgo+'.'+month, (MonthAgo+1)+'.'+month,  (MonthAgo+2)+'.'+month, 
-                (MonthAgo+3)+'.'+month, (MonthAgo+4)+'.'+month, (MonthAgo+5)+'.'+month, 
-                (MonthAgo+6)+'.'+month, day+'.'+month], 
+            labels: [monthAgoDay+'.'+monthAgoMonth, (monthAgoDay+1)+'.'+monthAgoMonth, 
+             (monthAgoDay+2)+'.'+monthAgoMonth, (monthAgoDay+3)+'.'+monthAgoMonth, 
+             (monthAgoDay+4)+'.'+monthAgoMonth, (monthAgoDay+5)+'.'+monthAgoMonth, 
+                (monthAgoDay+6)+'.'+monthAgoMonth, day+'.'+monthAgoMonth],
+                //miten tähän saisi mäppäyksen, joka toisi
+                //kaikki nuo päivämäärät tuolta taulukosta?
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -94,9 +99,9 @@ export default function ElediagramsMonth() {
         const temp = json.getElementsByTagName('price')
         setNewPrices([])
         getpriceOfTheMonth(temp)
-        console.log('monthAgo: ' + MonthAgo)
-        console.log('start: ' + start)
-        console.log('end: ' + end)
+        console.log('MontAgoDay: ' + monthAgoDay)
+        console.log('MonthAgoMonth: ' + monthAgoMonth)
+        console.log('MonthAgoYear: ' + monthAgoYear)
       })
       .catch(err => console.log(err));
   }, [])
