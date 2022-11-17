@@ -53,6 +53,12 @@ export default StyleSheet.create({
         paddingTop: 20,
       },
 
+      info: {
+        paddingLeft: 20,
+        fontSize: 15,
+        backgroundColor: '#FFC300',
+      },
+
       square: {
         backgroundColor: '#5F5F5F',
         borderColor: 'black',

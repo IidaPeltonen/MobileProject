@@ -5,7 +5,8 @@ import styles from "../style/style"
 export default function ElediagramsYear() {
   return (
     <View>
-      <Text>Vuasi</Text>
+      <Text style={styles.title}>Sähkön hintakehitys</Text>
+      <Text style={styles.info}>viimeisen vuoden aikana</Text>
     </View>
   )
 }

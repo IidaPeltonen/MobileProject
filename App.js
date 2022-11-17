@@ -10,7 +10,6 @@ import Footer from "./components/Footer";
 import styles from './style/style'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { StackView } from '@react-navigation/stack';
 import ElediagramsWeek from './components/ElediagramsWeek';
 import ElediagramsMonth from './components/ElediagramsMonth';
 import ElediagramsYear from './components/ElediagramsYear';

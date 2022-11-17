@@ -103,14 +103,10 @@ export default function ElediagramsDay() {
 
   return (
     <View style={styles.priceOfTheDay}>
-      
-      <Text style={styles.head}>
-        Sähkön hintakehitys tänään
-      </Text>
-      
-      {priceOfTheDay()}
-
-    </View>
+    <Text style={styles.title}>Sähkön hintakehitys </Text>
+    <Text style={styles.info}>viimeisen vuorokauden aikana</Text>
+    {priceOfTheDay()}
+  </View>
   )
 }
 

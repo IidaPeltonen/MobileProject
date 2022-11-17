@@ -106,9 +106,8 @@ export default function ElediagramsWeek() {
 
   return (
     <View style={styles.priceOfTheDay}>
-      <Text style={styles.head}>
-        Sähkön hintakehitys viimeisen viikon aikana
-      </Text>
+      <Text style={styles.title}>Sähkön hintakehitys</Text>
+      <Text style={styles.info}>viimeisen viikon aikana</Text>
       {priceOfTheWeek()}
     </View>
   )
