@@ -40,7 +40,6 @@ export default function ElediagramsDay() {
 
   const priceOfTheDay = () => {
     if (newPrices.length) {
-      console.log('length > 0')
       return (
         <LineChart
           data={{
