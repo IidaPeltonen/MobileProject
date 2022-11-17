@@ -57,10 +57,9 @@ export default function ElediagramsWeek() {
           //tähän voisi kikkailla sellaisen toiminnon, jolla nappulaa painamalla saisi 
           //näkyviin tarkan ajan ja hinnan
           chartConfig={chartConfig}
-          bezier
           style={{
-            marginVertical: 8,
-            marginRight: 10,
+            paddingRight:35,
+            borderRadius: 16
           }}
         />
       )
