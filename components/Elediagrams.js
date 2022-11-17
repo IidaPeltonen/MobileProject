@@ -25,7 +25,6 @@ export default function Elediagrams() {
   const [prices, setPrices] = useState([]); //hinta-taulukko
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
-
   function getPriceOfTheDay(prices) {
     setNewPrices([])
     for (let i = 0; i < 24; i++) {
@@ -42,8 +41,8 @@ export default function Elediagrams() {
     datasets: [
       {
         data: [
-          0, 1, 22, 13, 4, 25, 6, 17, 8, 10, 0, 11, 24, 13, 4, 15, 26, 7, 18, 9, 0, 11, 24, 3, 22
-          //newPrices
+         0, 1, 22, 13, 4, 25, 6, 17, 8, 10, 0, 11, 24, 13, 4, 15, 26, 7, 18, 9, 0, 11, 24, 3, 22
+        //newPrices
         ]
       }
     ]
@@ -77,8 +76,9 @@ export default function Elediagrams() {
         let json = new XMLParser().parseFromString(data);
         //console.log(json.getElementsByTagName('price'));
         setPrices(json.getElementsByTagName('price'))
+        const temp = json.getElementsByTagName('price')
         setNewPrices([])
-        getPriceOfTheDay(prices)
+        getPriceOfTheDay(temp)
       })
       .catch(err => console.log(err));
   }, [])

@@ -98,17 +98,17 @@ export default function Elepricenow() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-        //console.log(json.getElementsByTagName('price'));
         setPrices(json.getElementsByTagName('price'))
-        let noAlv = Number((prices[index].value) / 10).toFixed(2) 
+        const temp = json.getElementsByTagName('price')
+        let noAlv = Number((temp[index].value) / 10).toFixed(2) 
         let sum = Number(noAlv * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
-        let priceNext = Number((prices[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
+        let priceNext = Number((temp[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
         setPriceNow(sum)
         setPriceNextHour(priceNext)
         compare(sum, priceNext)
-        findMaxPrice(prices)
-        findMinPrice(prices)
-        findAvg(prices)
+        findMaxPrice(temp)
+        findMinPrice(temp)
+        findAvg(temp)
         console.log('Seuraavan tunnin hinta: ' + priceNextHour)
        /// console.log('Hinta nyt, ei sis  alv: ' + noAlv + 'snt/kWh')
         console.log('Hinta nyt, sis alv: ' + sum + 'snt/kWh') 
