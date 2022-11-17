@@ -1,8 +1,12 @@
-import { StyleSheet, Text, View, Dimensions, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, SafeAreaView, Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import styles from '../style/style';
+
+
+
+
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
@@ -102,10 +106,13 @@ export default function ElediagramsDay() {
 
   return (
     <View style={styles.priceOfTheDay}>
+      
       <Text style={styles.head}>
         Sähkön hintakehitys tänään
       </Text>
+      
       {priceOfTheDay()}
+
     </View>
   )
 }
