@@ -105,16 +105,21 @@ export default function Elepricenow() {
         let priceNext = Number((temp[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
         setPriceNow(sum)
         setPriceNextHour(priceNext)
-        compare(sum, priceNext)
+/*         console.log('priceNext: ' + priceNext)
+        console.log('sum: ' + sum)
+        console.log('priceNow: ' + priceNow)
+        console.log('priceNextHour: ' + priceNextHour)
+        compare(sum, priceNext) */
         findMaxPrice(temp)
         findMinPrice(temp)
         findAvg(temp)
         console.log('Seuraavan tunnin hinta: ' + priceNextHour)
        /// console.log('Hinta nyt, ei sis  alv: ' + noAlv + 'snt/kWh')
         console.log('Hinta nyt, sis alv: ' + sum + 'snt/kWh') 
-        console.log('Päivän korkein: ' + maxPrice + 'snt/kWh') 
+/*         console.log('Päivän korkein: ' + maxPrice + 'snt/kWh') 
         console.log('Päivän matalin: ' + minPrice + 'snt/kWh') 
-        console.log('Päivän ka: ' + avg + 'snt/kWh') //
+        console.log('Päivän ka: ' + avg + 'snt/kWh') // */
+        console.log('---') 
       })
       .catch(err => console.log(err));
   }, [])
