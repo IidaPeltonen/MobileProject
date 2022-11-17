@@ -11,10 +11,12 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 const day = new Date().getDate()
-const sevenDaysAgo= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getDate()
+const sevenDaysAgoDay= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getDate()
+const sevenDaysAgoMonth= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getMonth() + 1
+const sevenDaysAgoYear= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getFullYear()
 const StartTime = '0000'
 const EndTime = '0000'
-const start = 'periodStart=' + year + month + sevenDaysAgo + StartTime + '&'
+const start = 'periodStart=' + sevenDaysAgoYear + sevenDaysAgoMonth + sevenDaysAgoDay + StartTime + '&'
 const end = 'periodEnd=' + year + month + day + EndTime
 
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
@@ -38,9 +40,9 @@ export default function ElediagramsWeek() {
       return (
         <LineChart
           data={{
-            labels: [sevenDaysAgo+'.'+month, (sevenDaysAgo+1)+'.'+month,  (sevenDaysAgo+2)+'.'+month, 
-                (sevenDaysAgo+3)+'.'+month, (sevenDaysAgo+4)+'.'+month, (sevenDaysAgo+5)+'.'+month, 
-                (sevenDaysAgo+6)+'.'+month, day+'.'+month], 
+            labels: [sevenDaysAgoDay+'.'+month, (sevenDaysAgoDay+1)+'.'+month,  (sevenDaysAgoDay+2)+'.'+month, 
+                (sevenDaysAgoDay+3)+'.'+month, (sevenDaysAgoDay+4)+'.'+month, (sevenDaysAgoDay+5)+'.'+month, 
+                (sevenDaysAgoDay+6)+'.'+month, day+'.'+month], 
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -57,6 +59,7 @@ export default function ElediagramsWeek() {
           //tähän voisi kikkailla sellaisen toiminnon, jolla nappulaa painamalla saisi 
           //näkyviin tarkan ajan ja hinnan
           chartConfig={chartConfig}
+          bezier
           style={{
             paddingRight:35,
             borderRadius: 16
@@ -70,12 +73,9 @@ export default function ElediagramsWeek() {
     backgroundColor: "purple",
     backgroundGradientFrom: "blue",
     backgroundGradientTo: "pink",
-    decimalPlaces: 2, // optional, defaults to 2dp
+    decimalPlaces: 0, // optional, defaults to 2dp
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, //viivojen väri
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, //labeleiden väri
-    style: {
-      borderRadius: 16,
-    },
     propsForDots: {
       strokeWidth: "1",
       stroke: "purple" //palleroiden väri,
@@ -94,18 +94,17 @@ export default function ElediagramsWeek() {
         let json = new XMLParser().parseFromString(data);
         setPrices(json.getElementsByTagName('price'))
         const temp = json.getElementsByTagName('price')
-        //hae ensin ekan päivän hinnat
-        //laske niiden ka ja syötä uuteen tauluun
-        //toista koko viikolle
-        //vasta sitten mappaus diagrammiin
         setNewPrices([])
         getPriceOfTheWeek(temp)
+        console.log('sevenDaysAgoDay: ' + sevenDaysAgoDay)
+        console.log('sevenDaysAgoMonth: ' + sevenDaysAgoMonth)
+        console.log('sevenDaysAgoYear: ' + sevenDaysAgoYear)
       })
       .catch(err => console.log(err));
   }, [])
 
   return (
-    <View style={styles.priceOfTheDay}>
+    <View style={styles.priceOfTheWeek}>
       <Text style={styles.title}>Sähkön hintakehitys</Text>
       <Text style={styles.info}>viimeisen viikon aikana</Text>
       {priceOfTheWeek()}
