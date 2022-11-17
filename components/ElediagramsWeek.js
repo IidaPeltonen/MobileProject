@@ -25,10 +25,6 @@ export default function ElediagramsWeek() {
   const [prices, setPrices] = useState([]); //hinta-taulukko
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
-/*   console.log('start: ' + start)
-  console.log('end: ' + end)
-  console.log('prices length: ' + prices.length)  */
-
   function getPriceOfTheWeek(prices) {
     const tempArr = []
     for (let i = 0; i < (prices.length-24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
@@ -42,7 +38,9 @@ export default function ElediagramsWeek() {
       return (
         <LineChart
           data={{
-            labels: ["Ma", "Ti", "Ke", "To", "Pe", "La", "Su"],
+            labels: [sevenDaysAgo+'.'+month, (sevenDaysAgo+1)+'.'+month,  (sevenDaysAgo+2)+'.'+month, 
+                (sevenDaysAgo+3)+'.'+month, (sevenDaysAgo+4)+'.'+month, (sevenDaysAgo+5)+'.'+month, 
+                (sevenDaysAgo+6)+'.'+month, day+'.'+month], 
             datasets: [
               {
                 data: newPrices.map(item => {
