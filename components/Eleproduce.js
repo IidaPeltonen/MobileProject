@@ -56,7 +56,8 @@ export default function Footer() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         setLoads(json.getElementsByTagName('quantity'))
-        setLastLoad(Number(loads[index].value));
+        let temp = json.getElementsByTagName('quantity')
+        setLastLoad(Number(temp[index].value));
 
       // tällä tavalla saa ulos tietyn tunnin kokonaiskulutuksen.
       //  console.log(loads[index].value) 
@@ -75,10 +76,10 @@ export default function Footer() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         setGenerations(json.getElementsByTagName('quantity'))
-
+        let temp = json.getElementsByTagName('quantity')
       // tällä tavalla saa ulos tietyn tunnin suunnitellun kokonaistuotannon.
-        console.log(generations[16].value) 
-        setLastGeneration(Number(generations[index].value));
+        console.log(temp[16].value) 
+        setLastGeneration(Number(temp[index].value));
         importNeedCalculation(lastLoad,lastGeneration)
       })
       .catch(err => console.log(err));

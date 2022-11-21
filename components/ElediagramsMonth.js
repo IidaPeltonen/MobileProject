@@ -24,7 +24,6 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
 const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
 
 export default function ElediagramsMonth() {
-  const [prices, setPrices] = useState([]); //hinta-taulukko
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
   function getpriceOfTheMonth(prices) {
@@ -95,13 +94,10 @@ export default function ElediagramsMonth() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-        setPrices(json.getElementsByTagName('price'))
         const temp = json.getElementsByTagName('price')
         setNewPrices([])
         getpriceOfTheMonth(temp)
-        console.log('MontAgoDay: ' + monthAgoDay)
-        console.log('MonthAgoMonth: ' + monthAgoMonth)
-        console.log('MonthAgoYear: ' + monthAgoYear)
+
       })
       .catch(err => console.log(err));
   }, [])
@@ -110,7 +106,7 @@ export default function ElediagramsMonth() {
     <View style={styles.priceOfTheMonth}>
       <Text style={styles.title}>Sähkön hintakehitys</Text>
       <Text style={styles.info}>viimeisen kuukauden aikana</Text>
-      <Text style={styles.info}>EI VIELÄ TEHTY</Text>
+      <Text style={styles.info}>KESKEN</Text>
       {priceOfTheMonth()}
     </View>
   )

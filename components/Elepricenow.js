@@ -23,11 +23,10 @@ const index = time - 1 // tästä taulukon indeksistä haetaan hinta
 
 export default function Elepricenow() {
   const [data, setData] = useState([])
-  const [prices, setPrices] = useState([]); //hinta-taulukko
   const [priceNow, setPriceNow] = useState(0); //hinta juuri nyt
   const [priceNextHour, setPriceNextHour] = useState(0); //hinta seuraavalla tunnilla
-  const [arrow, setArrow] = useState('right') //nuolen suunnan määrittävä
-  const [color, setColor] = useState('yellow') //nuolen värin määrittävä
+  const [arrow, setArrow] = useState('left') //nuolen suunnan määrittävä
+  const [color, setColor] = useState('') //nuolen värin määrittävä
   const [maxPrice, setMaxPrice] = useState(0)
   const [minPrice, setMinPrice] = useState(0)
   const [avg, setAvg] = useState(0)
@@ -98,28 +97,22 @@ export default function Elepricenow() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-        setPrices(json.getElementsByTagName('price'))
         const temp = json.getElementsByTagName('price')
         let noAlv = Number((temp[index].value) / 10).toFixed(2) 
         let sum = Number(noAlv * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
         let priceNext = Number((temp[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
         setPriceNow(sum)
         setPriceNextHour(priceNext)
-/*         console.log('priceNext: ' + priceNext)
-        console.log('sum: ' + sum)
-        console.log('priceNow: ' + priceNow)
-        console.log('priceNextHour: ' + priceNextHour)
-        compare(sum, priceNext) */
         findMaxPrice(temp)
         findMinPrice(temp)
+/*         console.log('sum: ' + sum)
+        console.log('priceNext: ' + priceNext) */
+        compare(sum, priceNext)
+/*         console.log('hinta nyt:' + priceNow)
+        console.log('hinta tunnin päästä:' + priceNextHour)
+        console.log('arrow:' + arrow)
+        console.log('color:' + color) */
         findAvg(temp)
-        console.log('Seuraavan tunnin hinta: ' + priceNextHour)
-       /// console.log('Hinta nyt, ei sis  alv: ' + noAlv + 'snt/kWh')
-        console.log('Hinta nyt, sis alv: ' + sum + 'snt/kWh') 
-/*         console.log('Päivän korkein: ' + maxPrice + 'snt/kWh') 
-        console.log('Päivän matalin: ' + minPrice + 'snt/kWh') 
-        console.log('Päivän ka: ' + avg + 'snt/kWh') // */
-        console.log('---') 
       })
       .catch(err => console.log(err));
   }, [])
