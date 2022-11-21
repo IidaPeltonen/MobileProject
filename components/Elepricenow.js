@@ -1,4 +1,4 @@
-import {  Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -30,7 +30,7 @@ export default function Elepricenow() {
   const [maxPrice, setMaxPrice] = useState(0)
   const [minPrice, setMinPrice] = useState(0)
   const [avg, setAvg] = useState(0)
- 
+
   function compare(priceNow, priceNextHour) {
     //jos hinta nyt on suurempi kuin hinta tunnin päästä, kääntää nuolen alas ja muuttaa värin vihreäksi
     if (priceNow > priceNextHour) {
@@ -49,40 +49,40 @@ export default function Elepricenow() {
     }
     return arrow, color
   }
- 
+
   function findMaxPrice(prices) {
     let bigPrice = 0
-    for(let i = 0; i < 24; i++) {
+    for (let i = 0; i < 24; i++) {
       let curValue = Number(prices[i].value)
       if (curValue > bigPrice) {
         bigPrice = curValue
       }
     }
-    bigPrice = (bigPrice /10 * 1.24).toFixed(2) 
+    bigPrice = (bigPrice / 10 * 1.24).toFixed(2)
     setMaxPrice(bigPrice)
-  return maxPrice
-  } 
+    return maxPrice
+  }
 
   function findMinPrice(prices) {
     let smallPrice = 20000
-    for(let i = 0; i < 24; i++) {
+    for (let i = 0; i < 24; i++) {
       let curValue = Number(prices[i].value)
       if (curValue < smallPrice) {
         smallPrice = curValue
       }
     }
-    smallPrice = (smallPrice /10 * 1.24).toFixed(2) 
+    smallPrice = (smallPrice / 10 * 1.24).toFixed(2)
     setMinPrice(smallPrice)
-  return minPrice
-  } 
+    return minPrice
+  }
 
   function findAvg(prices) {
     let average = 0
-    for(let i = 0; i < 24; i++) {
+    for (let i = 0; i < 24; i++) {
       let price = Number(prices[i].value)
-      average+= price
+      average += price
     }
-    average = (average / 24 /10 * 1.24).toFixed(2) 
+    average = (average / 24 / 10 * 1.24).toFixed(2)
     setAvg(average)
     return avg
   }
@@ -98,21 +98,22 @@ export default function Elepricenow() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
-        let noAlv = Number((temp[index].value) / 10).toFixed(2) 
+
+        let noAlv = Number((temp[index].value) / 10).toFixed(2)
         let sum = Number(noAlv * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
         let priceNext = Number((temp[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
         setPriceNow(sum)
         setPriceNextHour(priceNext)
         findMaxPrice(temp)
         findMinPrice(temp)
-/*         console.log('sum: ' + sum)
-        console.log('priceNext: ' + priceNext) */
         compare(sum, priceNext)
-/*         console.log('hinta nyt:' + priceNow)
-        console.log('hinta tunnin päästä:' + priceNextHour)
-        console.log('arrow:' + arrow)
-        console.log('color:' + color) */
         findAvg(temp)
+        /*         console.log('sum: ' + sum)
+                console.log('priceNext: ' + priceNext)
+              console.log('hinta nyt:' + priceNow)
+                console.log('hinta tunnin päästä:' + priceNextHour)
+                console.log('arrow:' + arrow)
+                console.log('color:' + color) */
       })
       .catch(err => console.log(err));
   }, [])
@@ -122,18 +123,18 @@ export default function Elepricenow() {
       <ScrollView>
         <Text style={styles.title}>Sähkön hinta tänään (snt/kWh,sis. Alv 24%)</Text>
         <View style={styles.square}>
-        <Text style={styles.important}>Hinta nyt: {priceNow}       
-        <MaterialCommunityIcons
-          name={'arrow-' + arrow + '-bold'}
-          color={color}
-          size={40}
-          style={styles.icon}
-        ></MaterialCommunityIcons></Text>
-        <Text style={styles.text}>Päivän ylin: {maxPrice} </Text>
-        <Text style={styles.text}>Päivän alin: {minPrice} </Text>
-        <Text style={styles.text}>Päivän keskihinta: {avg} </Text>
+          <Text style={styles.important}>Hinta nyt: {priceNow}
+            <MaterialCommunityIcons
+              name={'arrow-' + arrow + '-bold'}
+              color={color}
+              size={40}
+              style={styles.icon}
+            ></MaterialCommunityIcons></Text>
+          <Text style={styles.text}>Päivän ylin: {maxPrice} </Text>
+          <Text style={styles.text}>Päivän alin: {minPrice} </Text>
+          <Text style={styles.text}>Päivän keskihinta: {avg} </Text>
         </View>
-        </ScrollView>
+      </ScrollView>
     </View>
   );
 }

@@ -95,9 +95,22 @@ export default function ElediagramsMonth() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
+        const temp2 = json.getElementsByTagName('start')
         setNewPrices([])
         getpriceOfTheMonth(temp)
-
+        //seuraava hakee taulukon jokaiselle pistelle tarkan ajan,
+        // ja hinnan
+        //tää pitää siirtää omaan funktioon joka sit näyttää nuo,
+        //kun pistettä klikkaa
+        console.log(temp2[0].value) //tällä saa ulos ekan pisteen pointsDaym ja kellonaika
+        let pointsYear = (temp2[0].value).substring(0,4)
+        let pointsMonth = (temp2[0].value).substring(5,7)
+        let pointsDay = (temp2[0].value).substring(8,10)
+        let pointsHour = (temp2[0].value).substring(11,16)
+        let pointPrice = temp[0].value
+        let pointTime = pointsDay + '.' + pointsMonth + '.' + pointsYear + ' ' + pointsHour
+        console.log('pointTime: ' + pointTime)
+        console.log('pointPrice: ' + pointPrice)
       })
       .catch(err => console.log(err));
   }, [])

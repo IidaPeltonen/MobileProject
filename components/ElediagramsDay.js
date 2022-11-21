@@ -4,10 +4,6 @@ import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import styles from '../style/style';
 
-
-
-
-
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
 const in_Domain = 'in_Domain=10YFI-1--------U&' // maakoodi
@@ -26,13 +22,19 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 
 export default function ElediagramsDay() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [times, setTimes] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
-  function getPriceOfTheDay(prices) {
+  function getPriceOfTheDay(prices, dates) {
     const tempArr = []
     for (let i = 0; i < 24; i++) {
       tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
     }
+    const tempDatesArr = []
+    for (let x = 0; x < 24; x++) {
+      tempDatesArr.push(Number(dates[x].value -1).toFixed(2)) // jotta saadaan indeksistä kellonaika
+    }
     setNewPrices(tempArr)
+    setTimes(tempDatesArr)
   }
 
   const priceOfTheDay = () => {
@@ -40,8 +42,11 @@ export default function ElediagramsDay() {
       return (
         <LineChart
           data={{
-            labels: ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
-              "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"],
+            labels: [
+              times.map(p => {
+              return parseInt(p)
+              })
+              ],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -52,7 +57,6 @@ export default function ElediagramsDay() {
           }}
           width={Dimensions.get("window").width - 10} // from react-native
           height={220}
-          //yAxisSuffix="snt/kWh"
           yAxisInterval={1} // optional, defaults to 1
           fromZero='true' //näyttää y-akselin nollasta asti
           //onDataPointClick	Function	Callback that takes {value, dataset, getColor}
@@ -64,6 +68,7 @@ export default function ElediagramsDay() {
             paddingRight:35,
             borderRadius: 16
           }}
+           
         />
       )
     }
@@ -93,8 +98,10 @@ export default function ElediagramsDay() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
+        const temp2 = json.getElementsByTagName('position')
         setNewPrices([])
-        getPriceOfTheDay(temp)
+        setTimes([])
+        getPriceOfTheDay(temp, temp2)
       })
       .catch(err => console.log(err));
   }, [])
