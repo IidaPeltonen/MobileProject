@@ -45,8 +45,8 @@ export default function App() {
       <Header></Header>
       <NavigationContainer>
       <Tab.Navigator screenOptions= {{tabBarLabelStyle: { fontSize: 14 , fontWeight:'bold', color: 'white' },
-        tabBarStyle: { backgroundColor: '#5F5F5F', borderWidth: 1, borderColor: '#2B2B2B', borderRadius: 3},
-        tabBarIndicatorStyle: {backgroundColor: '#FFC300'}
+        tabBarStyle: { backgroundColor: '#5F5F5F', borderWidth: 5, borderColor: '#FFC300'},
+        tabBarIndicatorStyle: {backgroundColor: 'black', height: 6}
         }}>
           <Tab.Screen  name="Hinta tänään" component={Elepricenow} />
           <Tab.Screen name="Hintakehitys" component={Development} />
