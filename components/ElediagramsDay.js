@@ -98,10 +98,18 @@ export default function ElediagramsDay() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
-        const temp2 = json.getElementsByTagName('position')
+        const temp2 = json.getElementsByTagName('start')
+        const temp3 = json.getElementsByTagName('position')
         setNewPrices([])
         setTimes([])
-        getPriceOfTheDay(temp, temp2)
+        getPriceOfTheDay(temp, temp3)
+        //seuraava hakee taulukon jokaiselle pistelle tarkan ajan,
+        // ja hinnan
+        //tää pitää siirtää omaan funktioon joka sit näyttää nuo,
+        //kun pistettä klikkaa
+        let pointsHour = (temp2[0].value).substring(11,16)
+        let pointPrice = temp[0].value
+        //console.log('Aika ja hinta indeksissä 0: ' +pointsHour + ' ja ' + pointPrice)
       })
       .catch(err => console.log(err));
   }, [])

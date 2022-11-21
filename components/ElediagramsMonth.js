@@ -109,8 +109,8 @@ export default function ElediagramsMonth() {
         let pointsHour = (temp2[0].value).substring(11,16)
         let pointPrice = temp[0].value
         let pointTime = pointsDay + '.' + pointsMonth + '.' + pointsYear + ' ' + pointsHour
-        console.log('pointTime: ' + pointTime)
-        console.log('pointPrice: ' + pointPrice)
+/*         console.log('pointTime: ' + pointTime)
+        console.log('pointPrice: ' + pointPrice) */
       })
       .catch(err => console.log(err));
   }, [])
