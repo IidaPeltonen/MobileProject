@@ -44,13 +44,6 @@ export default StyleSheet.create({
         fontFamily: 'Roboto',
       },
 
-      info: {
-        paddingLeft: 20,
-        fontSize: 15,
-        backgroundColor: '#FFC300',
-        fontFamily: 'Roboto'
-      },
-
       square: {
         backgroundColor: '#5F5F5F',
         paddingTop: 10,
