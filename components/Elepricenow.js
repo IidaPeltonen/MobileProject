@@ -2,6 +2,7 @@ import { Text, View, ScrollView } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useFonts } from 'expo-font';
 import styles from '../style/style';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
@@ -118,23 +119,43 @@ export default function Elepricenow() {
       .catch(err => console.log(err));
   }, [])
 
-  return (
-    <View>
-      <ScrollView>
-        <Text style={styles.title}>Sähkön hinta tänään (snt/kWh,sis. Alv 24%)</Text>
-        <View style={styles.square}>
-          <Text style={styles.important}>Hinta nyt: {priceNow}
-            <MaterialCommunityIcons
-              name={'arrow-' + arrow + '-bold'}
-              color={color}
-              size={40}
-              style={styles.icon}
-            ></MaterialCommunityIcons></Text>
-          <Text style={styles.text}>Päivän ylin: {maxPrice} </Text>
-          <Text style={styles.text}>Päivän alin: {minPrice} </Text>
-          <Text style={styles.text}>Päivän keskihinta: {avg} </Text>
-        </View>
-      </ScrollView>
-    </View>
-  );
+  const [loaded] = useFonts({
+    RubikGlitch: require('../assets/fonts/RubikGlitch-Regular.ttf'),
+    Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
+    Orbitronregular: require('../assets/fonts/Orbitron-Regular.ttf'),
+    Orbitronbold: require('../assets/fonts/Orbitron-Bold.ttf')
+    });
+    if(!loaded) {
+    return null;
+    }
+
+    return (
+          <View style={styles.square}>
+            <ScrollView>
+              <Text style={styles.title}>Sähkön hinta tänään (snt/kWh,sis. Alv 24%)</Text>
+              <Text style={styles.flex}>
+                <Text style={styles.text}>Hinta nyt:  </Text>
+                  <Text style={styles.important}>{priceNow}       
+                    <MaterialCommunityIcons
+                      name={'arrow-' + arrow + '-bold'}
+                      color={color}
+                      size={40}
+                      style={styles.icon}
+                    ></MaterialCommunityIcons></Text>
+              </Text>
+              <Text style={styles.flex}>
+                <Text style={styles.text}>Päivän ylin:  </Text>
+                <Text style={styles.notimportant}>{maxPrice} </Text>
+              </Text>
+              <Text style={styles.flex}>
+                <Text style={styles.text}>Päivän alin:  </Text>
+                <Text style={styles.notimportant}>{minPrice}</Text>
+              </Text>
+              <Text style={styles.flex}>
+                  <Text style={styles.text}>Päivän keskihinta:  </Text>
+                  <Text style={styles.notimportant}>{avg}</Text>
+              </Text>
+            </ScrollView>
+          </View>
+    );
 }

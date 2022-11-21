@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions} from 'react-native';
+import { ScrollView, Text, View, Dimensions} from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
@@ -97,11 +97,12 @@ export default function ElediagramsYear() {
   }, [])
 
   return (
-    <View style={styles.priceOfTheYear}>
-      <Text style={styles.title}>Sähkön hintakehitys</Text>
-      <Text style={styles.info}>viimeisen vuoden aikana</Text>
-      <Text style={styles.info}>EI VIELÄ TEHTY</Text>
-      {priceOfTheYear()}
+    <View style={styles.square}>
+      <ScrollView>
+        <Text style={styles.title}>Sähkön hintakehitys </Text>
+        <Text style={styles.text}>viimeisen vuorokauden aikana (EI VIELÄ TEHTY)</Text>
+        {priceOfTheYear()}
+      </ScrollView>
     </View>
   )
 }

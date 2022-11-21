@@ -1,94 +1,87 @@
-////npx expo install expo-font
-///npm i react-native-vector-icons    
-///npm i react-xml-parser
-///npx expo install react-native-svg@13.4.0
-///npm install react-native-chart-kit
-/// npm install @react-navigation/material-top-tabs react-native-tab-view         
-///npx expo install react-native-pager-view    
-
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+
     container: {
         flex: 1,
-        padding: 10,
-        backgroundColor: '#FFC300'
+        backgroundColor: '#2B2B2B',
+        borderRadius: 3,
       },
 
       header: {
-        margin: 10,
         paddingTop: 20,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: '#FFC300',
+        borderRadius: 3
       },
 
       logo: {
-        height: 90,
-        width: 90
-      },
-
-      name: {
-        marginTop: 30,
-        fontSize: 30,
-        fontFamily: 'RubikGlitch'
-      },
-
-      burger: {
-        alignItems: 'flex-end'
+        margin: 50,
+        flex: 1,
+        aspectRatio: 3.5,
+        resizeMode: 'contain'
       },
 
       footer: {
         alignItems: 'center',
         padding: 15,
+        backgroundColor: '#FFC300',
+        borderRadius: 3,
       },
 
       team: {
         fontSize:15,
-        fontWeight: 'bold'
+        fontFamily: 'Robotobold'
       },
 
       title: {
         paddingLeft: 20,
+        paddingBottom: 30,
         fontSize: 20,
-        backgroundColor: '#FFC300',
+        backgroundColor: '#5F5F5F',
         paddingTop: 20,
+        color: 'white',
+        fontFamily: 'Roboto',
       },
 
       info: {
         paddingLeft: 20,
         fontSize: 15,
         backgroundColor: '#FFC300',
+        fontFamily: 'Roboto'
       },
 
       square: {
         backgroundColor: '#5F5F5F',
-        borderColor: 'black',
-        borderRadius: 2,
-        borderWidth: 1,
         paddingTop: 10,
         paddingBottom: 20,
-        height: 555
+        height: '100%',
+        width: '100%'
       },
 
       important: {
-        paddingLeft: 20,
         paddingBottom: 40,
-        fontSize: 20,
+        paddingLeft: 40,
+        fontSize: 40,
         color: 'white',
+        fontFamily: 'Orbitronbold'
+      },
+
+      notimportant: {
+        color: 'white',
+        fontFamily: 'Orbitronbold'
       },
 
       text:{
-        paddingLeft: 20,
-        paddingTop: 20,
-        paddingBottom:20,
         color: 'white',
+        padding: 20,
+        fontFamily: 'Roboto'
       },
 
-      icon:{
+      flex:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 20,
         paddingBottom: 40,
-      },
-
-      View:{
-        backgroundColor: '#FFC300',
-        color: '#FFC300',
       },
 });

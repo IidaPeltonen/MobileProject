@@ -2,6 +2,7 @@ import React from 'react'
 import { Text,View, ScrollView } from 'react-native'
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
+import { useFonts } from 'expo-font';
 import styles from "../style/style"
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
@@ -26,7 +27,7 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
 // tällä alla olevalla osoitteella tulee suunniteltu tuotanto päivän ajalta suomessa.
 const URL2 = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType2 + processType2 + in_Domain + start + end
 
-export default function Footer() {
+export default function Eleproduce() {
 
   const [loads, setLoads] = useState([]); // taulukko kulutustiedoille
   const [lastLoad, setLastLoad] = useState(''); //viimeisin toteutunut kokonaiskulutus
@@ -84,19 +85,36 @@ export default function Footer() {
       })
       .catch(err => console.log(err));
   }, [])
+
+  const [loaded] = useFonts({
+    RubikGlitch: require('../assets/fonts/RubikGlitch-Regular.ttf'),
+    Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
+    Orbitronregular: require('../assets/fonts/Orbitron-Regular.ttf'),
+    Orbitronbold: require('../assets/fonts/Orbitron-Bold.ttf')
+  });
+  if(!loaded) {
+    return null;
+  }
+
   return (
     <View>
+      <View style={styles.square}>
       <ScrollView>
-        <View style={styles.square}>
-          <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
-          <Text style={styles.text}>Toteutunut kokonaiskulutus</Text>
-          <Text style={styles.important}>{lastLoad}</Text>
-          <Text style={styles.text}>Suunniteltu kokonaistuotanto</Text>
-          <Text style={styles.important}>{lastGeneration}</Text>
-          <Text style={styles.text}>Laskennallinen tuontisähkön tarve</Text>
-          <Text style={styles.important}>{importNeed}</Text>
-        </View>
+      <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
+      <Text style={styles.flex}>
+        <Text style={styles.text}>Toteutunut kokonaiskulutus  </Text>
+        <Text style={styles.notimportant}>{lastLoad}</Text>
+      </Text>
+      <Text style={styles.flex}>
+        <Text style={styles.text}>Suunniteltu kokonaistuotanto  </Text>
+        <Text style={styles.notimportant}>{lastGeneration}</Text>
+      </Text>
+      <Text style={styles.flex}>
+        <Text style={styles.text}>Laskennallinen tuontisähkön tarve  </Text>
+        <Text style={styles.notimportant}>{importNeed}</Text>
+      </Text>
       </ScrollView>
-    </View>
-  )
+      </View>
+  </View>
+  );
 }

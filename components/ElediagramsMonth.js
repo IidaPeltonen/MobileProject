@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions} from 'react-native';
+import { ScrollView, Text, View, Dimensions} from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
@@ -116,11 +116,12 @@ export default function ElediagramsMonth() {
   }, [])
 
   return (
-    <View style={styles.priceOfTheMonth}>
-      <Text style={styles.title}>Sähkön hintakehitys</Text>
-      <Text style={styles.info}>viimeisen kuukauden aikana</Text>
-      <Text style={styles.info}>KESKEN</Text>
-      {priceOfTheMonth()}
+    <View style={styles.square}>
+      <ScrollView>
+        <Text style={styles.title}>Sähkön hintakehitys </Text>
+        <Text style={styles.text}>viimeisen kuukauden aikana (KESKEN)</Text>
+        {priceOfTheMonth()}
+    </ScrollView>
     </View>
   )
 }
