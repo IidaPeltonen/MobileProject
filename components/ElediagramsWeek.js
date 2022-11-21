@@ -26,6 +26,11 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 export default function ElediagramsWeek() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
+
+  function showPointInfo() {
+
+  }
+
   function getPriceOfTheWeek(prices) {
     const tempArr = []
     for (let i = 0; i < (prices.length-24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
@@ -55,7 +60,8 @@ export default function ElediagramsWeek() {
           height={220}
           yAxisInterval={1} // optional, defaults to 1
           fromZero='true' //näyttää y-akselin nollasta asti
-          //onDataPointClick	Function	Callback that takes {value, dataset, getColor}
+          onDataPointClick= {showPointInfo}	
+          //Function	Callback that takes {value, dataset, getColor}
           //tähän voisi kikkailla sellaisen toiminnon, jolla nappulaa painamalla saisi 
           //näkyviin tarkan ajan ja hinnan
           chartConfig={chartConfig}
@@ -107,8 +113,8 @@ export default function ElediagramsWeek() {
         let pointsHour = (temp2[0].value).substring(11,16)
         let pointPrice = temp[0].value
         let pointTime = pointsDay + '.' + pointsMonth + '.' + pointsYear + ' ' + pointsHour
-        console.log('pointTime: ' + pointTime)
-        console.log('pointPrice: ' + pointPrice)
+       /*  console.log('pointTime: ' + pointTime)
+        console.log('pointPrice: ' + pointPrice) */
       })
       .catch(err => console.log(err));
   }, [])

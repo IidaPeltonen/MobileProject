@@ -44,7 +44,7 @@ export default function ElediagramsDay() {
           data={{
             labels: [
               times.map(p => {
-              return parseInt(p)
+                  return p
               })
               ],
             datasets: [

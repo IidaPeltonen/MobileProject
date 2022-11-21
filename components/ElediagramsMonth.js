@@ -27,6 +27,7 @@ export default function ElediagramsMonth() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
   function getpriceOfTheMonth(prices) {
+    //console.log('start jjjjj: ' + start)
     const tempArr = []
     for (let i = 0; i < (prices.length-24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
       tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
@@ -102,7 +103,7 @@ export default function ElediagramsMonth() {
         // ja hinnan
         //tää pitää siirtää omaan funktioon joka sit näyttää nuo,
         //kun pistettä klikkaa
-        console.log(temp2[0].value) //tällä saa ulos ekan pisteen pointsDaym ja kellonaika
+        //console.log(temp2[0].value) //tällä saa ulos ekan pisteen pointsDaym ja kellonaika
         let pointsYear = (temp2[0].value).substring(0,4)
         let pointsMonth = (temp2[0].value).substring(5,7)
         let pointsDay = (temp2[0].value).substring(8,10)

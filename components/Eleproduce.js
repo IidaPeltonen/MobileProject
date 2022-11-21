@@ -29,9 +29,7 @@ const URL2 = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + docume
 
 export default function Eleproduce() {
 
-  const [loads, setLoads] = useState([]); // taulukko kulutustiedoille
   const [lastLoad, setLastLoad] = useState(''); //viimeisin toteutunut kokonaiskulutus
-  const [generations, setGenerations] = useState([]); //taulukko tuotantoluvuille
   const [lastGeneration, setLastGeneration] = useState(''); //ennustettu kokonaistuotanto
   const [importNeed, setImportNeed] = useState(''); // muuttuja tuontisähkön tarpeelle
 
@@ -56,7 +54,7 @@ export default function Eleproduce() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-        setLoads(json.getElementsByTagName('quantity'))
+       // setLoads(json.getElementsByTagName('quantity'))
         let temp = json.getElementsByTagName('quantity')
         setLastLoad(Number(temp[index].value));
 
@@ -76,12 +74,11 @@ export default function Eleproduce() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-        setGenerations(json.getElementsByTagName('quantity'))
-        let temp = json.getElementsByTagName('quantity')
-      // tällä tavalla saa ulos tietyn tunnin suunnitellun kokonaistuotannon.
-        console.log(temp[16].value) 
-        setLastGeneration(Number(temp[index].value));
-        importNeedCalculation(lastLoad,lastGeneration)
+        let generationsTemp = json.getElementsByTagName('quantity')
+        let lastGenerationTemp =  Number(generationsTemp[index].value)
+        //console.log(lastLoad, lastGenerationTemp)
+        importNeedCalculation(lastLoad,lastGenerationTemp)
+        setLastGeneration(Number(generationsTemp[index].value));
       })
       .catch(err => console.log(err));
   }, [])

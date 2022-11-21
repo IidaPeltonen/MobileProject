@@ -36,7 +36,7 @@ export default function Elepricenow() {
     //jos hinta nyt on suurempi kuin hinta tunnin päästä, kääntää nuolen alas ja muuttaa värin vihreäksi
     if (priceNow > priceNextHour) {
       setArrow('down')
-      setColor('green')
+      setColor('lightgreen')
     }
     //jos hinta nyt on pienempi kuin hinta tunnin päästä, kääntää nuolen ylös ja muuttaa värin punaiseksi
     else if (priceNow < priceNextHour) {
@@ -99,7 +99,6 @@ export default function Elepricenow() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
-
         let noAlv = Number((temp[index].value) / 10).toFixed(2)
         let sum = Number(noAlv * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
         let priceNext = Number((temp[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
@@ -109,12 +108,6 @@ export default function Elepricenow() {
         findMinPrice(temp)
         compare(sum, priceNext)
         findAvg(temp)
-        /*         console.log('sum: ' + sum)
-                console.log('priceNext: ' + priceNext)
-              console.log('hinta nyt:' + priceNow)
-                console.log('hinta tunnin päästä:' + priceNextHour)
-                console.log('arrow:' + arrow)
-                console.log('color:' + color) */
       })
       .catch(err => console.log(err));
   }, [])
