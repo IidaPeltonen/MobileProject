@@ -25,7 +25,6 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
 const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
 
 export default function ElediagramsDay() {
-  const [prices, setPrices] = useState([]); //hinta-taulukko
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
   function getPriceOfTheDay(prices) {
@@ -93,7 +92,6 @@ export default function ElediagramsDay() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-        setPrices(json.getElementsByTagName('price'))
         const temp = json.getElementsByTagName('price')
         setNewPrices([])
         getPriceOfTheDay(temp)
