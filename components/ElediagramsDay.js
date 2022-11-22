@@ -31,7 +31,7 @@ export default function ElediagramsDay() {
     }
     const tempDatesArr = []
     for (let x = 0; x < 24; x++) {
-      tempDatesArr.push(Number(dates[x].value -1).toFixed(2)) // jotta saadaan indeksistä kellonaika
+      tempDatesArr.push(Number(dates[x].value - 1).toFixed(2)) // jotta saadaan indeksistä kellonaika
     }
     setNewPrices(tempArr)
     setTimes(tempDatesArr)
@@ -44,9 +44,9 @@ export default function ElediagramsDay() {
           data={{
             labels: [
               times.map(p => {
-                  return p
+                return p
               })
-              ],
+            ],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -59,16 +59,13 @@ export default function ElediagramsDay() {
           height={220}
           yAxisInterval={1} // optional, defaults to 1
           fromZero='true' //näyttää y-akselin nollasta asti
-          //onDataPointClick	Function	Callback that takes {value, dataset, getColor}
-          //tähän voisi kikkailla sellaisen toiminnon, jolla nappulaa painamalla saisi 
-          //näkyviin tarkan ajan ja hinnan
           chartConfig={chartConfig}
           bezier
           style={{
-            paddingRight:35,
+            paddingRight: 35,
             borderRadius: 16
           }}
-           
+
         />
       )
     }
@@ -107,7 +104,7 @@ export default function ElediagramsDay() {
         // ja hinnan
         //tää pitää siirtää omaan funktioon joka sit näyttää nuo,
         //kun pistettä klikkaa
-        let pointsHour = (temp2[0].value).substring(11,16)
+        let pointsHour = (temp2[0].value).substring(11, 16)
         let pointPrice = temp[0].value
         //console.log('Aika ja hinta indeksissä 0: ' +pointsHour + ' ja ' + pointPrice)
       })

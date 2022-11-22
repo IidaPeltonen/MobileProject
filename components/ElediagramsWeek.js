@@ -26,11 +26,6 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 export default function ElediagramsWeek() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
-
-  function showPointInfo() {
-
-  }
-
   function getPriceOfTheWeek(prices) {
     const tempArr = []
     for (let i = 0; i < (prices.length-24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
