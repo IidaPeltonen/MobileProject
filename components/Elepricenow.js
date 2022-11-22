@@ -125,7 +125,10 @@ export default function Elepricenow() {
     return (
           <View style={styles.square}>
             <ScrollView>
-              <View style={styles.titlepos}><Text style={styles.title}>Sähkön hinta tänään </Text><Text style={styles.lowkey}>(snt/kWh,sis. Alv 24%)</Text></View>
+              <View style={styles.titlepos}>
+                <Text style={styles.title}>Sähkön hinta tänään </Text>
+                <Text style={styles.lowkey}>(snt/kWh,sis. Alv 24%)</Text>
+              </View>
               <Text style={styles.flex}>
                 <Text style={styles.text}>Hinta nyt:  </Text>
                   <Text style={styles.important}>{priceNow}       

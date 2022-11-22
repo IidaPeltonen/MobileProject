@@ -125,8 +125,10 @@ export default function ElediagramsYear() {
   return (
     <View style={styles.square}>
       <ScrollView>
+      <View style={styles.titleposdia}>
         <Text style={styles.title}>Sähkön hintakehitys </Text>
         <Text style={styles.text}>viimeisen vuorokauden aikana (EI VIELÄ TEHTY)</Text>
+      </View>
         {/* {priceOfTheYear()} */}
       </ScrollView>
     </View>
