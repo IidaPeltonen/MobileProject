@@ -27,7 +27,7 @@ export default function Elepricenow() {
   const [priceNow, setPriceNow] = useState(0); //hinta juuri nyt
   const [priceNextHour, setPriceNextHour] = useState(0); //hinta seuraavalla tunnilla
   const [arrow, setArrow] = useState('left') //nuolen suunnan määrittävä
-  const [color, setColor] = useState('') //nuolen värin määrittävä
+  const [color, setColor] = useState('blue') //nuolen värin määrittävä
   const [maxPrice, setMaxPrice] = useState(0)
   const [minPrice, setMinPrice] = useState(0)
   const [avg, setAvg] = useState(0)
@@ -46,7 +46,7 @@ export default function Elepricenow() {
     //jos hinta nyt on sama kuin hinta tunnin päästä, kääntää nuolen oikealle ja muuttaa värin keltaiseksi
     if (priceNow === priceNextHour) {
       setArrow('right')
-      setColor('black')
+      setColor('#FFC300')
     }
     return arrow, color
   }
@@ -108,6 +108,8 @@ export default function Elepricenow() {
         findMinPrice(temp)
         compare(sum, priceNext)
         findAvg(temp)
+        console.log('hinta nyt: ' + sum)
+        console.log('hinta tunnin päästä: ' + priceNext)
       })
       .catch(err => console.log(err));
   }, [])
