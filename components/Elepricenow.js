@@ -108,8 +108,6 @@ export default function Elepricenow() {
         findMinPrice(temp)
         compare(sum, priceNext)
         findAvg(temp)
-        console.log('hinta nyt: ' + sum)
-        console.log('hinta tunnin päästä: ' + priceNext)
       })
       .catch(err => console.log(err));
   }, [])

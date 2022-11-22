@@ -114,7 +114,7 @@ export default function ElediagramsWeek() {
     <View style={styles.square}>
       <ScrollView>
         <Text style={styles.title}>Sähkön hintakehitys </Text>
-        <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
+        <Text style={styles.text}>viimeisen viikon aikana</Text>
         {priceOfTheWeek()}
       </ScrollView>
     </View>
