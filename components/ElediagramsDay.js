@@ -45,7 +45,6 @@ export default function ElediagramsDay() {
         <LineChart
           data={{
             labels: ["1","2","3","4","5","6","7","8","9","10","11","12" ],
-
             datasets: [
               {
                 data: newPrices.map(item => {
