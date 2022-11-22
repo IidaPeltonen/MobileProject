@@ -113,8 +113,10 @@ export default function ElediagramsWeek() {
   return (
     <View style={styles.square}>
       <ScrollView>
+      <View style={styles.titleposdia}>
         <Text style={styles.title}>Sähkön hintakehitys </Text>
         <Text style={styles.text}>viimeisen viikon aikana</Text>
+      </View>
         {priceOfTheWeek()}
       </ScrollView>
     </View>

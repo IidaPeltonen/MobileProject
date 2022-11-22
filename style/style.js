@@ -34,27 +34,30 @@ export default StyleSheet.create({
       },
 
       title: {
-        paddingLeft: 20,
-        paddingBottom: 30,
         fontSize: 20,
         backgroundColor: '#5F5F5F',
-        paddingTop: 20,
         color: 'white',
         fontFamily: 'Roboto',
       },
 
       lowkey: {
-        paddingBottom: 30,
-        fontSize: 15,
+        fontSize: 12,
         backgroundColor: '#5F5F5F',
-        paddingTop: 24,
         color: 'white',
         fontFamily: 'Roboto',
       },
 
       titlepos: {
         flexDirection: 'row',
-        
+        paddingLeft: 20,
+        paddingBottom: 30,
+        paddingTop: 20,
+      },
+
+      titleposdia: {
+        paddingLeft: 20,
+        paddingBottom: 30,
+        paddingTop: 20,
       },
 
       square: {
@@ -80,7 +83,6 @@ export default StyleSheet.create({
 
       text:{
         color: 'white',
-        padding: 20,
         fontFamily: 'Roboto'
       },
 

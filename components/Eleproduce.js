@@ -97,7 +97,9 @@ export default function Eleproduce() {
     <View>
       <View style={styles.square}>
       <ScrollView>
-      <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
+      <View style={styles.titlepos}>
+        <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
+      </View>
       <Text style={styles.flex}>
         <Text style={styles.text}>Toteutunut kokonaiskulutus  </Text>
         <Text style={styles.notimportant}>{lastLoad}</Text>
