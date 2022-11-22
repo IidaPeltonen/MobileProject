@@ -1,7 +1,6 @@
 import { List } from 'react-native-paper';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
-import { Text } from 'react-native';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan

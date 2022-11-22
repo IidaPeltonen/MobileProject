@@ -41,8 +41,21 @@ export default function ElediagramsDay() {
   const priceOfTheDay = () => {
     if (newPrices.length) {
       return (
+        //JOUNI: tämä toimii
         <LineChart
           data={{
+            labels: ["1","2","3","4","5","6","7","8","9","10","11","12" ],
+
+            datasets: [
+              {
+                data: newPrices.map(item => {
+                  return parseInt(item)
+                })
+              }
+            ]
+          }}
+         /* TÄMÄ EI TOIMI 
+         data={{
             labels: [
               times.map(p => {
                 return p
@@ -55,7 +68,7 @@ export default function ElediagramsDay() {
                 })
               }
             ]
-          }}
+          }} */
           width={Dimensions.get("window").width - 10} // from react-native
           height={220}
           yAxisInterval={1} // optional, defaults to 1
