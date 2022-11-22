@@ -45,6 +45,7 @@ export default StyleSheet.create({
         backgroundColor: '#5F5F5F',
         color: 'white',
         fontFamily: 'Roboto',
+        paddingTop: 7
       },
 
       titlepos: {
