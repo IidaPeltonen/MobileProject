@@ -55,10 +55,6 @@ export default function ElediagramsWeek() {
           height={220}
           yAxisInterval={1} // optional, defaults to 1
           fromZero='true' //näyttää y-akselin nollasta asti
-          onDataPointClick= {showPointInfo}	
-          //Function	Callback that takes {value, dataset, getColor}
-          //tähän voisi kikkailla sellaisen toiminnon, jolla nappulaa painamalla saisi 
-          //näkyviin tarkan ajan ja hinnan
           chartConfig={chartConfig}
           bezier
           style={{
