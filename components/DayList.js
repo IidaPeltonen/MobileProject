@@ -9,10 +9,13 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 const day = new Date().getDate()
+const sevenDaysAgoDay= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getDate()
+const sevenDaysAgoMonth= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getMonth() + 1
+const sevenDaysAgoYear= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getFullYear()
 const StartTime = '0000'
 const EndTime = '0000'
-const start = 'periodStart=' + year + month + day + StartTime + '&'
-const end = 'periodEnd=' + year + month + (day + 1) + EndTime
+const start = 'periodStart=' + sevenDaysAgoYear + sevenDaysAgoMonth + sevenDaysAgoDay + StartTime + '&'
+const end = 'periodEnd=' + year + month + day + EndTime
 
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
   + start + end
@@ -42,10 +45,7 @@ const DayList = () => {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
-        console.log(URL)
         getPriceOfTheDay(temp)
-        console.log('priceOfTheDay: ' + newPrices)
-        console.log(newPrices[0])
       })
       .catch(err => console.log(err));
   }, [])

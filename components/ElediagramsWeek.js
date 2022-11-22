@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import styles from '../style/style';
+import Weeklist from './WeekList';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
@@ -118,6 +119,7 @@ export default function ElediagramsWeek() {
         <Text style={styles.text}>viimeisen viikon aikana</Text>
       </View>
         {priceOfTheWeek()}
+        <Weeklist />
       </ScrollView>
     </View>
   )
