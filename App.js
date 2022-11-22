@@ -7,6 +7,7 @@
 ///npx expo install react-native-pager-view    
 /// npm install @react-navigation/material-bottom-tabs react-native-paper
 
+
 import { View, ScrollView } from 'react-native';
 import Header from "./components/Header";
 import Elepricenow from "./components/Elepricenow";

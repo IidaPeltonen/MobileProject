@@ -1,8 +1,9 @@
 import { ScrollView, Text, View, Dimensions } from 'react-native';
-import { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import styles from '../style/style';
+import DayList from './DayList';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
@@ -117,6 +118,7 @@ export default function ElediagramsDay() {
         <Text style={styles.title}>Sähkön hintakehitys </Text>
         <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
         {priceOfTheDay()}
+        <DayList />
       </ScrollView>
     </View>
   )
