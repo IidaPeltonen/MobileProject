@@ -12,7 +12,6 @@ export default StyleSheet.create({
         paddingTop: 20,
         flexDirection: 'row',
         backgroundColor: '#FFC300',
-        
       },
 
       logo: {
@@ -42,6 +41,20 @@ export default StyleSheet.create({
         paddingTop: 20,
         color: 'white',
         fontFamily: 'Roboto',
+      },
+
+      lowkey: {
+        paddingBottom: 30,
+        fontSize: 15,
+        backgroundColor: '#5F5F5F',
+        paddingTop: 24,
+        color: 'white',
+        fontFamily: 'Roboto',
+      },
+
+      titlepos: {
+        flexDirection: 'row',
+        
       },
 
       square: {
