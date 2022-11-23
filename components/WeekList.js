@@ -37,10 +37,9 @@ const Weeklist = () => {
   function getDates(dates) {
     const tempArr2 = []
     for (let x = 0; x < (dates.length); x++) {
-      console.log(dates[x].value)
       let date = (dates[x].value).substring(0,10) 
       let time = ' 00:00'
-let dateTime= date + time
+      let dateTime= date + time
       tempArr2.push(dateTime)
     }
     setDates(tempArr2)
@@ -60,20 +59,14 @@ let dateTime= date + time
         const temp2 = json.getElementsByTagName('start')
         //poistetaan taulukosta eka, turha startti
         temp2.splice(0, 1);
-        //console.log(temp2)
         getPriceOfTheWeek(temp)
         getDates(temp2)
-/*         console.log(URL)
-        console.log(dates)
-        console.log('7pv: ' + sevenDaysAgoDay)
-        console.log('tänään' + day) */
-        console.log(dates.length)
       })
       .catch(err => console.log(err));
   }, [])
 
   return (
-    <List.Section title="Tässä on väärät labelit jne, katsotaan osaako Jouni auttaa">
+    <List.Section title="">
       <List.Accordion
         title="Näytä tuntihinnat">
         <List.Item title={dates[0]} description={newPrices[0]}/>
