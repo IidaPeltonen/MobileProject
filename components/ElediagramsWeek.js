@@ -92,6 +92,8 @@ export default function ElediagramsWeek() {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
         const temp2 = json.getElementsByTagName('start')
+        //poistetaan taulukosta eka, turha startti
+        temp2.splice(0, 1);
         setNewPrices([])
         getPriceOfTheWeek(temp)
         //seuraava hakee taulukon jokaiselle pistelle tarkan ajan,

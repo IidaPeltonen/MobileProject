@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import styles from '../style/style';
+import MonthList from './MonthList';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
@@ -93,6 +94,8 @@ export default function ElediagramsMonth() {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
         const temp2 = json.getElementsByTagName('start')
+        //poistetaan taulukosta eka, turha startti
+        temp2.splice(0, 1);
         setNewPrices([])
         getpriceOfTheMonth(temp)
         //seuraava hakee taulukon jokaiselle pistelle tarkan ajan,
@@ -120,6 +123,7 @@ export default function ElediagramsMonth() {
         <Text style={styles.text}>viimeisen kuukauden aikana (KESKEN)</Text>
       </View> 
         {priceOfTheMonth()}
+        <MonthList />
       </ScrollView>
     </View>
   )

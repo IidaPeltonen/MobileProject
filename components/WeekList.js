@@ -245,32 +245,6 @@ const Weeklist = () => {
         <List.Item title="20:00-21:00" description={newPrices[165]}/>
         <List.Item title="21:00-22:00" description={newPrices[166]}/>
         <List.Item title="22:00-23:00" description={newPrices[167]}/>
-        <List.Item title="23:00-00:00" description={newPrices[168]}/>
-        <List.Item title={dates[7]} />
-        <List.Item title="00:00-01:00" description={newPrices[169]}/>
-        <List.Item title="01:00-02:00" description={newPrices[170]}/>
-        <List.Item title="02:00-03:00" description={newPrices[171]}/>
-        <List.Item title="03:00-04:00" description={newPrices[172]}/>
-        <List.Item title="04:00-05:00" description={newPrices[173]}/>
-        <List.Item title="05:00-06:00" description={newPrices[174]}/>
-        <List.Item title="06:00-07:00" description={newPrices[175]}/>
-        <List.Item title="07:00-08:00" description={newPrices[176]}/>
-        <List.Item title="08:00-09:00" description={newPrices[177]}/>
-        <List.Item title="09:00-10:00" description={newPrices[178]}/>
-        <List.Item title="10:00-11:00" description={newPrices[179]}/>
-        <List.Item title="11:00-12:00" description={newPrices[180]}/>
-        <List.Item title="12:00-13:00" description={newPrices[181]}/>
-        <List.Item title="13:00-14:00" description={newPrices[182]}/>
-        <List.Item title="14:00-15:00" description={newPrices[183]}/>
-        <List.Item title="15:00-16:00" description={newPrices[184]}/>
-        <List.Item title="16:00-17:00" description={newPrices[185]}/>
-        <List.Item title="17:00-18:00" description={newPrices[186]}/>
-        <List.Item title="18:00-19:00" description={newPrices[187]}/>
-        <List.Item title="19:00-20:00" description={newPrices[188]}/>
-        <List.Item title="20:00-21:00" description={newPrices[189]}/>
-        <List.Item title="21:00-22:00" description={newPrices[190]}/>
-        <List.Item title="22:00-23:00" description={newPrices[191]}/>
-        <List.Item title="23:00-00:00" description={newPrices[192]}/>
       </List.Accordion>
     </List.Section>
   );
