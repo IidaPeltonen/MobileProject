@@ -1,8 +1,10 @@
-import { ScrollView, Text, View, Dimensions, TextComponent } from 'react-native';
-import { useState, useEffect } from 'react';
+import { ScrollView, Text, View, Dimensions, TextComponent, Pressable, TouchableOpacity } from 'react-native';
+import { useState, useEffect, useCallback } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import styles from '../style/style';
+import MonthPicker from 'react-native-month-year-picker';
+import { SafeAreaView } from 'react-native-web';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
@@ -13,6 +15,8 @@ const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 const day = new Date().getDate()
 const yearAgo = (year - 1) + '' + month + '' + day + '0000'
+const chosenTimeStart = '00000'
+const chosenTimeEnd = '00000'
 const StartTime = '0000'
 const EndTime = '0000'
 const start = 'periodStart=' + yearAgo + '&'
@@ -24,7 +28,48 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 
 export default function ElediagramsYear() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [averagePerMonth, setAvgMonth] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [chosenTimeStart,setChosenTimeStart] = useState('00000')
+  const [chosenTimeEnd, setChosenTimeEnd] = useState('00000')
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+  const showPicker = useCallback((value) => setShow(value), []);
+  const onValueChange = useCallback(
+    (event, newDate) => {
+      const selectedDate = newDate || date;
+
+      showPicker(false);
+      setDate(selectedDate);
+    },
+    [date, showPicker],
+  );
+
+  function chooseTime() {
+
+  }
+
+  return (
+    <SafeAreaView>
+    <View>
+      <Text>Month Year Picker Example</Text>
+      <Text>{moment(date, "MM-YYYY")}</Text>
+      <TouchableOpacity  onPress={() => showPicker(true)}>
+        
+      <Text>OPEN</Text>
+    </TouchableOpacity>
+    {show && (
+      <MonthPicker
+        onChange={onValueChange}
+        value={date}
+        minimumDate={new Date()}
+        maximumDate={new Date(2025, 5)}
+       // locale="en"
+      />
+    )}
+    </View>
+    </SafeAreaView>
+
+  )
+
 
 /*   function countAverage(prices) {
     const tempArr = []
@@ -128,6 +173,8 @@ export default function ElediagramsYear() {
       <View style={styles.titleposdia}>
         <Text style={styles.title}>Sähkön hintakehitys </Text>
         <Text style={styles.text}>viimeisen vuorokauden aikana (EI VIELÄ TEHTY)</Text>
+
+        
       </View>
         {/* {priceOfTheYear()} */}
       </ScrollView>

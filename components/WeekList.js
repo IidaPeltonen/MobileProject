@@ -275,5 +275,4 @@ const Weeklist = () => {
     </List.Section>
   );
 };
-
 export default Weeklist;
