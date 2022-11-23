@@ -110,6 +110,8 @@ export default function ElediagramsDay() {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
         const temp2 = json.getElementsByTagName('start')
+        //poistetaan taulukosta eka, turha startti
+        temp2.splice(0, 1);
         const temp3 = json.getElementsByTagName('position')
         setNewPrices([])
         setTimes([])
