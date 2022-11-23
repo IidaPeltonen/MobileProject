@@ -36,12 +36,15 @@ export default function Eleproduce() {
   // funktio tuntisähkön tarpeen laskentaan
   function importNeedCalculation(lastLoad,lastGeneration) {
     let situation = lastLoad - lastGeneration
-
-    if (situation >= 0) {
+console.log('last load: ' + lastLoad) //tämä ei saa mitään arvoa sivun latautuessa ekaa kertaa
+console.log('last gen: ' + lastGeneration)
+console.log('sit: ' + situation)
+     if (situation >= 0) {
       setImportNeed(Number(situation));
     } else {
       setImportNeed(Number(0));
-    }
+    } 
+    setImportNeed(situation)
   }
 
   useEffect(() => {
@@ -54,12 +57,13 @@ export default function Eleproduce() {
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
-       // setLoads(json.getElementsByTagName('quantity'))
         let temp = json.getElementsByTagName('quantity')
-        setLastLoad(Number(temp[index].value));
-
+        console.log('index: ' + index)
+        let temp2 = (Number(temp[index].value))
+        console.log(temp2)
+        setLastLoad(temp2);
       // tällä tavalla saa ulos tietyn tunnin kokonaiskulutuksen.
-      //  console.log(loads[index].value) 
+      //console.log(temp[index].value) 
       })
       .catch(err => console.log(err));
   }, [])
@@ -101,11 +105,11 @@ export default function Eleproduce() {
         <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
       </View>
       <Text style={styles.flex}>
-        <Text style={styles.text}>Toteutunut kokonaiskulutus  </Text>
+        <Text style={styles.text}>Toteutunut kokonaiskulutus:  </Text>
         <Text style={styles.notimportant}>{lastLoad}</Text>
       </Text>
       <Text style={styles.flex}>
-        <Text style={styles.text}>Suunniteltu kokonaistuotanto  </Text>
+        <Text style={styles.text}>Suunniteltu kokonaistuotanto:  </Text>
         <Text style={styles.notimportant}>{lastGeneration}</Text>
       </Text>
       <Text style={styles.flex}>
