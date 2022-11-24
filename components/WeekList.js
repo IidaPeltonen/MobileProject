@@ -60,7 +60,7 @@ const Weeklist = () => {
         const temp = json.getElementsByTagName('price')
         const temp2 = json.getElementsByTagName('start')
         //poistetaan taulukosta eka, turha startti
-        temp2.splice(0, 1);
+        temp2.splice(0, 2);
         getPriceOfTheWeek(temp)
         getDates(temp2)
       })

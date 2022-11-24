@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, Dimensions} from 'react-native';
+import { ScrollView, Text, View, Dimensions } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
@@ -12,9 +12,9 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 const day = new Date().getDate()
-const sevenDaysAgoDay= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getDate()
-const sevenDaysAgoMonth= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getMonth() + 1
-const sevenDaysAgoYear= (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getFullYear()
+const sevenDaysAgoDay = (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getDate()
+const sevenDaysAgoMonth = (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getMonth() + 1
+const sevenDaysAgoYear = (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getFullYear()
 const StartTime = '0000'
 const EndTime = '0000'
 const start = 'periodStart=' + sevenDaysAgoYear + sevenDaysAgoMonth + sevenDaysAgoDay + StartTime + '&'
@@ -29,7 +29,7 @@ export default function ElediagramsWeek() {
 
   function getPriceOfTheWeek(prices) {
     const tempArr = []
-    for (let i = 0; i < (prices.length-24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
+    for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
       tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
     }
     setNewPrices(tempArr)
@@ -40,10 +40,11 @@ export default function ElediagramsWeek() {
       return (
         <LineChart
           data={{
-            labels: [sevenDaysAgoDay+'.'+sevenDaysAgoMonth, (sevenDaysAgoDay+1)+'.'+sevenDaysAgoMonth,  
-            (sevenDaysAgoDay+2)+'.'+sevenDaysAgoMonth, (sevenDaysAgoDay+3)+'.'+sevenDaysAgoMonth, 
-            (sevenDaysAgoDay+4)+'.'+sevenDaysAgoMonth, (sevenDaysAgoDay+5)+'.'+sevenDaysAgoMonth, 
-            (sevenDaysAgoDay+6)+'.'+sevenDaysAgoMonth, day+'.'+month], 
+            labels: [/*tähän kohtaa pilkun laittamalla rivi siirtyy oikealle, mutta siirtyy paaaaaljoon
+            tää on paskamainen muotoiltava, mutta katsotaan mitä keksitään*/sevenDaysAgoDay + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 1) + '.' + sevenDaysAgoMonth,
+              (sevenDaysAgoDay + 2) + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 3) + '.' + sevenDaysAgoMonth,
+              (sevenDaysAgoDay + 4) + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 5) + '.' + sevenDaysAgoMonth,
+              (sevenDaysAgoDay + 6) + '.' + sevenDaysAgoMonth],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -59,7 +60,7 @@ export default function ElediagramsWeek() {
           chartConfig={chartConfig}
           bezier
           style={{
-            paddingRight:35,
+            paddingRight: 35,
             borderRadius: 16
           }}
         />
@@ -75,7 +76,7 @@ export default function ElediagramsWeek() {
     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, //viivojen väri
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, //labeleiden väri
     propsForDots: {
-      strokeWidth: "1",
+      strokeWidth: "1", //palleroiden paksuus
       stroke: "purple" //palleroiden väri,
     }
   }
@@ -96,19 +97,6 @@ export default function ElediagramsWeek() {
         temp2.splice(0, 1);
         setNewPrices([])
         getPriceOfTheWeek(temp)
-        //seuraava hakee taulukon jokaiselle pistelle tarkan ajan,
-        // ja hinnan
-        //tää pitää siirtää omaan funktioon joka sit näyttää nuo,
-        //kun pistettä klikkaa
-        //console.log(temp2[0].value) //tällä saa ulos ekan pisteen pointsDaym ja kellonaika
-        let pointsYear = (temp2[0].value).substring(0,4)
-        let pointsMonth = (temp2[0].value).substring(5,7)
-        let pointsDay = (temp2[0].value).substring(8,10)
-        let pointsHour = (temp2[0].value).substring(11,16)
-        let pointPrice = temp[0].value
-        let pointTime = pointsDay + '.' + pointsMonth + '.' + pointsYear + ' ' + pointsHour
-       /*  console.log('pointTime: ' + pointTime)
-        console.log('pointPrice: ' + pointPrice) */
       })
       .catch(err => console.log(err));
   }, [])
@@ -116,10 +104,10 @@ export default function ElediagramsWeek() {
   return (
     <View style={styles.square}>
       <ScrollView>
-      <View style={styles.titleposdia}>
-        <Text style={styles.title}>Sähkön hintakehitys </Text>
-        <Text style={styles.text}>viimeisen viikon aikana</Text>
-      </View>
+        <View style={styles.titleposdia}>
+          <Text style={styles.title}>Sähkön hintakehitys </Text>
+          <Text style={styles.text}>viimeisen viikon aikana </Text>
+        </View>
         {priceOfTheWeek()}
         <Weeklist />
       </ScrollView>
