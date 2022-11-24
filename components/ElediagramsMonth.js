@@ -113,7 +113,7 @@ export default function ElediagramsMonth() {
       <ScrollView>
         <View style={styles.titleposdia}>
           <Text style={styles.title}>Sähkön hintakehitys </Text>
-          <Text style={styles.text}>viimeisen kuukauden aikana (KESKEN)</Text>
+          <Text style={styles.text}>viimeisen kuukauden aikana </Text>
         </View>
         {priceOfTheMonth()}
         <MonthList />
