@@ -26,13 +26,24 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 
 export default function ElediagramsMonth() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [times, setTimes] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
-  function getpriceOfTheMonth(prices) {
+  function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
     for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
       tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
     }
+    const tempDatesArr = []
+    for (let x = 0; x < dates.length; x++) {
+      //muutetaan päivämäärä suomalaiseen muotoon
+      let y = (dates[x].value).substring(0, 4)
+      let m = (dates[x].value).substring(5, 7)
+      let d = (dates[x].value).substring(8, 10)
+      let date = d + '.' + m + '.'
+      tempDatesArr.push(date)
+    }
     setNewPrices(tempArr)
+    setTimes(tempDatesArr)
   }
 
   const priceOfTheMonth = () => {
@@ -40,12 +51,7 @@ export default function ElediagramsMonth() {
       return (
         <LineChart
           data={{
-            labels: [monthAgoDay + '.' + monthAgoMonth, (monthAgoDay + 1) + '.' + monthAgoMonth,
-            (monthAgoDay + 2) + '.' + monthAgoMonth, (monthAgoDay + 3) + '.' + monthAgoMonth,
-            (monthAgoDay + 4) + '.' + monthAgoMonth, (monthAgoDay + 5) + '.' + monthAgoMonth,
-            (monthAgoDay + 6) + '.' + monthAgoMonth, day + '.' + monthAgoMonth],
-            //miten tähän saisi mäppäyksen, joka toisi
-            //kaikki nuo päivämäärät tuolta taulukosta?
+            labels: [times[0], times[4], times[9], times[14], times[19], times[24], times[29]],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -95,22 +101,9 @@ export default function ElediagramsMonth() {
         const temp = json.getElementsByTagName('price')
         const temp2 = json.getElementsByTagName('start')
         //poistetaan taulukosta eka, turha startti
-        temp2.splice(0, 1);
+        temp2.splice(0, 2);
         setNewPrices([])
-        getpriceOfTheMonth(temp)
-        //seuraava hakee taulukon jokaiselle pistelle tarkan ajan,
-        // ja hinnan
-        //tää pitää siirtää omaan funktioon joka sit näyttää nuo,
-        //kun pistettä klikkaa
-        //console.log(temp2[0].value) //tällä saa ulos ekan pisteen pointsDaym ja kellonaika
-        let pointsYear = (temp2[0].value).substring(0, 4)
-        let pointsMonth = (temp2[0].value).substring(5, 7)
-        let pointsDay = (temp2[0].value).substring(8, 10)
-        let pointsHour = (temp2[0].value).substring(11, 16)
-        let pointPrice = temp[0].value
-        let pointTime = pointsDay + '.' + pointsMonth + '.' + pointsYear + ' ' + pointsHour
-        /*         console.log('pointTime: ' + pointTime)
-                console.log('pointPrice: ' + pointPrice) */
+        getpriceOfTheMonth(temp, temp2)
       })
       .catch(err => console.log(err));
   }, [])
@@ -118,10 +111,10 @@ export default function ElediagramsMonth() {
   return (
     <View style={styles.square}>
       <ScrollView>
-      <View style={styles.titleposdia}>
-        <Text style={styles.title}>Sähkön hintakehitys </Text>
-        <Text style={styles.text}>viimeisen kuukauden aikana (KESKEN)</Text>
-      </View> 
+        <View style={styles.titleposdia}>
+          <Text style={styles.title}>Sähkön hintakehitys </Text>
+          <Text style={styles.text}>viimeisen kuukauden aikana (KESKEN)</Text>
+        </View>
         {priceOfTheMonth()}
         <MonthList />
       </ScrollView>
