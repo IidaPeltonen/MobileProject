@@ -33,7 +33,7 @@ export default function Eleproduce() {
   const [lastGeneration, setLastGeneration] = useState(''); //ennustettu kokonaistuotanto
   const [importNeed, setImportNeed] = useState(''); // muuttuja tuontisähkön tarpeelle
 
-  // funktio tuntisähkön tarpeen laskentaan
+  // funktio tuontisähkön tarpeen laskentaan
   function importNeedCalculation(lastLoad,lastGeneration) {
     let situation = lastLoad - lastGeneration
 console.log('last load: ' + lastLoad) //tämä ei saa mitään arvoa sivun latautuessa ekaa kertaa
@@ -48,7 +48,34 @@ console.log('sit: ' + situation)
   }
 
   useEffect(() => {
-    fetch(URL, {
+    Promise.all([
+      fetch(URL),
+      fetch(URL2),{
+      headers: {
+        'method': 'GET',
+        'Content-Type': 'application/xml',
+      },}
+    ])
+      .then(([resLoad, resGeneration]) =>
+        Promise.all([resLoad.text(), resGeneration.text()])
+      )
+      .then(([dataLoad, dataGeneration]) => {
+        let json = new XMLParser().parseFromString(dataLoad);
+        let loadTemp = json.getElementsByTagName('quantity')
+        let lastLoadTemp =  Number(loadTemp[index].value)
+       // console.log('index: ' + index)
+       // console.log(temp2);
+        setLastLoad(Number(loadTemp[index].value));
+        let json2 = new XMLParser().parseFromString(dataGeneration);
+        let generationsTemp = json2.getElementsByTagName('quantity')
+        let lastGenerationTemp =  Number(generationsTemp[index].value)
+        console.log(lastLoadTemp, lastGenerationTemp)
+        importNeedCalculation(lastLoadTemp,lastGenerationTemp)
+        setLastGeneration(Number(generationsTemp[index].value));
+      })
+      .catch(err => console.log(err));
+    }, [])
+   /*  fetch(URL, {
       headers: {
         'method': 'GET',
         'Content-Type': 'application/xml',
@@ -58,12 +85,12 @@ console.log('sit: ' + situation)
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         let temp = json.getElementsByTagName('quantity')
-        console.log('index: ' + index)
+        //console.log('index: ' + index)
         let temp2 = (Number(temp[index].value))
-        console.log(temp2)
+        //console.log(temp2)
         setLastLoad(temp2);
       // tällä tavalla saa ulos tietyn tunnin kokonaiskulutuksen.
-      //console.log(temp[index].value) 
+      //console.log(temp[index].value)
       })
       .catch(err => console.log(err));
   }, [])
@@ -85,7 +112,7 @@ console.log('sit: ' + situation)
         setLastGeneration(Number(generationsTemp[index].value));
       })
       .catch(err => console.log(err));
-  }, [])
+  }, []) */
 
   const [loaded] = useFonts({
     RubikGlitch: require('../assets/fonts/RubikGlitch-Regular.ttf'),
