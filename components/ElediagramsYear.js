@@ -57,13 +57,27 @@ export default function ElediagramsYear() {
       "Kesäkuu", "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu");
     let d = new Date();
     d.setDate(1);
-    for (let i = 0; i <= 11; i++) {
+    for (let i = 0; i <= 12; i++) {
       //console.log(monthName[d.getMonth()-1] + ' ' + d.getFullYear());
-      tempArr.push(monthName[d.getMonth()-1] + ' ' + d.getFullYear())
+      tempArr.push(monthName[d.getMonth()] + ' ' + d.getFullYear())
       d.setMonth(d.getMonth() - 1);
     }
-    console.log(tempArr[2]) // pitäisi marraskuussa käyttäessä olla elokuu
-    console.log(tempArr[0]) // pitäisi marraskuussa käyttäessä olla lokakuu
+
+    console.log(tempArr[12]) // pitäisi marraskuussa käyttäessä olla marraskuu 21
+    console.log(tempArr[11]) // pitäisi marraskuussa käyttäessä olla joulukuu 21
+    console.log(tempArr[10]) // pitäisi marraskuussa käyttäessä olla tammikuu 21
+    console.log(tempArr[9]) // pitäisi marraskuussa käyttäessä olla helmikuu 22
+    console.log(tempArr[8]) // pitäisi marraskuussa käyttäessä olla maaliskuu 22
+    console.log(tempArr[7]) // pitäisi marraskuussa käyttäessä olla huhtikuu 22
+    console.log(tempArr[6]) // pitäisi marraskuussa käyttäessä olla toukokuu 22
+    console.log(tempArr[5]) // pitäisi marraskuussa käyttäessä olla kesäkuu 22
+    console.log(tempArr[4]) // pitäisi marraskuussa käyttäessä olla heinäkuu 22
+    console.log(tempArr[3]) // pitäisi marraskuussa käyttäessä olla elokuu 22
+    console.log(tempArr[2]) // pitäisi marraskuussa käyttäessä olla syyskuu 22
+    console.log(tempArr[1]) // pitäisi marraskuussa käyttäessä olla lokakuu 22
+    console.log(tempArr[0]) // pitäisi marraskuussa käyttäessä olla marraskuu 22, tätä ei tarvitse 
+    //näyttää valikossa
+    console.log('-----')
     setMonths(tempArr)
   }
 
