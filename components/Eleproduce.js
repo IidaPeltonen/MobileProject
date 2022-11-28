@@ -36,9 +36,9 @@ export default function Eleproduce() {
   // funktio tuontisähkön tarpeen laskentaan
   function importNeedCalculation(lastLoad,lastGeneration) {
     let situation = lastLoad - lastGeneration
-console.log('last load: ' + lastLoad) //tämä ei saa mitään arvoa sivun latautuessa ekaa kertaa
+/* console.log('last load: ' + lastLoad) //tämä ei saa mitään arvoa sivun latautuessa ekaa kertaa
 console.log('last gen: ' + lastGeneration)
-console.log('sit: ' + situation)
+console.log('sit: ' + situation) */
      if (situation >= 0) {
       setImportNeed(Number(situation));
     } else {
@@ -69,7 +69,7 @@ console.log('sit: ' + situation)
         let json2 = new XMLParser().parseFromString(dataGeneration);
         let generationsTemp = json2.getElementsByTagName('quantity')
         let lastGenerationTemp =  Number(generationsTemp[index].value)
-        console.log(lastLoadTemp, lastGenerationTemp)
+        //console.log(lastLoadTemp, lastGenerationTemp)
         importNeedCalculation(lastLoadTemp,lastGenerationTemp)
         setLastGeneration(Number(generationsTemp[index].value));
       })
