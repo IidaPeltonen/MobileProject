@@ -28,15 +28,9 @@ const endDay = lastday(year, (month - 1));
 //kellonajat
 const StartTime = '0000' //nämä saa olla aina 00, koska kellonajalla ei ole merkitystä
 const EndTime = '0000' //nämä saa olla aina 00, koska kellonajalla ei ole merkitystä
-/* console.log('year: ' + year)
-console.log('month: ' + month)
-console.log('startDay: ' + day)
-console.log('endDay: ' + endDay) */
 //urlin pätkät, jotka muuttuu vallinnan mukaan, annetaan oletuksena kuluvan kkn eka päivä
 const start = 'periodStart=' + year + month + day + StartTime + '&'
 const end = 'periodEnd=' + year + month + endDay + EndTime
-/* console.log(start)
-console.log(end) */
 
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
   + start + end
@@ -49,7 +43,6 @@ export default function ElediagramsYear() {
   const [selected, setSelected] = useState(""); //valittu kuukausi
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
 
-
   //tämä rakentaa vuoden kuukauden nimillä, aloittaen edellisestä kuukaudesta
   function getYear() {
     const tempArr = []
@@ -58,45 +51,26 @@ export default function ElediagramsYear() {
     let d = new Date();
     d.setDate(1);
     for (let i = 0; i <= 12; i++) {
-      //console.log(monthName[d.getMonth()-1] + ' ' + d.getFullYear());
       tempArr.push(monthName[d.getMonth()] + ' ' + d.getFullYear())
       d.setMonth(d.getMonth() - 1);
     }
-
-    console.log(tempArr[12]) // pitäisi marraskuussa käyttäessä olla marraskuu 21
-    console.log(tempArr[11]) // pitäisi marraskuussa käyttäessä olla joulukuu 21
-    console.log(tempArr[10]) // pitäisi marraskuussa käyttäessä olla tammikuu 21
-    console.log(tempArr[9]) // pitäisi marraskuussa käyttäessä olla helmikuu 22
-    console.log(tempArr[8]) // pitäisi marraskuussa käyttäessä olla maaliskuu 22
-    console.log(tempArr[7]) // pitäisi marraskuussa käyttäessä olla huhtikuu 22
-    console.log(tempArr[6]) // pitäisi marraskuussa käyttäessä olla toukokuu 22
-    console.log(tempArr[5]) // pitäisi marraskuussa käyttäessä olla kesäkuu 22
-    console.log(tempArr[4]) // pitäisi marraskuussa käyttäessä olla heinäkuu 22
-    console.log(tempArr[3]) // pitäisi marraskuussa käyttäessä olla elokuu 22
-    console.log(tempArr[2]) // pitäisi marraskuussa käyttäessä olla syyskuu 22
-    console.log(tempArr[1]) // pitäisi marraskuussa käyttäessä olla lokakuu 22
-    console.log(tempArr[0]) // pitäisi marraskuussa käyttäessä olla marraskuu 22, tätä ei tarvitse 
-    //näyttää valikossa
-    console.log('-----')
     setMonths(tempArr)
   }
 
   const data = [
-/*     { key: '1', value: 'Mobiles' },
-    { key: '2', value: 'Appliances' },
-    { key: '3', value: 'Cameras' },
-    { key: '4', value: 'Computers', },
-    { key: '5', value: 'Vegetables' },
-    { key: '6', value: 'Diary Products' },
-    { key: '7', value: 'Drinks' },
-    { key: '8', value: 'Drinks' },
-    { key: '9', value: 'Drinks' },
-    { key: '10', value: 'Drinks' },
-    { key: '11', value: 'Drinks' },
-    { key: '12', value: 'Drinks' }, */
-    months.map(item => {
-      return item
-    })
+    { key: '1', value: months[1] },
+    { key: '2', value: months[2] },
+    { key: '3', value: months[3] },
+    { key: '4', value: months[4], },
+    { key: '5', value: months[5] },
+    { key: '6', value: months[6] },
+    { key: '7', value: months[7] },
+    { key: '8', value: months[8] },
+    { key: '9', value: months[9] },
+    { key: '10', value: months[10] },
+    { key: '11', value: months[11] },
+    { key: '12', value: months[12] }, 
+
   ]
 
   useEffect(() => {
@@ -110,8 +84,6 @@ export default function ElediagramsYear() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         getYear()
-        //console.log('months: ' + months[1])
-        //findMonths()
       })
       .catch(err => console.log(err));
   }, [])
