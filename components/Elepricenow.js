@@ -2,6 +2,7 @@ import { Text, View, ScrollView } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { ActivityIndicator } from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import styles from '../style/style';
 
@@ -131,7 +132,7 @@ export default function Elepricenow() {
               </View>
               <Text style={styles.flex}>
                 <Text style={styles.text}>Hinta nyt:  </Text>
-                  <Text style={styles.important}>{priceNow}       
+                  <Text style={styles.important}>{priceNow?priceNow : <ActivityIndicator size="large" color="#ffffff"/>}       
                     <MaterialCommunityIcons
                       name={'arrow-' + arrow + '-bold'}
                       color={color}
@@ -141,15 +142,15 @@ export default function Elepricenow() {
               </Text>
               <Text style={styles.flex}>
                 <Text style={styles.text}>Päivän ylin:  </Text>
-                <Text style={styles.notimportant}>{maxPrice} </Text>
+                <Text style={styles.notimportant}>{maxPrice?maxPrice : <ActivityIndicator size="small" color="#ffffff"/>} </Text>
               </Text>
               <Text style={styles.flex}>
                 <Text style={styles.text}>Päivän alin:  </Text>
-                <Text style={styles.notimportant}>{minPrice}</Text>
+                <Text style={styles.notimportant}>{minPrice?minPrice : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
               </Text>
               <Text style={styles.flex}>
                   <Text style={styles.text}>Päivän keskihinta:  </Text>
-                  <Text style={styles.notimportant}>{avg}</Text>
+                  <Text style={styles.notimportant}>{avg?avg : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
               </Text>
             </ScrollView>
           </View>
