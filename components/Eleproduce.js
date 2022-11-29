@@ -75,44 +75,6 @@ console.log('sit: ' + situation) */
       })
       .catch(err => console.log(err));
     }, [])
-   /*  fetch(URL, {
-      headers: {
-        'method': 'GET',
-        'Content-Type': 'application/xml',
-      },
-    })
-      .then(res => res.text())
-      .then(data => {
-        let json = new XMLParser().parseFromString(data);
-        let temp = json.getElementsByTagName('quantity')
-        //console.log('index: ' + index)
-        let temp2 = (Number(temp[index].value))
-        //console.log(temp2)
-        setLastLoad(temp2);
-      // tällä tavalla saa ulos tietyn tunnin kokonaiskulutuksen.
-      //console.log(temp[index].value)
-      })
-      .catch(err => console.log(err));
-  }, [])
-
-  useEffect(() => {
-    fetch(URL2, {
-      headers: {
-        'method': 'GET',
-        'Content-Type': 'application/xml',
-      },
-    })
-      .then(res => res.text())
-      .then(data => {
-        let json = new XMLParser().parseFromString(data);
-        let generationsTemp = json.getElementsByTagName('quantity')
-        let lastGenerationTemp =  Number(generationsTemp[index].value)
-        //console.log(lastLoad, lastGenerationTemp)
-        importNeedCalculation(lastLoad,lastGenerationTemp)
-        setLastGeneration(Number(generationsTemp[index].value));
-      })
-      .catch(err => console.log(err));
-  }, []) */
 
   const [loaded] = useFonts({
     RubikGlitch: require('../assets/fonts/RubikGlitch-Regular.ttf'),
