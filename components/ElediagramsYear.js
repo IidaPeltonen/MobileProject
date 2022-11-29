@@ -13,6 +13,8 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 
 //fuknktio kuukauden viimeisen päivän hakuun
 let lastday = function (y, m) {
+  console.log('täällä ollaan')
+  console.log(new Date(y, m + 1, 0).getDate())
   return new Date(y, m + 1, 0).getDate();
 }
 
@@ -34,13 +36,15 @@ const end = 'periodEnd=' + year + month + endDay + EndTime
 
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
   + start + end
-const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
 
 export default function ElediagramsYear() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
   const [chosenTimeStart, setChosenTimeStart] = useState('00000')
   const [chosenTimeEnd, setChosenTimeEnd] = useState('00000')
-  const [selected, setSelected] = useState(""); //valittu kuukausi
+  const [selected, setSelected] = useState(""); //valittu kuukausi listalla
+  const [selectedMonth, setSelectedMonth] = useState(""); //valittu kuukausi numerona
+  const [selectedYear, setSelectedYear] = useState(""); //valittu vuosi numerona
+  const [selectedMonthLast, setSelectedMonthLast] = useState(""); //valittu vuosi numerona
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
 
   //tämä rakentaa vuoden kuukauden nimillä, aloittaen edellisestä kuukaudesta
@@ -57,6 +61,7 @@ export default function ElediagramsYear() {
     setMonths(tempArr)
   }
 
+   //tämä tuottaa getArr-antaman taulukon tulokset dropdown-valikon "otsikoiksi"
   const data = [
     { key: '1', value: months[1] },
     { key: '2', value: months[2] },
@@ -72,7 +77,59 @@ export default function ElediagramsYear() {
     { key: '12', value: months[12] }, 
 
   ]
+  function checkTime(selected) {
+    //muuttuja kk-numerolle
+    let monthNumber = 0
+    //mikä on valittu
+    console.log('selected: ' + selected)
+    let y = Number(selected.substring(selected.length - 4)) //hakee kk-tekstin vuosiluvun
+    let m = selected.substring(0, 3) //hakee kk-tekstin 3 ekaa merkkiä
+    //loputon iffi tarkistamaan mikä kk on ja mitä se on numerona
+    if (m === 'Tam') {
+      monthNumber = 1
+    }
+    if (m === 'Hel') {
+      monthNumber = 2
+    }
+    if (m === 'Maa') {
+      monthNumber = 3
+    }
+    if (m === 'Huh') {
+      monthNumber = 4
+    }
+    if (m === 'Tou') {
+      monthNumber = 5
+    }
+    if (m === 'Kes') {
+      monthNumber = 6
+    }
+    if (m === 'Hei') {
+      monthNumber = 7
+    }
+    if (m === 'Elo') {
+      monthNumber = 8
+    }
+    if (m === 'Syy') {
+      monthNumber = 9
+    }
+    if (m === 'Lok') {
+      monthNumber = 10
+    }
+    if (m === 'Mar') {
+      monthNumber = 11
+    }
+    if (m === 'Jou') {
+      monthNumber = 12
+    }
+  //nyt on tiedossa valittu kk-numero ja vuosi
 
+  console.log('monthNumber: ' + monthNumber)
+  console.log('year: ' + y)
+  //nää pitää palauttaa ja sit kutsua lastDayta, vai voiko sen tehdä tässä?
+  lastday(y, monthNumber)
+  }
+
+   //tää varmaan siirretään johonkin funktioon, joka tehdään vasta kun jokin kuukausi valitaan?
   useEffect(() => {
     fetch(URL, {
       headers: {
@@ -84,17 +141,30 @@ export default function ElediagramsYear() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         getYear()
+        //sitten pitää tarkistaa mikä kk on valittu
+        checkTime(selected)
+        //sitten kutsua lastDay-funktiota(y + m)
+        //sitten pitäisi tehdä funktio joka hakee arvot
+        //ja piirtää diagrammin
       })
       .catch(err => console.log(err));
   }, [])
 
-
   return (
-    <SelectList
-      setSelected={(val) => setSelected(val)}
+    <View style={styles.square}>
+      <ScrollView>
+      <View style={styles.titleposdia}>
+        <Text style={styles.title}>Sähkön hintakehitys </Text>
+        <Text style={styles.text}>Valitse valikosta kuukausi, jonka arvoja haluat tarkastella (KESKEN)</Text>
+      </View>
+      <SelectList
+      setSelected={(val) => setSelected(val)} 
+      onSelect={checkTime(selected)} 
       data={data}
       save="value"
     />
+      </ScrollView>
+    </View>
   )
 
 };
