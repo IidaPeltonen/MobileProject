@@ -12,10 +12,12 @@ const in_Domain = 'in_Domain=10YFI-1--------U&' // maakoodi
 const out_Domain = 'out_Domain=10YFI-1--------U&'
 
 //fuknktio kuukauden viimeisen päivän hakuun
-let lastday = function (y, m) {
-  console.log('täällä ollaan')
-  console.log(new Date(y, m + 1, 0).getDate())
-  return new Date(y, m + 1, 0).getDate();
+let setLastDay = function (y, m) {
+  m = Number(m)
+  m = m-1
+  let lastOne = new Date(y, m + 1, 0).getDate()
+  console.log('kk:ssa nro ' + (m+1) + ' on '  + lastOne + ' päivää')
+  return lastOne
 }
 
 // tarvitaan:
@@ -26,7 +28,7 @@ const month = new Date().getMonth() + 1
 //alkupäivä voi aina olla kuukauden eka
 const day = '01'
 //loppupäiväksi haetaan kunkin kuukauden vika
-const endDay = lastday(year, (month - 1));
+const endDay = setLastDay(year, (month - 1));
 //kellonajat
 const StartTime = '0000' //nämä saa olla aina 00, koska kellonajalla ei ole merkitystä
 const EndTime = '0000' //nämä saa olla aina 00, koska kellonajalla ei ole merkitystä
@@ -125,8 +127,8 @@ export default function ElediagramsYear() {
 
   console.log('monthNumber: ' + monthNumber)
   console.log('year: ' + y)
-  //nää pitää palauttaa ja sit kutsua lastDayta, vai voiko sen tehdä tässä?
-  lastday(y, monthNumber)
+  //nää pitää palauttaa ja sit kutsua setLastDayta, vai voiko sen tehdä tässä?
+  setLastDay(y, monthNumber)
   }
 
    //tää varmaan siirretään johonkin funktioon, joka tehdään vasta kun jokin kuukausi valitaan?
@@ -143,7 +145,7 @@ export default function ElediagramsYear() {
         getYear()
         //sitten pitää tarkistaa mikä kk on valittu
         checkTime(selected)
-        //sitten kutsua lastDay-funktiota(y + m)
+        //sitten kutsua setLastDay-funktiota(y + m)
         //sitten pitäisi tehdä funktio joka hakee arvot
         //ja piirtää diagrammin
       })
