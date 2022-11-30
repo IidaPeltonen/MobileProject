@@ -16,7 +16,8 @@ const Firstday = '01'
 
 export default function ElediagramsYear() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [times, setTimes] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [times, setTimes] = useState([]); //tyhjä aika-taulukko, johon päivämäärät tallennetaan muutoksen jälkeen
+  const [timesArr, setTimesArr] = useState([]); //tyhjä aika-taulukko, johon päivämäärät tallennetaan vuosiluvun kanssa
   const [selected, setSelected] = useState(""); //valittu kuukausi listalla
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
   
@@ -153,17 +154,21 @@ export default function ElediagramsYear() {
     for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
       tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
     }
-    const tempDatesArr = []
+    const tempDatesArr = [] // labelia varten
+    const tempDatesArr2 = [] // alasvetovalikkoa varten
     for (let x = 0; x < dates.length; x++) {
       //muutetaan päivämäärä suomalaiseen muotoon
       let y = (dates[x].value).substring(0, 4)
       let m = (dates[x].value).substring(5, 7)
       let d = (dates[x].value).substring(8, 10)
-      let date = d + '.' + m + '.'
+      let date = d + '.' + m + '.' 
+      let date2 = d + '.' + m + '.' + y //alasvetovalikkoa varten vuosiluvulinen versio
       tempDatesArr.push(date)
+      tempDatesArr2.push(date2)
     }
     setNewPrices(tempArr)
     setTimes(tempDatesArr)
+    setTimesArr(tempDatesArr2)
   }
 
 
@@ -211,7 +216,7 @@ export default function ElediagramsYear() {
       save="value"
     />
     {priceOfTheMonth()}
-    <YearList newPrices={newPrices} dates={times}/>
+    <YearList newPrices={newPrices} dates={timesArr}/>
       </ScrollView>
     </View>
   )
