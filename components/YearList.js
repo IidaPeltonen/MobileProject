@@ -1,18 +1,10 @@
 import { List } from 'react-native-paper';
 import { useState } from 'react';
-import { View, Text } from 'react'
 
-const YearList = ({newPrices, dates, isSelected}) => {
+const YearList = ({newPrices, dates}) => {
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
 
-
-  if (isSelected === 'false') {
-      return (
-        <View><Text>Valitse kuukausi</Text></View>
-      )
-  }
-  else {
   return (
   
     <List.Section title="">
@@ -771,7 +763,6 @@ const YearList = ({newPrices, dates, isSelected}) => {
       </List.Accordion>
     </List.Section>
   );
-  }
 };
 
 export default YearList;
