@@ -12,10 +12,71 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 const day = new Date().getDate()
+let nextDayDay = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).getDate();
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
+if (nextDayDay === 1) {
+  nextDayDay = '01'
+}
+if (nextDayDay === 2) {
+  nextDayDay = '02'
+}
+if (nextDayDay === 3) {
+  nextDayDay = '03'
+}
+if (nextDayDay === 4) {
+  nextDayDay = '04'
+}
+if (nextDayDay === 5) {
+  nextDayDay = '05'
+}
+if (nextDayDay === 6) {
+  nextDayDay = '06'
+}
+if (nextDayDay === 7) {
+  nextDayDay = '07'
+}
+if (nextDayDay === 8) {
+  nextDayDay = '08'
+}
+if (nextDayDay === 9) {
+  nextDayDay = '09'
+}
+const nextDayMonth = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).getMonth() + 1;
+//jos kk on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
+if (nextDayMonth === 1) {
+  nextDayMonth = '01'
+}
+if (nextDayMonth === 2) {
+  nextDayMonth = '02'
+}
+if (nextDayMonth === 3) {
+  nextDayMonth = '03'
+}
+if (nextDayMonth === 4) {
+  nextDayMonth = '04'
+}
+if (nextDayMonth === 5) {
+  nextDayMonth = '05'
+}
+if (nextDayMonth === 6) {
+  nextDayMonth = '06'
+}
+if (nextDayMonth === 7) {
+  nextDayMonth = '07'
+}
+if (nextDayMonth === 8) {
+  nextDayMonth = '08'
+}
+if (nextDayMonth === 9) {
+  nextDayMonth = '09'
+}
+const nextDayYear = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).getFullYear();
 const StartTime = '0000'
 const EndTime = '0000'
 const start = 'periodStart=' + year + month + day + StartTime + '&'
-const end = 'periodEnd=' + year + month + (day + 1) + EndTime
+const end = 'periodEnd=' + nextDayYear + nextDayMonth + nextDayDay + EndTime
 
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
   + start + end
