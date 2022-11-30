@@ -26,7 +26,7 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 
 export default function ElediagramsMonth() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [times, setTimes] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [dates, setDates] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
@@ -43,7 +43,7 @@ export default function ElediagramsMonth() {
       tempDatesArr.push(date)
     }
     setNewPrices(tempArr)
-    setTimes(tempDatesArr)
+    setDates(tempDatesArr)
   }
 
   const priceOfTheMonth = () => {
@@ -51,7 +51,7 @@ export default function ElediagramsMonth() {
       return (
         <LineChart
           data={{
-            labels: [times[0], times[4], times[9], times[14], times[19], times[24], times[29]],
+            labels: [dates[0], dates[4], dates[9], dates[14], dates[19], dates[24], dates[29]],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -116,7 +116,7 @@ export default function ElediagramsMonth() {
           <Text style={styles.text}>viimeisen kuukauden aikana </Text>
         </View>
         {priceOfTheMonth()}
-        <MonthList />
+        <MonthList newPrices={newPrices} dates={dates} />
       </ScrollView>
     </View>
   )

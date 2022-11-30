@@ -1,6 +1,9 @@
 import { List } from 'react-native-paper';
+import { useState } from 'react';
 
 const DayList = ({ newPrices }) => {
+  const [expanded, setExpanded] = useState(true);
+  const handlePress = () => setExpanded(!expanded);
 
   return (
     <List.Section title="">

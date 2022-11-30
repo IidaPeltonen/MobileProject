@@ -1,72 +1,9 @@
 import { List } from 'react-native-paper';
 import { useState, useEffect } from 'react';
-import XMLParser from 'react-xml-parser';
 
-const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
-const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
-const in_Domain = 'in_Domain=10YFI-1--------U&' // maakoodi
-const out_Domain = 'out_Domain=10YFI-1--------U&'
-const year = new Date().getFullYear()
-const month = new Date().getMonth() + 1
-const day = new Date().getDate()
-const monthAgoDay = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getDate()
-const monthAgoMonth = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getMonth() + 1
-const monthAgoYear = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getFullYear()
-const StartTime = '0000'
-const EndTime = '0000'
-const start = 'periodStart=' + monthAgoYear + monthAgoMonth + monthAgoDay + StartTime + '&'
-const end = 'periodEnd=' + year + month + day + EndTime
-
-const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
-  + start + end
-const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
-
-const MonthList = () => {
+const MonthList = ({newPrices, dates}) => {
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
-  const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [dates, setDates] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-
-  function getPriceOfTheMonth(prices) {
-    const tempArr = []
-    for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
-      tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
-    }
-    setNewPrices(tempArr)
-  }
-
-  function getDates(dates) {
-    const tempArr2 = []
-    for (let x = 0; x < (dates.length); x++) {
-      //muutetaan päivämäärä suomalaiseen muotoon
-      let y = (dates[x].value).substring(0, 4)
-      let m = (dates[x].value).substring(5, 7)
-      let d = (dates[x].value).substring(8, 10)
-      let date = d + '.' + m + '.' + y
-      tempArr2.push(date)
-    }
-    setDates(tempArr2)
-  }
-
-  useEffect(() => {
-    fetch(URL, {
-      headers: {
-        'method': 'GET',
-        'Content-Type': 'application/xml',
-      },
-    })
-      .then(res => res.text())
-      .then(data => {
-        let json = new XMLParser().parseFromString(data);
-        const temp = json.getElementsByTagName('price')
-        const temp2 = json.getElementsByTagName('start')
-        //poistetaan taulukosta kaksi ekaa, turhaa startdatea (createdDate ja timeIntervalDate)
-        temp2.splice(0, 2);
-        getPriceOfTheMonth(temp)
-        getDates(temp2)
-      })
-      .catch(err => console.log(err));
-  }, [])
 
   return (
     <List.Section title="">

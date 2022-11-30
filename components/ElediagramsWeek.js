@@ -26,6 +26,7 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 
 export default function ElediagramsWeek() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [dates, setDates] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
 
   function getPriceOfTheWeek(prices) {
     const tempArr = []
@@ -33,6 +34,19 @@ export default function ElediagramsWeek() {
       tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
     }
     setNewPrices(tempArr)
+  }
+
+  function getDates(dates) {
+    const tempArr2 = []
+    for (let x = 0; x < (dates.length); x++) {
+      //muutetaan päivämäärä suomalaiseen muotoon
+      let y = (dates[x].value).substring(0, 4)
+      let m = (dates[x].value).substring(5, 7)
+      let d = (dates[x].value).substring(8, 10)
+      let date = d + '.' + m + '.' + y
+      tempArr2.push(date)
+    }
+    setDates(tempArr2)
   }
 
   const priceOfTheWeek = () => {
@@ -94,9 +108,9 @@ export default function ElediagramsWeek() {
         const temp = json.getElementsByTagName('price')
         const temp2 = json.getElementsByTagName('start')
         //poistetaan taulukosta eka, turha startti
-        temp2.splice(0, 1);
-        setNewPrices([])
+        temp2.splice(0, 2);
         getPriceOfTheWeek(temp)
+        getDates(temp2)
       })
       .catch(err => console.log(err));
   }, [])
@@ -109,7 +123,7 @@ export default function ElediagramsWeek() {
           <Text style={styles.text}>viimeisen viikon aikana </Text>
         </View>
         {priceOfTheWeek()}
-        <Weeklist />
+        <Weeklist newPrices={newPrices} dates={dates} />
       </ScrollView>
     </View>
   )
