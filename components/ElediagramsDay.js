@@ -179,7 +179,7 @@ export default function ElediagramsDay() {
         <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
       </View>
         {priceOfTheDay()}
-        <DayList />
+        <DayList newPrices={newPrices}/>
       </ScrollView>
     </View>
   )
