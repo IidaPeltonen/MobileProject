@@ -4,7 +4,7 @@ import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import styles from '../style/style';
 import { SelectList } from 'react-native-dropdown-select-list'
-//import MonthList from './MonthList';
+import YearList from './YearList';
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
@@ -16,10 +16,11 @@ const Firstday = '01'
 
 export default function ElediagramsYear() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [times, setTimes] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [dates, setDates] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
   const [selected, setSelected] = useState(""); //valittu kuukausi listalla
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
-  
+  const [isSelected, setIsSelected] = useState('false') //onko kk valittu vai ei
+
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
     for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
@@ -35,16 +36,15 @@ export default function ElediagramsYear() {
       tempDatesArr.push(date)
     }
     setNewPrices(tempArr)
-    setTimes(tempDatesArr)
+    setDates(tempDatesArr)
   }
 
   const priceOfTheMonth = () => {
-    console.log(newPrices.length)
     if (newPrices.length) {
       return (
         <LineChart
           data={{
-            labels: [times[0], times[4], times[9], times[14], times[19], times[24], times[29]],
+            labels: [dates[0], dates[4], dates[9], dates[14], dates[19], dates[24], dates[29]],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -95,7 +95,7 @@ export default function ElediagramsYear() {
     setMonths(tempArr)
   }
 
-   //tämä tuottaa getArr-antaman taulukon tulokset dropdown-valikon "otsikoiksi"
+  //tämä tuottaa getArr-antaman taulukon tulokset dropdown-valikon "otsikoiksi"
   const data = [
     { key: '1', value: months[1] },
     { key: '2', value: months[2] },
@@ -108,7 +108,7 @@ export default function ElediagramsYear() {
     { key: '9', value: months[9] },
     { key: '10', value: months[10] },
     { key: '11', value: months[11] },
-    { key: '12', value: months[12] }, 
+    { key: '12', value: months[12] },
 
   ]
   function checkTime(selected) {
@@ -167,14 +167,14 @@ export default function ElediagramsYear() {
       monthsLast = Number(31)
     }
 
-  //urlin pätkät, jotka muuttuu vallinnan mukaan, annetaan oletuksena kuluvan kkn eka päivä
-  let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
-  let end = 'periodEnd=' + y + monthNumber + monthsLast + EndTime
+    //urlin pätkät, jotka muuttuu vallinnan mukaan, annetaan oletuksena kuluvan kkn eka päivä
+    let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
+    let end = 'periodEnd=' + y + monthNumber + monthsLast + EndTime
 
-let URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain 
-+ out_Domain  + '' + start + end
+    let URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain
+      + out_Domain + '' + start + end
 
-     useEffect(() => {
+    useEffect(() => {
       fetch(URL, {
         headers: {
           'method': 'GET',
@@ -199,17 +199,18 @@ let URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentT
   return (
     <View style={styles.square}>
       <ScrollView>
-      <View style={styles.titleposdia}>
-        <Text style={styles.title}>Sähkön hintakehitys </Text>
-        <Text style={styles.text}>Valitse valikosta kuukausi, jonka arvoja haluat tarkastella (KESKEN)</Text>
-      </View>
-      <SelectList
-      setSelected={(val) => setSelected(val)} 
-      onSelect={checkTime(selected)} 
-      data={data}
-      save="value"
-    />
-    {priceOfTheMonth()}
+        <View style={styles.titleposdia}>
+          <Text style={styles.title}>Sähkön hintakehitys </Text>
+          <Text style={styles.text}>Valitse valikosta kuukausi, jonka arvoja haluat tarkastella (KESKEN)</Text>
+        </View>
+        <SelectList
+          setSelected={(val) => setSelected(val)}
+          onSelect={checkTime(selected) }
+          data={data}
+          save="value"
+        />
+        {priceOfTheMonth()}
+        {/* <YearList newPrices= {newPrices} dates= {dates} isSelected={isSelected} /> */}
       </ScrollView>
     </View>
   )
