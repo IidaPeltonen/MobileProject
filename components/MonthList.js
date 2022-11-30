@@ -1,5 +1,5 @@
 import { List } from 'react-native-paper';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const MonthList = ({newPrices, dates}) => {
   const [expanded, setExpanded] = useState(true);
