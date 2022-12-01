@@ -70,9 +70,72 @@ if (month === 8) {
 if (month === 9) {
   month = '09'
 }
+let previousDay = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getDate() ;
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
+if (previousDay === 1) {
+  previousDay = '01'
+}
+if (previousDay === 2) {
+  previousDay = '02'
+}
+if (previousDay === 3) {
+  previousDay = '03'
+}
+if (previousDay === 4) {
+  previousDay = '04'
+}
+if (previousDay === 5) {
+  previousDay = '05'
+}
+if (previousDay === 6) {
+  previousDay = '06'
+}
+if (previousDay === 7) {
+  previousDay = '07'
+}
+if (previousDay === 8) {
+  previousDay = '08'
+}
+if (previousDay === 9) {
+  previousDay = '09'
+}
+
+let previousMonth = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getMonth() + 1;
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
+if (previousMonth === 1) {
+  previousMonth = '01'
+}
+if (previousMonth === 2) {
+  previousMonth = '02'
+}
+if (previousMonth === 3) {
+  previousMonth = '03'
+}
+if (previousMonth === 4) {
+  previousMonth = '04'
+}
+if (previousMonth === 5) {
+  previousMonth = '05'
+}
+if (previousMonth === 6) {
+  previousMonth = '06'
+}
+if (previousMonth === 7) {
+  previousMonth = '07'
+}
+if (previousMonth === 8) {
+  previousMonth = '08'
+}
+if (previousMonth === 9) {
+  previousMonth = '09'
+}
+
+const previousYear = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getFullYear();
 const StartTime = '2300'
 const EndTime = '2300'
-const start = '&periodStart=' + year + month + (day - 1) + StartTime
+const start = '&periodStart=' + previousYear + previousMonth + previousDay + StartTime
 const end = '&periodEnd=' + year + month + day + EndTime
 const time = new Date().getHours()
 const index = time - 2
@@ -118,13 +181,10 @@ console.log('sit: ' + situation) */
         let json = new XMLParser().parseFromString(dataLoad);
         let loadTemp = json.getElementsByTagName('quantity')
         let lastLoadTemp =  Number(loadTemp[index].value)
-       // console.log('index: ' + index)
-       // console.log(temp2);
         setLastLoad(Number(loadTemp[index].value));
         let json2 = new XMLParser().parseFromString(dataGeneration);
         let generationsTemp = json2.getElementsByTagName('quantity')
         let lastGenerationTemp =  Number(generationsTemp[index].value)
-        //console.log(lastLoadTemp, lastGenerationTemp)
         importNeedCalculation(lastLoadTemp,lastGenerationTemp)
         setLastGeneration(Number(generationsTemp[index].value));
       })
