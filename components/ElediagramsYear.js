@@ -152,7 +152,7 @@ export default function ElediagramsYear() {
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
     for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
-      tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
+      tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
     }
     const tempDatesArr = [] // labelia varten
     const tempDatesArr2 = [] // alasvetovalikkoa varten

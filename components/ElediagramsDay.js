@@ -144,7 +144,7 @@ export default function ElediagramsDay() {
   function getPriceOfTheDay(prices, dates) {
     const tempArr = []
     for (let i = 0; i < 24; i++) {
-      tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
+      tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
     }
     const tempDatesArr = []
     for (let x = 0; x < 24; x++) {

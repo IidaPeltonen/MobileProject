@@ -176,7 +176,7 @@ export default function Elepricenow() {
         bigPrice = curValue
       }
     }
-    bigPrice = (bigPrice / 10 * 1.24).toFixed(2)
+    bigPrice = (bigPrice / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setMaxPrice(bigPrice)
     return maxPrice
   }
@@ -189,7 +189,7 @@ export default function Elepricenow() {
         smallPrice = curValue
       }
     }
-    smallPrice = (smallPrice / 10 * 1.24).toFixed(2)
+    smallPrice = (smallPrice / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setMinPrice(smallPrice)
     return minPrice
   }
@@ -200,7 +200,7 @@ export default function Elepricenow() {
       let price = Number(prices[i].value)
       average += price
     }
-    average = (average / 24 / 10 * 1.24).toFixed(2)
+    average = (average / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setAvg(average)
     return avg
   }
@@ -217,8 +217,8 @@ export default function Elepricenow() {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
         let noAlv = Number((temp[index].value) / 10).toFixed(2)
-        let sum = Number(noAlv * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
-        let priceNext = Number((temp[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
+        let sum = Number(noAlv * 1.10).toFixed(2) // alv nyt, ennen 1.12.22
+        let priceNext = Number((temp[time].value) / 10 * 1.10).toFixed(2) //alv nyt, ennen 1.12.22
         setPriceNow(sum)
         setPriceNextHour(priceNext)
         findMaxPrice(temp)
@@ -244,7 +244,7 @@ export default function Elepricenow() {
             <ScrollView>
               <View style={styles.titlepos}>
                 <Text style={styles.title}>Sähkön hinta tänään </Text>
-                <Text style={styles.lowkey}>(snt/kWh,sis. Alv 24%)</Text>
+                <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
               </View>
               <Text style={styles.flex}>
                 <Text style={styles.text}>Hinta nyt:  </Text>
