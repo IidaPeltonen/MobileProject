@@ -11,10 +11,121 @@ const in_Domain = 'in_Domain=10YFI-1--------U&' // maakoodi
 const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
-const day = new Date().getDate()
-const monthAgoDay = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getDate()
+let day = new Date().getDate()
+if (day === 1) {
+  day = '01'
+}
+if (day === 2) {
+  day = '02'
+}
+if (day === 3) {
+  day = '03'
+}
+if (day === 4) {
+  day = '04'
+}
+if (day === 5) {
+  day = '05'
+}
+if (day === 6) {
+  day = '06'
+}
+if (day === 7) {
+  day = '07'
+}
+if (day === 8) {
+  day = '08'
+}
+if (day === 9) {
+  day = '09'
+}
+
+if (month === 1) {
+  month = '01'
+}
+if (month === 2) {
+  month = '02'
+}
+if (month === 3) {
+  month = '03'
+}
+if (month === 4) {
+  month = '04'
+}
+if (month === 5) {
+  month = '05'
+}
+if (month === 6) {
+  month = '06'
+}
+if (month === 7) {
+  month = '07'
+}
+if (month === 8) {
+  month = '08'
+}
+if (month === 9) {
+  month = '09'
+}
+let monthAgoDay = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getDate()
 const monthAgoMonth = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getMonth() + 1
 const monthAgoYear = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getFullYear()
+
+if (monthAgoDay === 1) {
+  monthAgoDay = '01'
+}
+if (monthAgoDay === 2) {
+  monthAgoDay = '02'
+}
+if (monthAgoDay === 3) {
+  monthAgoDay = '03'
+}
+if (monthAgoDay === 4) {
+  monthAgoDay = '04'
+}
+if (monthAgoDay === 5) {
+  monthAgoDay = '05'
+}
+if (monthAgoDay === 6) {
+  monthAgoDay = '06'
+}
+if (monthAgoDay === 7) {
+  monthAgoDay = '07'
+}
+if (monthAgoDay === 8) {
+  monthAgoDay = '08'
+}
+if (monthAgoDay === 9) {
+  monthAgoDay = '09'
+}
+
+if (monthAgoMonth === 1) {
+  monthAgoMonth = '01'
+}
+if (monthAgoMonth === 2) {
+  monthAgoMonth = '02'
+}
+if (monthAgoMonth === 3) {
+  monthAgoMonth = '03'
+}
+if (monthAgoMonth === 4) {
+  monthAgoMonth = '04'
+}
+if (monthAgoMonth === 5) {
+  monthAgoMonth = '05'
+}
+if (monthAgoMonth === 6) {
+  monthAgoMonth = '06'
+}
+if (monthAgoMonth === 7) {
+  monthAgoMonth = '07'
+}
+if (monthAgoMonth === 8) {
+  monthAgoMonth = '08'
+}
+if (monthAgoMonth === 9) {
+  monthAgoMonth = '09'
+}
 const StartTime = '0000'
 const EndTime = '0000'
 const start = 'periodStart=' + monthAgoYear + monthAgoMonth + monthAgoDay + StartTime + '&'

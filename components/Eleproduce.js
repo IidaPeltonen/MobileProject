@@ -14,7 +14,62 @@ const processType = '&processType=A16' // minkä tyyppistä kulutustietoa haetaa
 const processType2 = '&processType=A01' // minkä tyyppistä tuotantotietoa haetaan, "day ahead"
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
-const day = new Date().getDate()
+let day = new Date().getDate()
+if (day === 1) {
+  day = '01'
+}
+if (day === 2) {
+  day = '02'
+}
+if (day === 3) {
+  day = '03'
+}
+if (day === 4) {
+  day = '04'
+}
+if (day === 5) {
+  day = '05'
+}
+if (day === 6) {
+  day = '06'
+}
+if (day === 7) {
+  day = '07'
+}
+if (day === 8) {
+  day = '08'
+}
+if (day === 9) {
+  day = '09'
+}
+
+if (month === 1) {
+  month = '01'
+}
+if (month === 2) {
+  month = '02'
+}
+if (month === 3) {
+  month = '03'
+}
+if (month === 4) {
+  month = '04'
+}
+if (month === 5) {
+  month = '05'
+}
+if (month === 6) {
+  month = '06'
+}
+if (month === 7) {
+  month = '07'
+}
+if (month === 8) {
+  month = '08'
+}
+if (month === 9) {
+  month = '09'
+}
 const StartTime = '2300'
 const EndTime = '2300'
 const start = '&periodStart=' + year + month + (day - 1) + StartTime
