@@ -32,10 +32,10 @@ function Development() {
     tabBarIndicatorStyle: {backgroundColor: '#FFC300'}
     
     }}>
-      <Tab.Screen name="Päivä" component={ElediagramsDay} />
-      <Tab.Screen name="Viikko" component={ElediagramsWeek} />
-      <Tab.Screen name="Kuukausi" component={ElediagramsMonth} />
-      <Tab.Screen name="Vuosi" component={ElediagramsYear} />
+      <Tab.Screen lazy={true} name="Päivä" component={ElediagramsDay} />
+      <Tab.Screen lazy={true} name="Viikko" component={ElediagramsWeek} />
+      <Tab.Screen lazy={true} name="Kuukausi" component={ElediagramsMonth} />
+      <Tab.Screen lazy={true} name="Vuosi" component={ElediagramsYear} />
     </Tab.Navigator>
   )
 }
@@ -50,9 +50,9 @@ export default function App() {
         tabBarStyle: { backgroundColor: '#5F5F5F', borderWidth: 5, borderColor: '#FFC300'},
         tabBarIndicatorStyle: {backgroundColor: 'black', height: 6}
         }}>
-          <Tab.Screen  name="Hinta tänään" component={Elepricenow} />
-          <Tab.Screen name="Hintakehitys" component={Development} />
-          <Tab.Screen name="Kulutus ja tuotanto" component={Eleproduce} />
+          <Tab.Screen lazy={true}  name="Hinta tänään" component={Elepricenow} />
+          <Tab.Screen lazy={true} name="Hintakehitys" component={Development} />
+          <Tab.Screen lazy={true} name="Kulutus ja tuotanto" component={Eleproduce} />
         </Tab.Navigator>
       </NavigationContainer>
       <Footer></Footer>
