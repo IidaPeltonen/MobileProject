@@ -231,6 +231,7 @@ export default function ElediagramsDay() {
       <ScrollView>
       <View style={styles.titleposdia}>
         <Text style={styles.title}>Sähkön hintakehitys </Text>
+        <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
         <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
       </View>
         {priceOfTheDay()}

@@ -188,17 +188,18 @@ export default function ElediagramsMonth() {
   }
 
   const chartConfig = {
-    backgroundColor: "purple",
-    backgroundGradientFrom: "blue",
-    backgroundGradientTo: "pink",
+    backgroundColor: "black",
+    backgroundGradientFrom: "#2B2B2B",
+    backgroundGradientTo: "#808080",
     decimalPlaces: 0, // optional, defaults to 2dp
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, //viivojen väri
-    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, //labeleiden väri
+    color: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //viivojen väri
+    labelColor: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //labeleiden väri,
     propsForDots: {
       strokeWidth: "1",
-      stroke: "purple" //palleroiden väri,
+      stroke: "black" //palleroiden väri,
     }
   }
+
 
   useEffect(() => {
     fetch(URL, {
@@ -225,6 +226,7 @@ export default function ElediagramsMonth() {
       <ScrollView>
         <View style={styles.titleposdia}>
           <Text style={styles.title}>Sähkön hintakehitys </Text>
+          <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
           <Text style={styles.text}>viimeisen kuukauden aikana </Text>
         </View>
         {priceOfTheMonth()}
