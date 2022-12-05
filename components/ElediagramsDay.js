@@ -11,7 +11,62 @@ const in_Domain = 'in_Domain=10YFI-1--------U&' // maakoodi
 const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
-const day = new Date().getDate()
+let day = new Date().getDate()
+if (day === 1) {
+  day = '01'
+}
+if (day === 2) {
+  day = '02'
+}
+if (day === 3) {
+  day = '03'
+}
+if (day === 4) {
+  day = '04'
+}
+if (day === 5) {
+  day = '05'
+}
+if (day === 6) {
+  day = '06'
+}
+if (day === 7) {
+  day = '07'
+}
+if (day === 8) {
+  day = '08'
+}
+if (day === 9) {
+  day = '09'
+}
+
+if (month === 1) {
+  month = '01'
+}
+if (month === 2) {
+  month = '02'
+}
+if (month === 3) {
+  month = '03'
+}
+if (month === 4) {
+  month = '04'
+}
+if (month === 5) {
+  month = '05'
+}
+if (month === 6) {
+  month = '06'
+}
+if (month === 7) {
+  month = '07'
+}
+if (month === 8) {
+  month = '08'
+}
+if (month === 9) {
+  month = '09'
+}
 let nextDayDay = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).getDate();
 //jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
 //joten muutetaan ne kaksinumeroiseksi
@@ -89,7 +144,7 @@ export default function ElediagramsDay() {
   function getPriceOfTheDay(prices, dates) {
     const tempArr = []
     for (let i = 0; i < 24; i++) {
-      tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
+      tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
     }
     const tempDatesArr = []
     for (let x = 0; x < 24; x++) {
@@ -176,6 +231,7 @@ export default function ElediagramsDay() {
       <ScrollView>
       <View style={styles.titleposdia}>
         <Text style={styles.title}>Sähkön hintakehitys </Text>
+        <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
         <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
       </View>
         {priceOfTheDay()}

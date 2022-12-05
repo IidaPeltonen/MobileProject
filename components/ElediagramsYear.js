@@ -4,7 +4,7 @@ import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import styles from '../style/style';
 import { SelectList } from 'react-native-dropdown-select-list'
-import YearList from './YearList';
+import YearList from './YearList'
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
 const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
@@ -16,71 +16,11 @@ const Firstday = '01'
 
 export default function ElediagramsYear() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [dates, setDates] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [times, setTimes] = useState([]); //tyhjä aika-taulukko, johon päivämäärät tallennetaan muutoksen jälkeen
+  const [timesArr, setTimesArr] = useState([]); //tyhjä aika-taulukko, johon päivämäärät tallennetaan vuosiluvun kanssa
   const [selected, setSelected] = useState(""); //valittu kuukausi listalla
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
-  const [isSelected, setIsSelected] = useState('false') //onko kk valittu vai ei
-
-  function getpriceOfTheMonth(prices, dates) {
-    const tempArr = []
-    for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
-      tempArr.push(Number(prices[i].value / 10 * 1.24).toFixed(2))
-    }
-    const tempDatesArr = []
-    for (let x = 0; x < dates.length; x++) {
-      //muutetaan päivämäärä suomalaiseen muotoon
-      let y = (dates[x].value).substring(0, 4)
-      let m = (dates[x].value).substring(5, 7)
-      let d = (dates[x].value).substring(8, 10)
-      let date = d + '.' + m + '.'
-      tempDatesArr.push(date)
-    }
-    setNewPrices(tempArr)
-    setDates(tempDatesArr)
-  }
-
-  const priceOfTheMonth = () => {
-    if (newPrices.length) {
-      return (
-        <LineChart
-          data={{
-            labels: [dates[0], dates[4], dates[9], dates[14], dates[19], dates[24], dates[29]],
-            datasets: [
-              {
-                data: newPrices.map(item => {
-                  return parseInt(item)
-                })
-              }
-            ]
-          }}
-          width={Dimensions.get("window").width - 10} // from react-native
-          height={220}
-          yAxisInterval={1} // optional, defaults to 1
-          fromZero='true' //näyttää y-akselin nollasta asti
-          chartConfig={chartConfig}
-          bezier
-          style={{
-            paddingRight: 35,
-            borderRadius: 16
-          }}
-        />
-      )
-    }
-  }
-
-  const chartConfig = {
-    backgroundColor: "purple",
-    backgroundGradientFrom: "blue",
-    backgroundGradientTo: "pink",
-    decimalPlaces: 0, // optional, defaults to 2dp
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, //viivojen väri
-    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, //labeleiden väri
-    propsForDots: {
-      strokeWidth: "1",
-      stroke: "purple" //palleroiden väri,
-    }
-  }
-
+  
   //tämä rakentaa vuoden kuukauden nimillä, aloittaen edellisestä kuukaudesta
   function getYear() {
     const tempArr = []
@@ -111,12 +51,30 @@ export default function ElediagramsYear() {
     { key: '12', value: months[12] },
 
   ]
+
+  const chartConfig = {
+    backgroundColor: "black",
+    backgroundGradientFrom: "#2B2B2B",
+    backgroundGradientTo: "#808080",
+    decimalPlaces: 0, // optional, defaults to 2dp
+    color: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //viivojen väri
+    labelColor: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //labeleiden väri,
+    propsForDots: {
+      strokeWidth: "1",
+      stroke: "black" //palleroiden väri,
+    }
+  }
+
+
+  useEffect(() => {
+    getYear()
+  }, [])
+  
   function checkTime(selected) {
-    //muuttuja kk-numerolle
-    let monthNumber = 0
-    let monthsLast = 0
-    let y = Number(selected.substring(selected.length - 4)) //hakee kk-tekstin vuosiluvun
-    let m = selected.substring(0, 3) //hakee kk-tekstin 3 ekaa merkkiä
+    var monthNumber = 0
+    var monthsLast = 0
+    var y = Number(selected.substring(selected.length - 4)) //hakee kk-tekstin vuosiluvun
+    var m = selected.substring(0, 3) //hakee kk-tekstin 3 ekaa merkkiä
     //loputon iffi tarkistamaan mikä kk on ja mitä se on numerona
     if (m === 'Tam') {
       monthNumber = '01'
@@ -166,51 +124,101 @@ export default function ElediagramsYear() {
       monthNumber = '12'
       monthsLast = Number(31)
     }
-
-    //urlin pätkät, jotka muuttuu vallinnan mukaan, annetaan oletuksena kuluvan kkn eka päivä
-    let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
-    let end = 'periodEnd=' + y + monthNumber + monthsLast + EndTime
-
-    let URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain
-      + out_Domain + '' + start + end
-
-    useEffect(() => {
-      fetch(URL, {
-        headers: {
-          'method': 'GET',
-          'Content-Type': 'application/xml',
-        },
-      })
-        .then(res => res.text())
-        .then(data => {
-          getYear()
-          let json = new XMLParser().parseFromString(data);
-          const temp = json.getElementsByTagName('price')
-          const temp2 = json.getElementsByTagName('start')
-          //poistetaan taulukosta eka, turha startti
-          temp2.splice(0, 2);
-          //setNewPrices([])
-          getpriceOfTheMonth(temp, temp2)
-        })
-        .catch(err => console.log(err));
-    }, [])
+    getData(monthNumber, monthsLast, y)
   }
 
+  function getData(monthNumber, monthsLast, y) {
+    let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
+    let end = 'periodEnd=' + y + monthNumber + monthsLast + EndTime
+    
+    const tempURL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain
+      + out_Domain + '' + start + end
+    fetch(tempURL, {
+      headers: {
+        'method': 'GET',
+        'Content-Type': 'application/xml',
+      },
+    })
+      .then(res => res.text())
+      .then(data => {
+        let json = new XMLParser().parseFromString(data);
+        const prices = json.getElementsByTagName('price')
+        const dates = json.getElementsByTagName('start')
+        dates.splice(0,2)
+        getpriceOfTheMonth(prices,dates)
+      })
+      .catch(err => console.log(err));
+  }
+
+  function getpriceOfTheMonth(prices, dates) {
+    const tempArr = []
+    for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
+      tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
+    }
+    const tempDatesArr = [] // labelia varten
+    const tempDatesArr2 = [] // alasvetovalikkoa varten
+    for (let x = 0; x < dates.length; x++) {
+      //muutetaan päivämäärä suomalaiseen muotoon
+      let y = (dates[x].value).substring(0, 4)
+      let m = (dates[x].value).substring(5, 7)
+      let d = (dates[x].value).substring(8, 10)
+      let date = d + '.' + m + '.' 
+      let date2 = d + '.' + m + '.' + y //alasvetovalikkoa varten vuosiluvulinen versio
+      tempDatesArr.push(date)
+      tempDatesArr2.push(date2)
+    }
+    setNewPrices(tempArr)
+    setTimes(tempDatesArr)
+    setTimesArr(tempDatesArr2)
+  }
+
+
+  const priceOfTheMonth = () => {
+    let lastIndex = times.length -1
+    if (newPrices.length) {
+      return (
+        <LineChart
+          data={{
+            labels: [times[0], times[4], times[9], times[14], times[19], times[24], times[lastIndex]],
+            datasets: [
+              {
+                data: newPrices.map(item => {
+                  return parseInt(item)
+                })
+              }
+            ]
+          }}
+          width={Dimensions.get("window").width - 10} // from react-native
+          height={220}
+          yAxisInterval={1} // optional, defaults to 1a
+          fromZero='true' //näyttää y-akselin nollasta asti
+          chartConfig={chartConfig}
+          bezier
+          style={{
+            paddingRight: 35,
+            borderRadius: 16
+          }}
+        />
+      )
+    }
+  }
+  
   return (
     <View style={styles.square}>
       <ScrollView>
-        <View style={styles.titleposdia}>
-          <Text style={styles.title}>Sähkön hintakehitys </Text>
-          <Text style={styles.text}>Valitse valikosta kuukausi, jonka arvoja haluat tarkastella (KESKEN)</Text>
-        </View>
-        <SelectList
-          setSelected={(val) => setSelected(val)}
-          onSelect={checkTime(selected) }
-          data={data}
-          save="value"
-        />
-        {priceOfTheMonth()}
-        {/* <YearList newPrices= {newPrices} dates= {dates} isSelected={isSelected} /> */}
+      <View style={styles.titleposdia}>
+        <Text style={styles.title}>Sähkön hintakehitys </Text>
+        <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
+        <Text style={styles.text}>Valitse valikosta kuukausi, jonka arvoja haluat tarkastella (KESKEN)</Text>
+      </View>
+      <SelectList
+      setSelected={(val) => setSelected(val)} 
+      onSelect={() =>checkTime(selected)} 
+      data={data}
+      save="value"
+    />
+    {priceOfTheMonth()}
+    <YearList newPrices={newPrices} dates={timesArr}/>
       </ScrollView>
     </View>
   )

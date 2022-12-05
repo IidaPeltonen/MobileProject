@@ -12,7 +12,62 @@ const in_Domain = 'in_Domain=10YFI-1--------U&' // maakoodi
 const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
-const day = new Date().getDate()
+let day = new Date().getDate()
+if (day === 1) {
+  day = '01'
+}
+if (day === 2) {
+  day = '02'
+}
+if (day === 3) {
+  day = '03'
+}
+if (day === 4) {
+  day = '04'
+}
+if (day === 5) {
+  day = '05'
+}
+if (day === 6) {
+  day = '06'
+}
+if (day === 7) {
+  day = '07'
+}
+if (day === 8) {
+  day = '08'
+}
+if (day === 9) {
+  day = '09'
+}
+
+if (month === 1) {
+  month = '01'
+}
+if (month === 2) {
+  month = '02'
+}
+if (month === 3) {
+  month = '03'
+}
+if (month === 4) {
+  month = '04'
+}
+if (month === 5) {
+  month = '05'
+}
+if (month === 6) {
+  month = '06'
+}
+if (month === 7) {
+  month = '07'
+}
+if (month === 8) {
+  month = '08'
+}
+if (month === 9) {
+  month = '09'
+}
 let nextDayDay = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).getDate();
 //jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
 //joten muutetaan ne kaksinumeroiseksi
@@ -121,7 +176,7 @@ export default function Elepricenow() {
         bigPrice = curValue
       }
     }
-    bigPrice = (bigPrice / 10 * 1.24).toFixed(2)
+    bigPrice = (bigPrice / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setMaxPrice(bigPrice)
     return maxPrice
   }
@@ -134,7 +189,7 @@ export default function Elepricenow() {
         smallPrice = curValue
       }
     }
-    smallPrice = (smallPrice / 10 * 1.24).toFixed(2)
+    smallPrice = (smallPrice / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setMinPrice(smallPrice)
     return minPrice
   }
@@ -145,7 +200,7 @@ export default function Elepricenow() {
       let price = Number(prices[i].value)
       average += price
     }
-    average = (average / 24 / 10 * 1.24).toFixed(2)
+    average = (average / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setAvg(average)
     return avg
   }
@@ -162,8 +217,8 @@ export default function Elepricenow() {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
         let noAlv = Number((temp[index].value) / 10).toFixed(2)
-        let sum = Number(noAlv * 1.24).toFixed(2) // alv nyt, ennen 1.12.22
-        let priceNext = Number((temp[time].value) / 10 * 1.24).toFixed(2) //alv nyt, ennen 1.12.22
+        let sum = Number(noAlv * 1.10).toFixed(2) // alv nyt, ennen 1.12.22
+        let priceNext = Number((temp[time].value) / 10 * 1.10).toFixed(2) //alv nyt, ennen 1.12.22
         setPriceNow(sum)
         setPriceNextHour(priceNext)
         findMaxPrice(temp)
@@ -175,7 +230,6 @@ export default function Elepricenow() {
   }, [])
 
   const [loaded] = useFonts({
-    RubikGlitch: require('../assets/fonts/RubikGlitch-Regular.ttf'),
     Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     Orbitronregular: require('../assets/fonts/Orbitron-Regular.ttf'),
     Orbitronbold: require('../assets/fonts/Orbitron-Bold.ttf')
@@ -189,7 +243,7 @@ export default function Elepricenow() {
             <ScrollView>
               <View style={styles.titlepos}>
                 <Text style={styles.title}>Sähkön hinta tänään </Text>
-                <Text style={styles.lowkey}>(snt/kWh,sis. Alv 24%)</Text>
+                <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
               </View>
               <Text style={styles.flex}>
                 <Text style={styles.text}>Hinta nyt:  </Text>

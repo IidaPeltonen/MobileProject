@@ -6,7 +6,7 @@
 /// npm install @react-navigation/material-top-tabs react-native-tab-view         
 ///npx expo install react-native-pager-view    
 /// npm install @react-navigation/material-bottom-tabs react-native-paper
-///nnpx expo install react-native-web@~0.18.7 react-dom@18.0.0 @expo/webpack-config@^0.17.0
+///npx expo install react-native-web@~0.18.7 react-dom@18.0.0 @expo/webpack-config@^0.17.0
 ///npm i react-native-dropdown-select-list
 
 import { View, ScrollView } from 'react-native';
@@ -29,7 +29,7 @@ function Development() {
   return (
     <Tab.Navigator screenOptions= {{tabBarLabelStyle: { fontSize: 13 , fontWeight:'bold', color: 'white' },
     tabBarStyle: { backgroundColor: '#808080', borderWidth: 2, borderColor: '#5F5F5F'},
-    tabBarIndicatorStyle: {backgroundColor: '#FFC300'}
+    tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}
     
     }}>
       <Tab.Screen lazy={true} name="Päivä" component={ElediagramsDay} />
@@ -47,8 +47,8 @@ export default function App() {
       <Header></Header>
       <NavigationContainer>
       <Tab.Navigator screenOptions= {{tabBarLabelStyle: { fontSize: 14 , fontWeight:'bold', color: 'white' },
-        tabBarStyle: { backgroundColor: '#5F5F5F', borderWidth: 5, borderColor: '#FFC300'},
-        tabBarIndicatorStyle: {backgroundColor: 'black', height: 6}
+        tabBarStyle: { backgroundColor: '#5F5F5F'},
+        tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}
         }}>
           <Tab.Screen lazy={true}  name="Hinta tänään" component={Elepricenow} />
           <Tab.Screen lazy={true} name="Hintakehitys" component={Development} />

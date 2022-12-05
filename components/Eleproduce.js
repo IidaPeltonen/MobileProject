@@ -14,10 +14,128 @@ const processType = '&processType=A16' // minkä tyyppistä kulutustietoa haetaa
 const processType2 = '&processType=A01' // minkä tyyppistä tuotantotietoa haetaan, "day ahead"
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
-const day = new Date().getDate()
+let day = new Date().getDate()
+if (day === 1) {
+  day = '01'
+}
+if (day === 2) {
+  day = '02'
+}
+if (day === 3) {
+  day = '03'
+}
+if (day === 4) {
+  day = '04'
+}
+if (day === 5) {
+  day = '05'
+}
+if (day === 6) {
+  day = '06'
+}
+if (day === 7) {
+  day = '07'
+}
+if (day === 8) {
+  day = '08'
+}
+if (day === 9) {
+  day = '09'
+}
+
+if (month === 1) {
+  month = '01'
+}
+if (month === 2) {
+  month = '02'
+}
+if (month === 3) {
+  month = '03'
+}
+if (month === 4) {
+  month = '04'
+}
+if (month === 5) {
+  month = '05'
+}
+if (month === 6) {
+  month = '06'
+}
+if (month === 7) {
+  month = '07'
+}
+if (month === 8) {
+  month = '08'
+}
+if (month === 9) {
+  month = '09'
+}
+let previousDay = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getDate() ;
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
+if (previousDay === 1) {
+  previousDay = '01'
+}
+if (previousDay === 2) {
+  previousDay = '02'
+}
+if (previousDay === 3) {
+  previousDay = '03'
+}
+if (previousDay === 4) {
+  previousDay = '04'
+}
+if (previousDay === 5) {
+  previousDay = '05'
+}
+if (previousDay === 6) {
+  previousDay = '06'
+}
+if (previousDay === 7) {
+  previousDay = '07'
+}
+if (previousDay === 8) {
+  previousDay = '08'
+}
+if (previousDay === 9) {
+  previousDay = '09'
+}
+
+let previousMonth = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getMonth() + 1;
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
+if (previousMonth === 1) {
+  previousMonth = '01'
+}
+if (previousMonth === 2) {
+  previousMonth = '02'
+}
+if (previousMonth === 3) {
+  previousMonth = '03'
+}
+if (previousMonth === 4) {
+  previousMonth = '04'
+}
+if (previousMonth === 5) {
+  previousMonth = '05'
+}
+if (previousMonth === 6) {
+  previousMonth = '06'
+}
+if (previousMonth === 7) {
+  previousMonth = '07'
+}
+if (previousMonth === 8) {
+  previousMonth = '08'
+}
+if (previousMonth === 9) {
+  previousMonth = '09'
+}
+
+const previousYear = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getFullYear();
 const StartTime = '2300'
 const EndTime = '2300'
-const start = '&periodStart=' + year + month + (day - 1) + StartTime
+const start = '&periodStart=' + previousYear + previousMonth + previousDay + StartTime
 const end = '&periodEnd=' + year + month + day + EndTime
 const time = new Date().getHours()
 const index = time - 2
@@ -63,13 +181,10 @@ console.log('sit: ' + situation) */
         let json = new XMLParser().parseFromString(dataLoad);
         let loadTemp = json.getElementsByTagName('quantity')
         let lastLoadTemp =  Number(loadTemp[index].value)
-       // console.log('index: ' + index)
-       // console.log(temp2);
         setLastLoad(Number(loadTemp[index].value));
         let json2 = new XMLParser().parseFromString(dataGeneration);
         let generationsTemp = json2.getElementsByTagName('quantity')
         let lastGenerationTemp =  Number(generationsTemp[index].value)
-        //console.log(lastLoadTemp, lastGenerationTemp)
         importNeedCalculation(lastLoadTemp,lastGenerationTemp)
         setLastGeneration(Number(generationsTemp[index].value));
       })
@@ -77,7 +192,6 @@ console.log('sit: ' + situation) */
     }, [])
 
   const [loaded] = useFonts({
-    RubikGlitch: require('../assets/fonts/RubikGlitch-Regular.ttf'),
     Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     Orbitronregular: require('../assets/fonts/Orbitron-Regular.ttf'),
     Orbitronbold: require('../assets/fonts/Orbitron-Bold.ttf')
