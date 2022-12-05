@@ -155,14 +155,13 @@ export default function Eleproduce() {
   function importNeedCalculation(lastLoad,lastGeneration) {
     let situation = lastLoad - lastGeneration
 /* console.log('last load: ' + lastLoad) //tämä ei saa mitään arvoa sivun latautuessa ekaa kertaa
-console.log('last gen: ' + lastGeneration)
+console.log('last gen: ' + lastGeneration) 
 console.log('sit: ' + situation) */
      if (situation >= 0) {
       setImportNeed(Number(situation));
     } else {
       setImportNeed(Number(0));
     } 
-    setImportNeed(situation)
   }
 
   useEffect(() => {
