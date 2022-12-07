@@ -3,6 +3,7 @@ import { Text,View, ScrollView } from 'react-native'
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { useFonts } from 'expo-font';
+import { ActivityIndicator } from 'react-native-paper';
 import styles from "../style/style"
 
 const APIKEY = '4d24ca50-7859-4d0d-97c2-de16d61007af';
@@ -201,25 +202,23 @@ console.log('sit: ' + situation) */
 
   return (
     <View>
-      <View style={styles.square}>
-      <ScrollView>
-      <View style={styles.titlepos}>
-        <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
-      </View>
-      <Text style={styles.flex}>
-        <Text style={styles.text}>Toteutunut kokonaiskulutus:  </Text>
-        <Text style={styles.notimportant}>{lastLoad}</Text>
-      </Text>
-      <Text style={styles.flex}>
-        <Text style={styles.text}>Suunniteltu kokonaistuotanto:  </Text>
-        <Text style={styles.notimportant}>{lastGeneration}</Text>
-      </Text>
-      <Text style={styles.flex}>
-        <Text style={styles.text}>Laskennallinen tuontisähkön tarve  </Text>
-        <Text style={styles.notimportant}>{importNeed}</Text>
-      </Text>
-      </ScrollView>
-      </View>
-  </View>
+    <View style={styles.square}>
+    <ScrollView>
+    <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
+    <Text style={styles.flex}>
+      <Text style={styles.text}>Toteutunut kokonaiskulutus  </Text>
+      <Text style={styles.notimportant}>{lastLoad?lastLoad : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
+    </Text>
+    <Text style={styles.flex}>
+      <Text style={styles.text}>Suunniteltu kokonaistuotanto  </Text>
+      <Text style={styles.notimportant}>{lastGeneration?lastGeneration : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
+    </Text>
+    <Text style={styles.flex}>
+      <Text style={styles.text}>Laskennallinen tuontisähkön tarve  </Text>
+      <Text style={styles.notimportant}>{importNeed?importNeed : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
+    </Text>
+    </ScrollView>
+    </View>
+</View>
   );
 }

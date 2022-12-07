@@ -59,14 +59,13 @@ export default StyleSheet.create({
       },
 
       square: {
-        backgroundColor: '#5F5F5F',
+        backgroundColor: '#2B2B2B',
         paddingTop: 10,
         paddingBottom: 20,
-        width: '100%',
+        height: '100%',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center', 
-        flex: 1,
       },
 
       important: {
