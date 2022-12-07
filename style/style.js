@@ -93,4 +93,30 @@ export default StyleSheet.create({
         paddingLeft: 20,
         paddingBottom: 40,
       },
+      center:{
+        alignContent: 'center',
+        alignSelf: 'center',
+        alignItems: 'center',
+      },
+      //näytä-otsikko, päivämäärät
+      descriptionStyle: {
+        backgroundColor: "white"
+      },
+      //näytä-otsikko, päivämäärät
+      titleStyle: {
+        color:'white', 
+        backgroundColor:'#808080',
+        alignSelf: 'center'
+      },
+      //tuntihinnat
+      descriptionStyleItems: {
+        color: 'white',
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: 18
+      },
+      titleStyleItems: {
+        color:'white',
+        alignSelf: 'center'
+      }
 });
