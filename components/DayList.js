@@ -1,87 +1,44 @@
 import { List } from 'react-native-paper';
 import { useState } from 'react';
+import style from '../style/style';
 
 const DayList = ({ newPrices }) => {
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
 
+  const times = ["00:00-01:00", "01:00-02:00", "02:00-03:00", "03:00-04:00", "04:00-05:00", "05:00-06:00",
+  "06:00-07:00", "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00",
+  "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00", "18:00-19:00", "19:00-20:00",
+  "20:00-21:00", "21:00-22:00", "22:00-23:00", "23:00-00:00"]
+
   return (
     <List.Section title="">
-      <List.Accordion
-        title="Näytä tuntihinnat" descriptionStyle={{backgroundColor: "white"}} titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}>
-        <List.Item title="00:00-01:00" description={newPrices[0]} 
-        descriptionStyle={{color: 'white'}} titleStyle={{color:'white'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="01:00-02:00" description={newPrices[1]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="02:00-03:00" description={newPrices[2]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="03:00-04:00" description={newPrices[3]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="04:00-05:00" description={newPrices[4]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="05:00-06:00" description={newPrices[5]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="06:00-07:00" description={newPrices[6]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="07:00-08:00" description={newPrices[7]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="08:00-09:00" description={newPrices[8]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="09:00-10:00" description={newPrices[9]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="10:00-11:00" description={newPrices[10]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="11:00-12:00" description={newPrices[11]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="12:00-13:00" description={newPrices[12]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="13:00-14:00" description={newPrices[13]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="14:00-15:00" description={newPrices[14]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="15:00-16:00" description={newPrices[15]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="16:00-17:00" description={newPrices[16]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="17:00-18:00" description={newPrices[17]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="18:00-19:00" description={newPrices[18]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="19:00-20:00" description={newPrices[19]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="20:00-21:00" description={newPrices[20]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="21:00-22:00" description={newPrices[21]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="22:00-23:00" description={newPrices[22]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
-        <List.Item title="23:00-00:00" description={newPrices[23]} descriptionStyle={{color: 'white'}}
-        titleStyle={{color:'white', backgroundColor:'#808080'}} 
-        style={{backgroundColor:'#808080'}}/>
+    <List.Accordion
+      title="Näytä tuntihinnat" descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+          <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[0] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[1] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[2] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[3]} titleStyle={style.titleStyleItems} description={newPrices[3] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[4]} titleStyle={style.titleStyleItems} description={newPrices[4] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[5]} titleStyle={style.titleStyleItems} description={newPrices[5] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[6]} titleStyle={style.titleStyleItems} description={newPrices[6] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[7]} titleStyle={style.titleStyleItems} description={newPrices[7] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[8]} titleStyle={style.titleStyleItems} description={newPrices[8] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[9]} titleStyle={style.titleStyleItems} description={newPrices[9] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[10]} titleStyle={style.titleStyleItems} description={newPrices[10] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[11]} titleStyle={style.titleStyleItems} description={newPrices[11] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[12]} titleStyle={style.titleStyleItems} description={newPrices[12] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[13]} titleStyle={style.titleStyleItems} description={newPrices[13] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[14]} titleStyle={style.titleStyleItems} description={newPrices[14] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[15]} titleStyle={style.titleStyleItems} description={newPrices[15] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[16]} titleStyle={style.titleStyleItems} description={newPrices[16] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[17]} titleStyle={style.titleStyleItems} description={newPrices[17] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[18]} titleStyle={style.titleStyleItems} description={newPrices[18] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[19]} titleStyle={style.titleStyleItems} description={newPrices[19] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[20]} titleStyle={style.titleStyleItems} description={newPrices[20] + 'snt/kWh' } descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[21]} titleStyle={style.titleStyleItems} description={newPrices[21] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[22]} titleStyle={style.titleStyleItems} description={newPrices[22] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
+          <List.Item title={times[23]} titleStyle={style.titleStyleItems} description={newPrices[23] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
       </List.Accordion>
     </List.Section>
   );

@@ -93,11 +93,6 @@ export default StyleSheet.create({
         paddingLeft: 20,
         paddingBottom: 40,
       },
-      center:{
-        alignContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
-      },
       //näytä-otsikko, päivämäärät
       descriptionStyle: {
         backgroundColor: "white"

@@ -126,6 +126,19 @@ if (sevenDaysAgoMonth === 8) {
 if (sevenDaysAgoMonth === 9) {
   sevenDaysAgoMonth = '09'
 }
+let sixDaysAgoDay = (new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)).getDate()
+let sixDaysAgoMonth = (new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let fiveDaysAgoDay = (new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)).getDate()
+let fiveDaysAgoMonth = (new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let fourDaysAgoDay = (new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)).getDate()
+let fourDaysAgoMonth = (new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let threeDaysAgoDay = (new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)).getDate()
+let threeDaysAgoMonth = (new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let twDaysAgoDay = (new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)).getDate()
+let twoDaysAgoMonth = (new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let oneDaysAgoDay = (new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)).getDate()
+let oneDaysAgoMonth = (new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)).getMonth() + 1
+
 const StartTime = '0000'
 const EndTime = '0000'
 const start = 'periodStart=' + sevenDaysAgoYear + sevenDaysAgoMonth + sevenDaysAgoDay + StartTime + '&'
@@ -165,11 +178,10 @@ export default function ElediagramsWeek() {
       return (
         <LineChart
           data={{
-            labels: [/*tähän kohtaa pilkun laittamalla rivi siirtyy oikealle, mutta siirtyy paaaaaljoon
-            tää on paskamainen muotoiltava, mutta katsotaan mitä keksitään*/sevenDaysAgoDay + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 1) + '.' + sevenDaysAgoMonth,
-              (sevenDaysAgoDay + 2) + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 3) + '.' + sevenDaysAgoMonth,
-              (sevenDaysAgoDay + 4) + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 5) + '.' + sevenDaysAgoMonth,
-              (sevenDaysAgoDay + 6) + '.' + sevenDaysAgoMonth],
+            labels: [sevenDaysAgoDay + '.' + sevenDaysAgoMonth, sixDaysAgoDay + '.' + sixDaysAgoMonth,
+            fiveDaysAgoDay + '.' + fiveDaysAgoMonth, fourDaysAgoDay + '.' + fourDaysAgoMonth,
+            threeDaysAgoDay + '.' + threeDaysAgoMonth, twDaysAgoDay + '.' + twoDaysAgoMonth,
+            oneDaysAgoDay + '.' + oneDaysAgoMonth],
             datasets: [
               {
                 data: newPrices.map(item => {
