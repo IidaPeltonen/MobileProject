@@ -148,6 +148,8 @@ export default function Elepricenow() {
   const [maxPrice, setMaxPrice] = useState(0)
   const [minPrice, setMinPrice] = useState(0)
   const [avg, setAvg] = useState(0)
+  const [highTime, setHighTime] = useState(0)
+  const [lowTime, setLowTime] = useState(0)
 
   function compare(priceNow, priceNextHour) {
     //jos hinta nyt on suurempi kuin hinta tunnin päästä, kääntää nuolen alas ja muuttaa värin vihreäksi
@@ -170,27 +172,33 @@ export default function Elepricenow() {
 
   function findMaxPrice(prices) {
     let bigPrice = 0
+    let timeUp = 0
     for (let i = 0; i < 24; i++) {
       let curValue = Number(prices[i].value)
       if (curValue > bigPrice) {
+        timeUp = i + 1
         bigPrice = curValue
       }
     }
     bigPrice = (bigPrice / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setMaxPrice(bigPrice)
+    setHighTime(timeUp)
     return maxPrice
   }
 
   function findMinPrice(prices) {
     let smallPrice = 20000
+    let timeDown = 0
     for (let i = 0; i < 24; i++) {
       let curValue = Number(prices[i].value)
       if (curValue < smallPrice) {
+        timeDown = i + 1
         smallPrice = curValue
       }
     }
     smallPrice = (smallPrice / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setMinPrice(smallPrice)
+    setLowTime(timeDown)
     return minPrice
   }
 
@@ -257,11 +265,11 @@ export default function Elepricenow() {
                     ></MaterialCommunityIcons></Text>
               </Text>
               <Text style={styles.flex}>
-                <Text style={styles.text}>Päivän ylin:  </Text>
-                <Text style={styles.notimportant}>{maxPrice?maxPrice : <ActivityIndicator size="small" color="#ffffff"/>} </Text>
+                <Text style={styles.text}>Päivän ylin (klo: {highTime}-{highTime+1}):  </Text>
+                <Text style={styles.notimportant}>{maxPrice?maxPrice : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
               </Text>
               <Text style={styles.flex}>
-                <Text style={styles.text}>Päivän alin:  </Text>
+                <Text style={styles.text}>Päivän alin (klo: {lowTime}-{lowTime+1}):  </Text>
                 <Text style={styles.notimportant}>{minPrice?minPrice : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
               </Text>
               <Text style={styles.flex}>

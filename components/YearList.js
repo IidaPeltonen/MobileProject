@@ -15,7 +15,7 @@ const YearList = ({newPrices, dates}) => {
   return (
     <List.Section title="">
     <List.Accordion
-      title="Näytä tuntihinnat" descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+      title="Näytä tuntihinnat" disabled='true' descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} >
       <List.Accordion
         title={dates[0]} descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[24] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />

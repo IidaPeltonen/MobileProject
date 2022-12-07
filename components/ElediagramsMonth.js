@@ -138,6 +138,11 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 export default function ElediagramsMonth() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
   const [dates, setDates] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
+
+  function getAvgs() {
+    
+  }
 
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
