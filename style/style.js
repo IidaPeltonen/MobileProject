@@ -9,7 +9,6 @@ export default StyleSheet.create({
       },
 
       header: {
-        paddingTop: 20,
         flexDirection: 'row',
         backgroundColor: '#FFC300',
       },
@@ -35,7 +34,6 @@ export default StyleSheet.create({
 
       title: {
         fontSize: 20,
-        backgroundColor: '#5F5F5F',
         color: 'white',
         fontFamily: 'Roboto',
       },
@@ -45,28 +43,30 @@ export default StyleSheet.create({
         backgroundColor: '#5F5F5F',
         color: 'white',
         fontFamily: 'Roboto',
-        paddingTop: 7
+        paddingTop: "2%"
       },
 
       titlepos: {
         flexDirection: 'row',
         paddingLeft: 20,
-        paddingBottom: 30,
+        paddingBottom: 50,
         paddingTop: 20,
       },
 
       titleposdia: {
-        paddingLeft: 20,
-        paddingBottom: 30,
         paddingTop: 20,
+        flexDirection: 'row',
       },
 
       square: {
         backgroundColor: '#5F5F5F',
         paddingTop: 10,
         paddingBottom: 20,
-        height: '100%',
         width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center', 
+        flex: 1,
       },
 
       important: {
@@ -84,7 +84,10 @@ export default StyleSheet.create({
 
       text:{
         color: 'white',
-        fontFamily: 'Roboto'
+        padding: 20,
+        fontFamily: 'Roboto',
+        paddingBottom: 20,
+        fontSize: 20,
       },
 
       flex:{

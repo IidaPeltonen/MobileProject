@@ -245,8 +245,8 @@ export default function ElediagramsWeek() {
         <View style={styles.titleposdia}>
           <Text style={styles.title}>Sähkön hintakehitys </Text>
           <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
-          <Text style={styles.text}>viimeisen viikon aikana </Text>
         </View>
+        <Text style={styles.text}>viimeisen viikon aikana </Text>
         {priceOfTheWeek()}
         <Weeklist newPrices={newPrices} dates={dates} />
       </ScrollView>
