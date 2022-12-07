@@ -209,14 +209,14 @@ export default function ElediagramsYear() {
       <ScrollView>
       <View style={styles.titleposdia}>
         <Text style={styles.title}>Sähkön hintakehitys </Text>
-        <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
-        <Text style={styles.text}>Valitse valikosta kuukausi, jonka arvoja haluat tarkastella (KESKEN)</Text>
+        <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
       </View>
       <SelectList
       setSelected={(val) => setSelected(val)} 
       onSelect={() =>checkTime(selected)} 
       data={data}
       save="value"
+      placeholder='Valitse kuukausi'
     />
     {priceOfTheMonth()}
     <YearList newPrices={newPrices} dates={timesArr}/>
