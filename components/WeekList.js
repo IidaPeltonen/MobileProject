@@ -2,6 +2,7 @@ import { List } from 'react-native-paper';
 import { useState } from 'react';
 
 const Weeklist = ({newPrices, dates}) => {
+  console.log('WeekList')
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
 

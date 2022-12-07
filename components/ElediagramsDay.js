@@ -198,6 +198,7 @@ export default function ElediagramsDay() {
   }
 
   useEffect(() => {
+    console.log('eleDiagramsDay.js')
     fetch(URL, {
       headers: {
         'method': 'GET',

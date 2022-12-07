@@ -146,7 +146,6 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
 const URL2 = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType2 + processType2 + in_Domain + start + end
 
 export default function Eleproduce() {
-
   const [lastLoad, setLastLoad] = useState(''); //viimeisin toteutunut kokonaiskulutus
   const [lastGeneration, setLastGeneration] = useState(''); //ennustettu kokonaistuotanto
   const [importNeed, setImportNeed] = useState(''); // muuttuja tuontisähkön tarpeelle
@@ -165,6 +164,7 @@ console.log('sit: ' + situation) */
   }
 
   useEffect(() => {
+    console.log('Eleproduce')
     Promise.all([
       fetch(URL),
       fetch(URL2),{

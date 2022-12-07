@@ -207,6 +207,7 @@ export default function ElediagramsWeek() {
   }
 
   useEffect(() => {
+    console.log('ElediagramsWeek.js')
     fetch(URL, {
       headers: {
         'method': 'GET',

@@ -2,6 +2,7 @@ import { List } from 'react-native-paper';
 import { useState } from 'react';
 
 const YearList = ({newPrices, dates}) => {
+  console.log('YearList')
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
 

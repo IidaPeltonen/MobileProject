@@ -65,8 +65,8 @@ export default function ElediagramsYear() {
     }
   }
 
-
   useEffect(() => {
+    console.log('ElediagramsYear.js - getYear')
     getYear()
   }, [])
   
@@ -128,6 +128,7 @@ export default function ElediagramsYear() {
   }
 
   function getData(monthNumber, monthsLast, y) {
+    console.log('ElediagramsYear.js - getData')
     let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
     let end = 'periodEnd=' + y + monthNumber + monthsLast + EndTime
     

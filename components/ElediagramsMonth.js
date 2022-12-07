@@ -202,6 +202,7 @@ export default function ElediagramsMonth() {
 
 
   useEffect(() => {
+    console.log('ElediagramsMonth.js')
     fetch(URL, {
       headers: {
         'method': 'GET',
