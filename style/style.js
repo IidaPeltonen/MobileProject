@@ -9,6 +9,7 @@ export default StyleSheet.create({
       },
 
       header: {
+        flexDirection: 'row',
         backgroundColor: '#FFC300',
       },
 
@@ -32,10 +33,7 @@ export default StyleSheet.create({
       },
 
       title: {
-        paddingLeft: 20,
-        paddingBottom: 30,
         fontSize: 20,
-        paddingTop: 20,
         color: 'white',
         fontFamily: 'Roboto',
       },
@@ -45,13 +43,13 @@ export default StyleSheet.create({
         backgroundColor: '#5F5F5F',
         color: 'white',
         fontFamily: 'Roboto',
-        paddingTop: "8%"
+        paddingTop: "2%"
       },
 
       titlepos: {
         flexDirection: 'row',
         paddingLeft: 20,
-        paddingBottom: 20,
+        paddingBottom: 50,
         paddingTop: 20,
       },
 
