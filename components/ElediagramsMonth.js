@@ -140,9 +140,24 @@ export default function ElediagramsMonth() {
   const [dates, setDates] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
   const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
 
-  function getAvgs() {
-    
+  function getAvgs(prices) {
+    const tempAvg = []
+    let a = 24
+    let b = 47
+    let avg = 0
+    for (let length = 0; length <= (prices.length - 25); length++) {
+      for (a=a; a<=b; a++) {
+          let price = Number(prices[a].value)
+          avg += price
+      }
+      let dailyAvg = (avg / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
+      avg = 0
+      b += 24
+      tempAvg.push(dailyAvg)
+    }
+    setAvgs(tempAvg)
   }
+
 
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
@@ -223,6 +238,7 @@ export default function ElediagramsMonth() {
         temp2.splice(0, 2);
         setNewPrices([])
         getpriceOfTheMonth(temp, temp2)
+        getAvgs(temp)
       })
       .catch(err => console.log(err));
   }, [])
@@ -236,7 +252,7 @@ export default function ElediagramsMonth() {
         </View>
         <Text style={styles.text}>viimeisen kuukauden aikana </Text>
         {priceOfTheMonth()}
-        <MonthList newPrices={newPrices} dates={dates} />
+        <MonthList newPrices={newPrices} dates={dates} avgs={avgs}/>
       </ScrollView>
     </View>
   )

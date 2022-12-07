@@ -3,7 +3,6 @@ import { useState } from 'react';
 import style from '../style/style';
 
 const Weeklist = ({newPrices, dates}) => {
-  console.log('WeekList')
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
 
