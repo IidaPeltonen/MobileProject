@@ -209,8 +209,8 @@ export default function ElediagramsYear() {
       <ScrollView>
       <View style={styles.titleposdia}>
         <Text style={styles.title}>Sähkön hintakehitys </Text>
-        <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
       </View>
+      <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
       <SelectList
       setSelected={(val) => setSelected(val)} 
       onSelect={() =>checkTime(selected)} 
