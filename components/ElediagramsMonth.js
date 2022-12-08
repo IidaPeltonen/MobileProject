@@ -140,19 +140,18 @@ export default function ElediagramsMonth() {
   const [dates, setDates] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
   const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
 
-  function getAvgs(prices) {
+  function getAvgs(prices, dates) {
     const tempAvg = []
-    let a = 24
-    let b = 47
     let avg = 0
-    for (let length = 0; length <= (prices.length - 25); length++) {
-      for (a=a; a<=b; a++) {
-          let price = Number(prices[a].value)
-          avg += price
+
+    for (let length = 0; length <= dates.length; length++) {
+      for (let a=0; a<=23; a++) {
+        let price = Number(prices[a].value)
+        avg += price
       }
+      prices.splice(0, 23);
       let dailyAvg = (avg / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
       avg = 0
-      b += 24
       tempAvg.push(dailyAvg)
     }
     setAvgs(tempAvg)
@@ -161,7 +160,7 @@ export default function ElediagramsMonth() {
 
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
-    for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
+    for (let i = 0; i < (prices.length); i++) {
       tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
     }
     const tempDatesArr = []
@@ -220,9 +219,7 @@ export default function ElediagramsMonth() {
     }
   }
 
-
   useEffect(() => {
-    console.log('ElediagramsMonth.js')
     fetch(URL, {
       headers: {
         'method': 'GET',
@@ -235,13 +232,14 @@ export default function ElediagramsMonth() {
         const temp = json.getElementsByTagName('price')
         const temp2 = json.getElementsByTagName('start')
         //poistetaan taulukosta eka, turha startti
-        temp2.splice(0, 2);
+        temp2.splice(0, 1);
         setNewPrices([])
         getpriceOfTheMonth(temp, temp2)
-        getAvgs(temp)
+        getAvgs(temp, temp2)
       })
       .catch(err => console.log(err));
   }, [])
+
 
   return (
     <View style={styles.square}>

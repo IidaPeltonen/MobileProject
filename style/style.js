@@ -115,5 +115,11 @@ export default StyleSheet.create({
       titleStyleItems: {
         color:'white',
         alignSelf: 'center'
+      },
+      //keskiarvot
+      titleDescriptionStyle: {
+        color: 'white',
+        alignSelf: 'center',
+        backgroundColor: '#808080'
       }
 });

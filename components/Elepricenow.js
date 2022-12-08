@@ -214,7 +214,6 @@ export default function Elepricenow() {
   }
 
   useEffect(() => {
-    console.log('Elepricenow.js')
     fetch(URL, {
       headers: {
         'method': 'GET',

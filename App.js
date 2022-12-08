@@ -26,7 +26,6 @@ import Loading from './components/Loading';
 const Tab = createMaterialTopTabNavigator();
 
 function Development() {
-  console.log('app.js - development')
   return (
     <Tab.Navigator screenOptions= {{tabBarLabelStyle: { fontSize: 13 , fontWeight:'bold', color: 'white' },
     tabBarStyle: { backgroundColor: '#808080', borderWidth: 2, borderColor: '#5F5F5F'},
@@ -42,7 +41,6 @@ function Development() {
 }
 
 export default function App() {
-console.log('app.js')
   return (
     <View style={styles.container}>
       <Header></Header>

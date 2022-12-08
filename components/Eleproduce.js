@@ -165,7 +165,6 @@ console.log('sit: ' + situation) */
   }
 
   useEffect(() => {
-    console.log('Eleproduce')
     Promise.all([
       fetch(URL),
       fetch(URL2),{
