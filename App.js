@@ -22,15 +22,17 @@ import styles from './style/style'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Loading from './components/Loading';
+import { lazy } from 'react';
 
 const Tab = createMaterialTopTabNavigator();
 
 function Development() {
   return (
-    <Tab.Navigator screenOptions= {{tabBarLabelStyle: { fontSize: 13 , fontWeight:'bold', color: 'white' },
-    tabBarStyle: { backgroundColor: '#808080', borderWidth: 2, borderColor: '#5F5F5F'},
-    tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}
-    
+    <Tab.Navigator screenOptions= {{
+      tabBarLabelStyle: { fontSize: 13 , fontWeight:'bold', color: 'white' },
+      tabBarStyle: { backgroundColor: '#808080', borderWidth: 2, borderColor: '#5F5F5F'},
+      tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2},
+      lazy:true
     }}>
       <Tab.Screen name="Päivä" component={ElediagramsDay} />
       <Tab.Screen name="Viikko" component={ElediagramsWeek} />
