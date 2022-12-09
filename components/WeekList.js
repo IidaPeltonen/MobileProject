@@ -2,7 +2,7 @@ import { List } from 'react-native-paper';
 import { useState } from 'react';
 import style from '../style/style';
 
-const Weeklist = ({ newPrices, dates }) => {
+const Weeklist = ({ newPrices, dates, avgs }) => {
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
 
@@ -16,7 +16,7 @@ const Weeklist = ({ newPrices, dates }) => {
       <List.Accordion
         title="Näytä tuntihinnat" descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
         <List.Accordion
-          title={dates[0]} descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+          title={dates[0]} description={'Päivän ka: ' + avgs[0] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[0] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[1] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[2] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -43,7 +43,7 @@ const Weeklist = ({ newPrices, dates }) => {
           <List.Item title={times[23]} titleStyle={style.titleStyleItems} description={newPrices[23] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         </List.Accordion>
         <List.Accordion
-          title={dates[1]} descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+          title={dates[1]} description={'Päivän ka: ' + avgs[1] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[24] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[27] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[26] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -70,7 +70,7 @@ const Weeklist = ({ newPrices, dates }) => {
           <List.Item title={times[23]} titleStyle={style.titleStyleItems} description={newPrices[47] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         </List.Accordion>
         <List.Accordion
-          title={dates[2]} descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+          title={dates[2]} description={'Päivän ka: ' + avgs[2] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[48] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[49] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[50] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -97,7 +97,7 @@ const Weeklist = ({ newPrices, dates }) => {
           <List.Item title={times[23]} titleStyle={style.titleStyleItems} description={newPrices[71] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         </List.Accordion>
         <List.Accordion
-          title={dates[3]} descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+          title={dates[3]} description={'Päivän ka: ' + avgs[3] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[72] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[73] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[74] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -124,7 +124,7 @@ const Weeklist = ({ newPrices, dates }) => {
           <List.Item title={times[23]} titleStyle={style.titleStyleItems} description={newPrices[95] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         </List.Accordion>
         <List.Accordion
-          title={dates[4]} descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+          title={dates[4]} description={'Päivän ka: ' + avgs[4] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[96] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[97] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[98] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -151,7 +151,7 @@ const Weeklist = ({ newPrices, dates }) => {
           <List.Item title={times[23]} titleStyle={style.titleStyleItems} description={newPrices[119] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         </List.Accordion>
         <List.Accordion
-          title={dates[5]} descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+          title={dates[5]} description={'Päivän ka: ' + avgs[5] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[120] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[121] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[122] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -178,7 +178,7 @@ const Weeklist = ({ newPrices, dates }) => {
           <List.Item title={times[23]} titleStyle={style.titleStyleItems} description={newPrices[143] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         </List.Accordion>
         <List.Accordion
-          title={dates[6]} descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+          title={dates[6]} description={'Päivän ka: ' + avgs[6] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[144] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[145] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[146] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />

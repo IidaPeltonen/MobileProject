@@ -2,7 +2,7 @@ import { List } from 'react-native-paper';
 import { useState } from 'react';
 import style from '../style/style';
 
-const DayList = ({ newPrices }) => {
+const DayList = ({ newPrices, dates, avgs }) => {
   const [expanded, setExpanded] = useState(true);
   const handlePress = () => setExpanded(!expanded);
 
@@ -15,6 +15,9 @@ const DayList = ({ newPrices }) => {
     <List.Section title="">
       <List.Accordion
         title="Näytä tuntihinnat" descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+      {/* style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} > */}
+
+        <List.Item title={dates}  description={'Päivän ka: ' + avgs[0] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} />
         <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[0] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[1] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         <List.Item title={times[2]} titleStyle={style.titleStyleItems} description={newPrices[2] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />

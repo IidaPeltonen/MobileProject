@@ -135,23 +135,39 @@ const end = 'periodEnd=' + nextDayYear + nextDayMonth + nextDayDay + EndTime
 
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
   + start + end
-const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
 
 export default function ElediagramsDay() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [times, setTimes] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [dates, setDates] = useState(day + '.' + month + '.' + year); //muuttuja päivämäärän tallennukseen
+  const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
 
-  function getPriceOfTheDay(prices, dates) {
+  function getAvgs(prices) {
+    const tempAvg = []
+    let avg = 0
+
+    for (let length = 0; length <= 1; length++) {
+      for (let a = 0; a <= 23; a++) {
+        let price = Number(prices[a].value)
+        avg += price
+      }
+      prices.splice(0,24)
+      let dailyAvg = (avg / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
+      tempAvg.push(dailyAvg)
+    }
+    setAvgs(tempAvg)
+  }
+
+  function getPriceOfTheDay(prices) {
+    setDates(day + '.' + month + '.' + year)
     const tempArr = []
+    tempArr.push(Number(prices[0].value / 10 * 1.10).toFixed(2) -1) // tää on silkka huijaus,
+    //kannasta ei saa tällä meidän nykyisellä osoitteella hintaa eiliseltä 23-00
     for (let i = 0; i < 24; i++) {
       tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
+    console.log(tempArr[0])
     }
-    const tempDatesArr = []
-    for (let x = 0; x < 24; x++) {
-      tempDatesArr.push(Number(dates[x].value - 1).toFixed(2)) // jotta saadaan indeksistä kellonaika
-    }
+
     setNewPrices(tempArr)
-    setTimes(tempDatesArr)
   }
 
   const priceOfTheDay = () => {
@@ -208,20 +224,8 @@ export default function ElediagramsDay() {
       .then(data => {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
-        const temp2 = json.getElementsByTagName('start')
-        //poistetaan taulukosta eka, turha startti
-        temp2.splice(0, 1);
-        const temp3 = json.getElementsByTagName('position')
-        setNewPrices([])
-        setTimes([])
-        getPriceOfTheDay(temp, temp3)
-        //seuraava hakee taulukon jokaiselle pistelle tarkan ajan,
-        // ja hinnan
-        //tää pitää siirtää omaan funktioon joka sit näyttää nuo,
-        //kun pistettä klikkaa
-        let pointsHour = (temp2[0].value).substring(11, 16)
-        let pointPrice = temp[0].value
-        //console.log('Aika ja hinta indeksissä 0: ' +pointsHour + ' ja ' + pointPrice)
+        getPriceOfTheDay(temp)
+        getAvgs(temp, dates)
       })
       .catch(err => console.log(err));
   }, [])
@@ -235,7 +239,7 @@ export default function ElediagramsDay() {
         </View>
         <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
         {priceOfTheDay()}
-        <DayList newPrices={newPrices} />
+        <DayList newPrices={newPrices} dates={dates} avgs={avgs} />
       </ScrollView>
     </View>
   )

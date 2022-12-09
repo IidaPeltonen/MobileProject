@@ -150,7 +150,25 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 
 export default function ElediagramsWeek() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [dates, setDates] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [dates, setDates] = useState([]); //tyhjä hinta-taulukko, johon päivät tallennetaan muutoksen jälkeen
+  const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
+
+  function getAvgs(prices, dates) {
+    const tempAvg = []
+    let avg = 0
+
+    for (let length = 0; length <= dates.length; length++) {
+      for (let a = 0; a <= 23; a++) {
+        let price = Number(prices[a].value)
+        avg += price
+      }
+      prices.splice(0, 23);
+      let dailyAvg = (avg / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
+      avg = 0
+      tempAvg.push(dailyAvg)
+    }
+    setAvgs(tempAvg)
+  }
 
   function getPriceOfTheWeek(prices) {
     const tempArr = []
@@ -234,6 +252,7 @@ export default function ElediagramsWeek() {
         temp2.splice(0, 2);
         getPriceOfTheWeek(temp)
         getDates(temp2)
+        getAvgs(temp, temp2)
       })
       .catch(err => console.log(err));
   }, [])
@@ -247,7 +266,7 @@ export default function ElediagramsWeek() {
         </View>
         <Text style={styles.text}>viimeisen viikon aikana </Text>
         {priceOfTheWeek()}
-        <Weeklist newPrices={newPrices} dates={dates} />
+        <Weeklist newPrices={newPrices} dates={dates} avgs={avgs} />
       </ScrollView>
     </View>
   )
