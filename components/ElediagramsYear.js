@@ -21,6 +21,25 @@ export default function ElediagramsYear() {
   const [selected, setSelected] = useState(""); //valittu kuukausi listalla
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
   const [isSelected, setIsSelected] = useState(false);
+  const [avgs, setAvgs] = useState([]); //tyhjä taulukko päiväkeskiarvoille
+
+  function getAvgs(prices, dates) {
+    const tempAvg = []
+    let avg = 0
+
+    for (let length = 0; length <= dates.length; length++) {
+      for (let a = 0; a <= 23; a++) {
+        let price = Number(prices[a].value)
+        avg += price
+      }
+      prices.splice(0, 23);
+      let dailyAvg = (avg / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
+      avg = 0
+      tempAvg.push(dailyAvg)
+    }
+    setAvgs(tempAvg)
+  }
+
 
   //tämä rakentaa vuoden kuukauden nimillä, aloittaen edellisestä kuukaudesta
   function getYear() {
@@ -147,13 +166,15 @@ export default function ElediagramsYear() {
         const dates = json.getElementsByTagName('start')
         dates.splice(0, 2)
         getpriceOfTheMonth(prices, dates)
+        getAvgs(prices, dates)
       })
       .catch(err => console.log(err));
   }
 
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
-    for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
+    console.log('prices.length: ' + prices.length)
+    for (let i = 0; i < (prices.length); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
       tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
     }
     const tempDatesArr = [] // labelia varten
@@ -203,6 +224,7 @@ export default function ElediagramsYear() {
     }
   }
 
+  //jos kk on valittu
   if (isSelected === true) {
     return (
       <View style={styles.square}>
@@ -219,11 +241,12 @@ export default function ElediagramsYear() {
             placeholder='Valitse kuukausi'
           />
           {priceOfTheMonth()}
-          <YearList newPrices={newPrices} dates={timesArr} />
+          <YearList newPrices={newPrices} dates={timesArr} avgs={avgs} />
         </ScrollView>
       </View>
     )
   }
+  //jos kuukautta ei vielä ole valittu
   if (isSelected === false) {
     return (
       <View style={styles.square}>
