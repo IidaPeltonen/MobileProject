@@ -145,7 +145,7 @@ export default function ElediagramsMonth() {
     let avg = 0
 
     for (let length = 0; length <= dates.length; length++) {
-      for (let a=0; a<=23; a++) {
+      for (let a = 0; a <= 23; a++) {
         let price = Number(prices[a].value)
         avg += price
       }
@@ -250,7 +250,7 @@ export default function ElediagramsMonth() {
         </View>
         <Text style={styles.text}>viimeisen kuukauden aikana </Text>
         {priceOfTheMonth()}
-        <MonthList newPrices={newPrices} dates={dates} avgs={avgs}/>
+        <MonthList newPrices={newPrices} dates={dates} avgs={avgs} />
       </ScrollView>
     </View>
   )

@@ -241,41 +241,41 @@ export default function Elepricenow() {
     Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     Orbitronregular: require('../assets/fonts/Orbitron-Regular.ttf'),
     Orbitronbold: require('../assets/fonts/Orbitron-Bold.ttf')
-    });
-    if(!loaded) {
+  });
+  if (!loaded) {
     return null;
-    }
+  }
 
-    return (
-          <View style={styles.square}>
-            <ScrollView>
-              <View style={styles.titlepos}>
-                <Text style={styles.title}>Sähkön hinta tänään </Text>
-                <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
-              </View>
-              <Text style={styles.flex}>
-                <Text style={styles.text}>Hinta nyt:  </Text>
-                  <Text style={styles.important}>{priceNow?priceNow : <ActivityIndicator size="large" color="#ffffff"/>}       
-                    <MaterialCommunityIcons
-                      name={'arrow-' + arrow + '-bold'}
-                      color={color}
-                      size={40}
-                      style={styles.icon}
-                    ></MaterialCommunityIcons></Text>
-              </Text>
-              <Text style={styles.flex}>
-                <Text style={styles.text}>Päivän ylin (klo: {highTime}-{highTime+1}):  </Text>
-                <Text style={styles.notimportant}>{maxPrice?maxPrice : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
-              </Text>
-              <Text style={styles.flex}>
-                <Text style={styles.text}>Päivän alin (klo: {lowTime}-{lowTime+1}):  </Text>
-                <Text style={styles.notimportant}>{minPrice?minPrice : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
-              </Text>
-              <Text style={styles.flex}>
-                  <Text style={styles.text}>Päivän keskihinta:  </Text>
-                  <Text style={styles.notimportant}>{avg?avg : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
-              </Text>
-            </ScrollView>
-          </View>
-    );
+  return (
+    <View style={styles.square}>
+      <ScrollView>
+        <View style={styles.titlepos}>
+          <Text style={styles.title}>Sähkön hinta tänään </Text>
+          <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
+        </View>
+        <Text style={styles.flex}>
+          <Text style={styles.text}>Hinta nyt:  </Text>
+          <Text style={styles.important}>{priceNow ? priceNow : <ActivityIndicator size="large" color="#ffffff" />}
+            <MaterialCommunityIcons
+              name={'arrow-' + arrow + '-bold'}
+              color={color}
+              size={40}
+              style={styles.icon}
+            ></MaterialCommunityIcons></Text>
+        </Text>
+        <Text style={styles.flex}>
+          <Text style={styles.text}>Päivän ylin (klo: {highTime}-{highTime + 1}):  </Text>
+          <Text style={styles.notimportant}>{maxPrice ? maxPrice : <ActivityIndicator size="small" color="#ffffff" />}</Text>
+        </Text>
+        <Text style={styles.flex}>
+          <Text style={styles.text}>Päivän alin (klo: {lowTime}-{lowTime + 1}):  </Text>
+          <Text style={styles.notimportant}>{minPrice ? minPrice : <ActivityIndicator size="small" color="#ffffff" />}</Text>
+        </Text>
+        <Text style={styles.flex}>
+          <Text style={styles.text}>Päivän keskihinta:  </Text>
+          <Text style={styles.notimportant}>{avg ? avg : <ActivityIndicator size="small" color="#ffffff" />}</Text>
+        </Text>
+      </ScrollView>
+    </View>
+  );
 }

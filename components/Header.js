@@ -9,8 +9,8 @@ export default function Header() {
   return (
     <View>
       <View style={styles.header}>
-      <Image source = {require('../assets/sp-.png')}
-      style={styles.logo} />
+        <Image source={require('../assets/sp-.png')}
+          style={styles.logo} />
       </View>
 
     </ View>

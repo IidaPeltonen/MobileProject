@@ -32,10 +32,10 @@ function Development() {
     tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}
     
     }}>
-      <Tab.Screen lazy={true} name="Päivä" component={ElediagramsDay} />
-      <Tab.Screen lazy={true} name="Viikko" component={ElediagramsWeek} />
-      <Tab.Screen lazy={true} name="Kuukausi" component={ElediagramsMonth} />
-      <Tab.Screen lazy={true} name="Vuosi" component={ElediagramsYear} />
+      <Tab.Screen name="Päivä" component={ElediagramsDay} />
+      <Tab.Screen name="Viikko" component={ElediagramsWeek} />
+      <Tab.Screen name="Kuukausi" component={ElediagramsMonth} />
+      <Tab.Screen name="Vuosi" component={ElediagramsYear} />
     </Tab.Navigator>
   )
 }
@@ -45,13 +45,15 @@ export default function App() {
     <View style={styles.container}>
       <Header></Header>
       <NavigationContainer>
-      <Tab.Navigator screenOptions= {{tabBarLabelStyle: { fontSize: 14 , fontWeight:'bold', color: 'white' },
+      <Tab.Navigator screenOptions= {{
+        tabBarLabelStyle: { fontSize: 14 , fontWeight:'bold', color: 'white' },
         tabBarStyle: { backgroundColor: '#5F5F5F'},
-        tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}
+        tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2},
+        lazy:true 
         }}>
-          <Tab.Screen lazy={true}  name="Hinta tänään" component={Elepricenow} />
-          <Tab.Screen lazy={true} name="Hintakehitys" component={Development} />
-          <Tab.Screen lazy={true} name="Kulutus ja tuotanto" component={Eleproduce} />
+          <Tab.Screen  name="Hinta tänään" component={Elepricenow} />
+          <Tab.Screen  name="Hintakehitys" component={Development} />
+          <Tab.Screen  name="Kulutus ja tuotanto" component={Eleproduce} />
         </Tab.Navigator>
       </NavigationContainer>
       <Footer></Footer>

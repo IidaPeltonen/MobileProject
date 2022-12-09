@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text,View, ScrollView } from 'react-native'
+import { Text, View, ScrollView } from 'react-native'
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { useFonts } from 'expo-font';
@@ -43,7 +43,6 @@ if (day === 8) {
 if (day === 9) {
   day = '09'
 }
-
 if (month === 1) {
   month = '01'
 }
@@ -71,7 +70,7 @@ if (month === 8) {
 if (month === 9) {
   month = '09'
 }
-let previousDay = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getDate() ;
+let previousDay = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getDate();
 //jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
 //joten muutetaan ne kaksinumeroiseksi
 if (previousDay === 1) {
@@ -152,26 +151,24 @@ export default function Eleproduce() {
   const [importNeed, setImportNeed] = useState(''); // muuttuja tuontisähkön tarpeelle
 
   // funktio tuontisähkön tarpeen laskentaan
-  function importNeedCalculation(lastLoad,lastGeneration) {
+  function importNeedCalculation(lastLoad, lastGeneration) {
     let situation = lastLoad - lastGeneration
-/* console.log('last load: ' + lastLoad) //tämä ei saa mitään arvoa sivun latautuessa ekaa kertaa
-console.log('last gen: ' + lastGeneration) 
-console.log('sit: ' + situation) */
-     if (situation >= 0) {
+    if (situation >= 0) {
       setImportNeed(Number(situation));
     } else {
       setImportNeed(Number(0));
-    } 
+    }
   }
 
   useEffect(() => {
     Promise.all([
       fetch(URL),
-      fetch(URL2),{
-      headers: {
-        'method': 'GET',
-        'Content-Type': 'application/xml',
-      },}
+      fetch(URL2), {
+        headers: {
+          'method': 'GET',
+          'Content-Type': 'application/xml',
+        },
+      }
     ])
       .then(([resLoad, resGeneration]) =>
         Promise.all([resLoad.text(), resGeneration.text()])
@@ -179,45 +176,45 @@ console.log('sit: ' + situation) */
       .then(([dataLoad, dataGeneration]) => {
         let json = new XMLParser().parseFromString(dataLoad);
         let loadTemp = json.getElementsByTagName('quantity')
-        let lastLoadTemp =  Number(loadTemp[index].value)
+        let lastLoadTemp = Number(loadTemp[index].value)
         setLastLoad(Number(loadTemp[index].value));
         let json2 = new XMLParser().parseFromString(dataGeneration);
         let generationsTemp = json2.getElementsByTagName('quantity')
-        let lastGenerationTemp =  Number(generationsTemp[index].value)
-        importNeedCalculation(lastLoadTemp,lastGenerationTemp)
+        let lastGenerationTemp = Number(generationsTemp[index].value)
+        importNeedCalculation(lastLoadTemp, lastGenerationTemp)
         setLastGeneration(Number(generationsTemp[index].value));
       })
       .catch(err => console.log(err));
-    }, [])
+  }, [])
 
   const [loaded] = useFonts({
     Roboto: require('../assets/fonts/Roboto-Regular.ttf'),
     Orbitronregular: require('../assets/fonts/Orbitron-Regular.ttf'),
     Orbitronbold: require('../assets/fonts/Orbitron-Bold.ttf')
   });
-  if(!loaded) {
+  if (!loaded) {
     return null;
   }
 
   return (
     <View>
-    <View style={styles.square}>
-    <ScrollView>
-    <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
-    <Text style={styles.flex}>
-      <Text style={styles.text}>Toteutunut kokonaiskulutus  </Text>
-      <Text style={styles.notimportant}>{lastLoad?lastLoad : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
-    </Text>
-    <Text style={styles.flex}>
-      <Text style={styles.text}>Suunniteltu kokonaistuotanto  </Text>
-      <Text style={styles.notimportant}>{lastGeneration?lastGeneration : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
-    </Text>
-    <Text style={styles.flex}>
-      <Text style={styles.text}>Laskennallinen tuontisähkön tarve  </Text>
-      <Text style={styles.notimportant}>{importNeed?importNeed : <ActivityIndicator size="small" color="#ffffff"/>}</Text>
-    </Text>
-    </ScrollView>
+      <View style={styles.square}>
+        <ScrollView>
+          <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
+          <Text style={styles.flex}>
+            <Text style={styles.text}>Toteutunut kokonaiskulutus  </Text>
+            <Text style={styles.notimportant}>{lastLoad ? lastLoad : <ActivityIndicator size="small" color="#ffffff" />}</Text>
+          </Text>
+          <Text style={styles.flex}>
+            <Text style={styles.text}>Suunniteltu kokonaistuotanto  </Text>
+            <Text style={styles.notimportant}>{lastGeneration ? lastGeneration : <ActivityIndicator size="small" color="#ffffff" />}</Text>
+          </Text>
+          <Text style={styles.flex}>
+            <Text style={styles.text}>Laskennallinen tuontisähkön tarve  </Text>
+            <Text style={styles.notimportant}>{importNeed ? importNeed : <ActivityIndicator size="small" color="#ffffff" />}</Text>
+          </Text>
+        </ScrollView>
+      </View>
     </View>
-</View>
   );
 }

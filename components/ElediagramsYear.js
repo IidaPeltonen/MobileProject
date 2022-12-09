@@ -21,7 +21,7 @@ export default function ElediagramsYear() {
   const [selected, setSelected] = useState(""); //valittu kuukausi listalla
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
   const [isSelected, setIsSelected] = useState(false);
-  
+
   //tämä rakentaa vuoden kuukauden nimillä, aloittaen edellisestä kuukaudesta
   function getYear() {
     const tempArr = []
@@ -67,10 +67,9 @@ export default function ElediagramsYear() {
   }
 
   useEffect(() => {
-    console.log('ElediagramsYear.js - getYear')
     getYear()
   }, [])
-  
+
   function checkTime(selected) {
     setIsSelected(true)
     var monthNumber = 0
@@ -130,10 +129,9 @@ export default function ElediagramsYear() {
   }
 
   function getData(monthNumber, monthsLast, y) {
-    console.log('ElediagramsYear.js - getData')
     let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
     let end = 'periodEnd=' + y + monthNumber + monthsLast + EndTime
-    
+
     const tempURL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain
       + out_Domain + '' + start + end
     fetch(tempURL, {
@@ -147,8 +145,8 @@ export default function ElediagramsYear() {
         let json = new XMLParser().parseFromString(data);
         const prices = json.getElementsByTagName('price')
         const dates = json.getElementsByTagName('start')
-        dates.splice(0,2)
-        getpriceOfTheMonth(prices,dates)
+        dates.splice(0, 2)
+        getpriceOfTheMonth(prices, dates)
       })
       .catch(err => console.log(err));
   }
@@ -165,7 +163,7 @@ export default function ElediagramsYear() {
       let y = (dates[x].value).substring(0, 4)
       let m = (dates[x].value).substring(5, 7)
       let d = (dates[x].value).substring(8, 10)
-      let date = d + '.' + m + '.' 
+      let date = d + '.' + m + '.'
       let date2 = d + '.' + m + '.' + y //alasvetovalikkoa varten vuosiluvulinen versio
       tempDatesArr.push(date)
       tempDatesArr2.push(date2)
@@ -176,7 +174,7 @@ export default function ElediagramsYear() {
   }
 
   const priceOfTheMonth = () => {
-    let lastIndex = times.length -1
+    let lastIndex = times.length - 1
     if (newPrices.length) {
       return (
         <LineChart
@@ -205,46 +203,46 @@ export default function ElediagramsYear() {
     }
   }
 
-if (isSelected === true) {
-  return (
-    <View style={styles.square}>
-      <ScrollView>
-      <View style={styles.titleposdia}>
-        <Text style={styles.title}>Sähkön hintakehitys </Text>
+  if (isSelected === true) {
+    return (
+      <View style={styles.square}>
+        <ScrollView>
+          <View style={styles.titleposdia}>
+            <Text style={styles.title}>Sähkön hintakehitys </Text>
+          </View>
+          <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
+          <SelectList
+            setSelected={(val) => setSelected(val)}
+            onSelect={() => checkTime(selected)}
+            data={data}
+            save="value"
+            placeholder='Valitse kuukausi'
+          />
+          {priceOfTheMonth()}
+          <YearList newPrices={newPrices} dates={timesArr} />
+        </ScrollView>
       </View>
-      <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
-      <SelectList
-      setSelected={(val) => setSelected(val)} 
-      onSelect={() =>checkTime(selected)} 
-      data={data}
-      save="value"
-      placeholder='Valitse kuukausi'
-    />
-    {priceOfTheMonth()}
-    <YearList newPrices={newPrices} dates={timesArr}/>
-      </ScrollView>
-    </View>
-  )
-}
-if (isSelected === false) {
-  return (
-    <View style={styles.square}>
-      <ScrollView>
-      <View style={styles.titleposdia}>
-        <Text style={styles.title}>Sähkön hintakehitys </Text>
+    )
+  }
+  if (isSelected === false) {
+    return (
+      <View style={styles.square}>
+        <ScrollView>
+          <View style={styles.titleposdia}>
+            <Text style={styles.title}>Sähkön hintakehitys </Text>
+          </View>
+          <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
+          <SelectList
+            setSelected={(val) => setSelected(val)}
+            onSelect={() => checkTime(selected)}
+            data={data}
+            save="value"
+            placeholder='Valitse kuukausi'
+          />
+          {priceOfTheMonth()}
+        </ScrollView>
       </View>
-      <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
-      <SelectList
-      setSelected={(val) => setSelected(val)} 
-      onSelect={() =>checkTime(selected)} 
-      data={data}
-      save="value"
-      placeholder='Valitse kuukausi'
-    />
-    {priceOfTheMonth()}
-      </ScrollView>
-    </View>
-  )
-}
+    )
+  }
 }
 

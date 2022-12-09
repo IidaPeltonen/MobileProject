@@ -159,7 +159,7 @@ export default function ElediagramsDay() {
       return (
         <LineChart
           data={{
-            labels: ["23","01","03","05","07","09","11","13","15","17","19","21","23"],
+            labels: ["23", "01", "03", "05", "07", "09", "11", "13", "15", "17", "19", "21", "23"],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -229,13 +229,13 @@ export default function ElediagramsDay() {
   return (
     <View style={styles.square}>
       <ScrollView>
-      <View style={styles.titleposdia}>
-        <Text style={styles.title}>Sähkön hintakehitys </Text>
-        <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>  
-      </View>
-      <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
+        <View style={styles.titleposdia}>
+          <Text style={styles.title}>Sähkön hintakehitys </Text>
+          <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
+        </View>
+        <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
         {priceOfTheDay()}
-        <DayList newPrices={newPrices}/>
+        <DayList newPrices={newPrices} />
       </ScrollView>
     </View>
   )
