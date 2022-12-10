@@ -202,15 +202,10 @@ export default function ElediagramsDay() {
 
   const chartConfig = {
     backgroundColor: "black",
-    backgroundGradientFrom: "#2B2B2B",
-    backgroundGradientTo: "#808080",
+    backgroundGradientFrom: "#171717",
+    backgroundGradientTo: "#5c5b5b",
     decimalPlaces: 0, // optional, defaults to 2dp
-    color: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //viivojen väri
-    labelColor: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //labeleiden väri,
-    propsForDots: {
-      strokeWidth: "1",
-      stroke: "black"  //palleroiden väri,
-    }
+    color: (opacity = 1) => `rgba(255, 213, 0, ${opacity})`, //viivojen väri
   }
 
   useEffect(() => {
