@@ -9,7 +9,6 @@ export default StyleSheet.create({
       },
 
       header: {
-        paddingTop: 20,
         flexDirection: 'row',
         backgroundColor: '#FFC300',
       },
@@ -34,37 +33,39 @@ export default StyleSheet.create({
       },
 
       title: {
-        fontSize: 20,
-        backgroundColor: '#5F5F5F',
+        fontSize: 25,
         color: 'white',
         fontFamily: 'Roboto',
       },
 
       lowkey: {
         fontSize: 12,
-        backgroundColor: '#5F5F5F',
         color: 'white',
         fontFamily: 'Roboto',
-        paddingTop: 7
+        paddingTop: "2%"
       },
 
       titlepos: {
         flexDirection: 'row',
         paddingLeft: 20,
-        paddingBottom: 30,
+        paddingBottom: 50,
         paddingTop: 20,
       },
 
       titleposdia: {
-        paddingLeft: 20,
-        paddingBottom: 30,
         paddingTop: 20,
+        paddingLeft: 20,
+        flexDirection: 'row',
       },
 
       square: {
-        backgroundColor: '#5F5F5F',
+        backgroundColor: '#2B2B2B',
+        paddingTop: 10,
+        paddingBottom: 20,
         height: '100%',
-        width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center', 
       },
 
       important: {
@@ -77,43 +78,63 @@ export default StyleSheet.create({
 
       notimportant: {
         color: 'white',
-        fontFamily: 'Orbitronbold'
+        fontFamily: 'Orbitronbold',
       },
 
       text:{
         color: 'white',
-        fontFamily: 'Roboto'
+        padding: 20,
+        fontFamily: 'Roboto',
+        paddingBottom: 20,
+        fontSize: 20,
       },
 
-      flex:{
+      flex1:{
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: 20,
         paddingBottom: 40,
       },
 
-      modal: {
-        flex: 4,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
+      flex2:{
+        paddingLeft: 5,
       },
 
-      modalcontent: {
-        marginTop: 300,
-        width: '100%',
-        height: 200,
-        backgroundColor: '#5F5F5F',
-        borderRadius: 3,
-        padding: 10,
-        paddingTop: 15,
+      flex3:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 20,
+        paddingBottom: 40,
       },
-
-      modaltext: {
-        color:'white',
-        padding: 5,
+      //näytä-otsikko, päivämäärät
+      descriptionStyle: {
+        backgroundColor: "white",
         fontFamily: 'Roboto',
-        marginBottom: 13,
       },
+      //näytä-otsikko, päivämäärät
+      titleStyle: {
+        color:'white', 
+        backgroundColor:'#808080',
+        alignSelf: 'center',
+        fontFamily: 'Roboto',
+      },
+      //tuntihinnat
+      descriptionStyleItems: {
+        color: 'white',
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: 18,
+      },
+      titleStyleItems: {
+        color:'white',
+        alignSelf: 'center',
+        fontFamily: 'Roboto',
+      },
+      //keskiarvot
+      titleDescriptionStyle: {
+        color: 'white',
+        alignSelf: 'center',
+        backgroundColor: '#808080',
+        fontFamily: 'Roboto',
+      }
 });

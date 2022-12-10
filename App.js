@@ -22,15 +22,17 @@ import styles from './style/style'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Loading from './components/Loading';
+import { lazy } from 'react';
 
 const Tab = createMaterialTopTabNavigator();
 
 function Development() {
   return (
-    <Tab.Navigator screenOptions= {{tabBarLabelStyle: { fontSize: 13 , fontWeight:'bold', color: 'white' },
-    tabBarStyle: { backgroundColor: '#808080', borderWidth: 2, borderColor: '#5F5F5F'},
-    tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}
-    
+    <Tab.Navigator swipeEnabled= {false} screenOptions= {{ 
+      tabBarLabelStyle: { fontSize: 13 , fontWeight:'bold', color: 'white' },
+      tabBarStyle: { backgroundColor: '#808080', borderWidth: 2, borderColor: '#5F5F5F'},
+      tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}, 
+      lazy:true
     }}>
       <Tab.Screen name="Päivä" component={ElediagramsDay} />
       <Tab.Screen name="Viikko" component={ElediagramsWeek} />
@@ -41,18 +43,19 @@ function Development() {
 }
 
 export default function App() {
-
   return (
     <View style={styles.container}>
       <Header></Header>
       <NavigationContainer>
-      <Tab.Navigator screenOptions= {{tabBarLabelStyle: { fontSize: 14 , fontWeight:'bold', color: 'white' },
+      <Tab.Navigator screenOptions= {{
+        tabBarLabelStyle: { fontSize: 14 , fontWeight:'bold', color: 'white' },
         tabBarStyle: { backgroundColor: '#5F5F5F'},
-        tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}
+        tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2},
+        lazy:true 
         }}>
           <Tab.Screen  name="Hinta tänään" component={Elepricenow} />
-          <Tab.Screen name="Hintakehitys" component={Development} />
-          <Tab.Screen name="Kulutus ja tuotanto" component={Eleproduce} />
+          <Tab.Screen  name="Hintakehitys" component={Development} />
+          <Tab.Screen  name="Kulutus ja tuotanto" component={Eleproduce} />
         </Tab.Navigator>
       </NavigationContainer>
       <Footer></Footer>

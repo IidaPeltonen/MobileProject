@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, Dimensions, TextComponent, SafeAreaView, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, View, Dimensions, } from 'react-native';
 import { useState, useEffect, useCallback } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
@@ -20,7 +20,27 @@ export default function ElediagramsYear() {
   const [timesArr, setTimesArr] = useState([]); //tyhjä aika-taulukko, johon päivämäärät tallennetaan vuosiluvun kanssa
   const [selected, setSelected] = useState(""); //valittu kuukausi listalla
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
-  
+  const [isSelected, setIsSelected] = useState(false);
+  const [avgs, setAvgs] = useState([]); //tyhjä taulukko päiväkeskiarvoille
+
+  function getAvgs(prices, dates) {
+    const tempAvg = []
+    let avg = 0
+
+    for (let length = 0; length <= dates.length; length++) {
+      for (let a = 0; a <= 23; a++) {
+        let price = Number(prices[a].value)
+        avg += price
+      }
+      prices.splice(0, 23);
+      let dailyAvg = (avg / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
+      avg = 0
+      tempAvg.push(dailyAvg)
+    }
+    setAvgs(tempAvg)
+  }
+
+
   //tämä rakentaa vuoden kuukauden nimillä, aloittaen edellisestä kuukaudesta
   function getYear() {
     const tempArr = []
@@ -65,12 +85,12 @@ export default function ElediagramsYear() {
     }
   }
 
-
   useEffect(() => {
     getYear()
   }, [])
-  
+
   function checkTime(selected) {
+    setIsSelected(true)
     var monthNumber = 0
     var monthsLast = 0
     var y = Number(selected.substring(selected.length - 4)) //hakee kk-tekstin vuosiluvun
@@ -130,7 +150,7 @@ export default function ElediagramsYear() {
   function getData(monthNumber, monthsLast, y) {
     let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
     let end = 'periodEnd=' + y + monthNumber + monthsLast + EndTime
-    
+
     const tempURL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain
       + out_Domain + '' + start + end
     fetch(tempURL, {
@@ -144,15 +164,16 @@ export default function ElediagramsYear() {
         let json = new XMLParser().parseFromString(data);
         const prices = json.getElementsByTagName('price')
         const dates = json.getElementsByTagName('start')
-        dates.splice(0,2)
-        getpriceOfTheMonth(prices,dates)
+        dates.splice(0, 2)
+        getpriceOfTheMonth(prices, dates)
+        getAvgs(prices, dates)
       })
       .catch(err => console.log(err));
   }
 
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
-    for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
+    for (let i = 0; i < (prices.length); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
       tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
     }
     const tempDatesArr = [] // labelia varten
@@ -162,7 +183,7 @@ export default function ElediagramsYear() {
       let y = (dates[x].value).substring(0, 4)
       let m = (dates[x].value).substring(5, 7)
       let d = (dates[x].value).substring(8, 10)
-      let date = d + '.' + m + '.' 
+      let date = d + '.' + m + '.'
       let date2 = d + '.' + m + '.' + y //alasvetovalikkoa varten vuosiluvulinen versio
       tempDatesArr.push(date)
       tempDatesArr2.push(date2)
@@ -172,9 +193,8 @@ export default function ElediagramsYear() {
     setTimesArr(tempDatesArr2)
   }
 
-
   const priceOfTheMonth = () => {
-    let lastIndex = times.length -1
+    let lastIndex = times.length - 1
     if (newPrices.length) {
       return (
         <LineChart
@@ -202,25 +222,49 @@ export default function ElediagramsYear() {
       )
     }
   }
-  
-  return (
-    <View style={styles.square}>
-      <ScrollView>
-      <View style={styles.titleposdia}>
-        <Text style={styles.title}>Sähkön hintakehitys </Text>
-        <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
-        <Text style={styles.text}>Valitse valikosta kuukausi, jonka arvoja haluat tarkastella (KESKEN)</Text>
-      </View>
-      <SelectList
-      setSelected={(val) => setSelected(val)} 
-      onSelect={() =>checkTime(selected)} 
-      data={data}
-      save="value"
-    />
-    {priceOfTheMonth()}
-    <YearList newPrices={newPrices} dates={timesArr}/>
-      </ScrollView>
-    </View>
-  )
 
-};
+  //jos kk on valittu
+  if (isSelected === true) {
+    return (
+      <View style={styles.square}>
+        <ScrollView>
+          <View style={styles.titleposdia}>
+            <Text style={styles.title}>Sähkön hintakehitys </Text>
+          </View>
+          <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
+          <SelectList
+            setSelected={(val) => setSelected(val)}
+            onSelect={() => checkTime(selected)}
+            data={data}
+            save="value"
+            placeholder='Valitse kuukausi'
+          />
+          {priceOfTheMonth()}
+          <YearList newPrices={newPrices} dates={timesArr} avgs={avgs} />
+        </ScrollView>
+      </View>
+    )
+  }
+  //jos kuukautta ei vielä ole valittu
+  if (isSelected === false) {
+    return (
+      <View style={styles.square}>
+        <ScrollView>
+          <View style={styles.titleposdia}>
+            <Text style={styles.title}>Sähkön hintakehitys </Text>
+          </View>
+          <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
+          <SelectList
+            setSelected={(val) => setSelected(val)}
+            onSelect={() => checkTime(selected)}
+            data={data}
+            save="value"
+            placeholder='Valitse kuukausi'
+          />
+          {priceOfTheMonth()}
+        </ScrollView>
+      </View>
+    )
+  }
+}
+

@@ -126,6 +126,19 @@ if (sevenDaysAgoMonth === 8) {
 if (sevenDaysAgoMonth === 9) {
   sevenDaysAgoMonth = '09'
 }
+let sixDaysAgoDay = (new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)).getDate()
+let sixDaysAgoMonth = (new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let fiveDaysAgoDay = (new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)).getDate()
+let fiveDaysAgoMonth = (new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let fourDaysAgoDay = (new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)).getDate()
+let fourDaysAgoMonth = (new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let threeDaysAgoDay = (new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)).getDate()
+let threeDaysAgoMonth = (new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let twDaysAgoDay = (new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)).getDate()
+let twoDaysAgoMonth = (new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)).getMonth() + 1
+let oneDaysAgoDay = (new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)).getDate()
+let oneDaysAgoMonth = (new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)).getMonth() + 1
+
 const StartTime = '0000'
 const EndTime = '0000'
 const start = 'periodStart=' + sevenDaysAgoYear + sevenDaysAgoMonth + sevenDaysAgoDay + StartTime + '&'
@@ -137,7 +150,25 @@ const time = new Date().getHours() // current time, tunti. Toimii myös seuraava
 
 export default function ElediagramsWeek() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
-  const [dates, setDates] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
+  const [dates, setDates] = useState([]); //tyhjä hinta-taulukko, johon päivät tallennetaan muutoksen jälkeen
+  const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
+
+  function getAvgs(prices, dates) {
+    const tempAvg = []
+    let avg = 0
+
+    for (let length = 0; length <= dates.length; length++) {
+      for (let a = 0; a <= 23; a++) {
+        let price = Number(prices[a].value)
+        avg += price
+      }
+      prices.splice(0, 23);
+      let dailyAvg = (avg / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
+      avg = 0
+      tempAvg.push(dailyAvg)
+    }
+    setAvgs(tempAvg)
+  }
 
   function getPriceOfTheWeek(prices) {
     const tempArr = []
@@ -165,11 +196,10 @@ export default function ElediagramsWeek() {
       return (
         <LineChart
           data={{
-            labels: [/*tähän kohtaa pilkun laittamalla rivi siirtyy oikealle, mutta siirtyy paaaaaljoon
-            tää on paskamainen muotoiltava, mutta katsotaan mitä keksitään*/sevenDaysAgoDay + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 1) + '.' + sevenDaysAgoMonth,
-              (sevenDaysAgoDay + 2) + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 3) + '.' + sevenDaysAgoMonth,
-              (sevenDaysAgoDay + 4) + '.' + sevenDaysAgoMonth, (sevenDaysAgoDay + 5) + '.' + sevenDaysAgoMonth,
-              (sevenDaysAgoDay + 6) + '.' + sevenDaysAgoMonth],
+            labels: [sevenDaysAgoDay + '.' + sevenDaysAgoMonth, sixDaysAgoDay + '.' + sixDaysAgoMonth,
+            fiveDaysAgoDay + '.' + fiveDaysAgoMonth, fourDaysAgoDay + '.' + fourDaysAgoMonth,
+            threeDaysAgoDay + '.' + threeDaysAgoMonth, twDaysAgoDay + '.' + twoDaysAgoMonth,
+            oneDaysAgoDay + '.' + oneDaysAgoMonth],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -222,6 +252,7 @@ export default function ElediagramsWeek() {
         temp2.splice(0, 2);
         getPriceOfTheWeek(temp)
         getDates(temp2)
+        getAvgs(temp, temp2)
       })
       .catch(err => console.log(err));
   }, [])
@@ -232,10 +263,10 @@ export default function ElediagramsWeek() {
         <View style={styles.titleposdia}>
           <Text style={styles.title}>Sähkön hintakehitys </Text>
           <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
-          <Text style={styles.text}>viimeisen viikon aikana </Text>
         </View>
+        <Text style={styles.text}>viimeisen viikon aikana </Text>
         {priceOfTheWeek()}
-        <Weeklist newPrices={newPrices} dates={dates} />
+        <Weeklist newPrices={newPrices} dates={dates} avgs={avgs} />
       </ScrollView>
     </View>
   )
