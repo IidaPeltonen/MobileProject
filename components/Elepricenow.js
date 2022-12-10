@@ -253,7 +253,7 @@ export default function Elepricenow() {
           <Text style={styles.title}>Sähkön hinta tänään </Text>
           <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
         </View>
-        <Text style={styles.flex}>
+        <Text style={styles.flex1}>
           <Text style={styles.text}>Hinta nyt:  </Text>
           <Text style={styles.important}>{priceNow ? priceNow : <ActivityIndicator size="large" color="#ffffff" />}
             <MaterialCommunityIcons
@@ -263,15 +263,15 @@ export default function Elepricenow() {
               style={styles.icon}
             ></MaterialCommunityIcons></Text>
         </Text>
-        <Text style={styles.flex}>
+        <Text style={styles.flex1}>
           <Text style={styles.text}>Päivän ylin (klo: {highTime}-{highTime + 1}):  </Text>
           <Text style={styles.notimportant}>{maxPrice ? maxPrice : <ActivityIndicator size="small" color="#ffffff" />}</Text>
         </Text>
-        <Text style={styles.flex}>
+        <Text style={styles.flex1}>
           <Text style={styles.text}>Päivän alin (klo: {lowTime}-{lowTime + 1}):  </Text>
           <Text style={styles.notimportant}>{minPrice ? minPrice : <ActivityIndicator size="small" color="#ffffff" />}</Text>
         </Text>
-        <Text style={styles.flex}>
+        <Text style={styles.flex1}>
           <Text style={styles.text}>Päivän keskihinta:  </Text>
           <Text style={styles.notimportant}>{avg ? avg : <ActivityIndicator size="small" color="#ffffff" />}</Text>
         </Text>

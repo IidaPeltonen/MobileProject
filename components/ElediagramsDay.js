@@ -237,9 +237,13 @@ export default function ElediagramsDay() {
           <Text style={styles.title}>Sähkön hintakehitys </Text>
           <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
         </View>
+        
         <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
+        <Text style={styles.flex2}>
         {priceOfTheDay()}
+        </Text>
         <DayList newPrices={newPrices} dates={dates} avgs={avgs} />
+        
       </ScrollView>
     </View>
   )

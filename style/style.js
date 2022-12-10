@@ -54,6 +54,7 @@ export default StyleSheet.create({
 
       titleposdia: {
         paddingTop: 20,
+        paddingLeft: 20,
         flexDirection: 'row',
       },
 
@@ -88,7 +89,18 @@ export default StyleSheet.create({
         fontSize: 20,
       },
 
-      flex:{
+      flex1:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 20,
+        paddingBottom: 40,
+      },
+
+      flex2:{
+        paddingLeft: 5,
+      },
+
+      flex3:{
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: 20,
