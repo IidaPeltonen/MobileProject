@@ -33,14 +33,13 @@ export default StyleSheet.create({
       },
 
       title: {
-        fontSize: 20,
+        fontSize: 25,
         color: 'white',
         fontFamily: 'Roboto',
       },
 
       lowkey: {
         fontSize: 12,
-        backgroundColor: '#5F5F5F',
         color: 'white',
         fontFamily: 'Roboto',
         paddingTop: "2%"
@@ -78,7 +77,7 @@ export default StyleSheet.create({
 
       notimportant: {
         color: 'white',
-        fontFamily: 'Orbitronbold'
+        fontFamily: 'Orbitronbold',
       },
 
       text:{
@@ -97,29 +96,33 @@ export default StyleSheet.create({
       },
       //näytä-otsikko, päivämäärät
       descriptionStyle: {
-        backgroundColor: "white"
+        backgroundColor: "white",
+        fontFamily: 'Roboto',
       },
       //näytä-otsikko, päivämäärät
       titleStyle: {
         color:'white', 
         backgroundColor:'#808080',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontFamily: 'Roboto',
       },
       //tuntihinnat
       descriptionStyleItems: {
         color: 'white',
         alignSelf: 'center',
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 18,
       },
       titleStyleItems: {
         color:'white',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontFamily: 'Roboto',
       },
       //keskiarvot
       titleDescriptionStyle: {
         color: 'white',
         alignSelf: 'center',
-        backgroundColor: '#808080'
+        backgroundColor: '#808080',
+        fontFamily: 'Roboto',
       }
 });
