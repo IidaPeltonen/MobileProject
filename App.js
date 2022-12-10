@@ -28,10 +28,10 @@ const Tab = createMaterialTopTabNavigator();
 
 function Development() {
   return (
-    <Tab.Navigator screenOptions= {{
+    <Tab.Navigator swipeEnabled= {false} screenOptions= {{ 
       tabBarLabelStyle: { fontSize: 13 , fontWeight:'bold', color: 'white' },
       tabBarStyle: { backgroundColor: '#808080', borderWidth: 2, borderColor: '#5F5F5F'},
-      tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2},
+      tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}, 
       lazy:true
     }}>
       <Tab.Screen name="Päivä" component={ElediagramsDay} />
