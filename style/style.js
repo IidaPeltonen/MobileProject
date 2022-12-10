@@ -63,8 +63,6 @@ export default StyleSheet.create({
 
       square: {
         backgroundColor: '#5F5F5F',
-        paddingTop: 10,
-        paddingBottom: 20,
         height: '100%',
         width: '100%',
       },
@@ -92,5 +90,30 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         paddingLeft: 20,
         paddingBottom: 40,
+      },
+
+      modal: {
+        flex: 4,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+      },
+
+      modalcontent: {
+        marginTop: 300,
+        width: '100%',
+        height: 200,
+        backgroundColor: '#5F5F5F',
+        borderRadius: 3,
+        padding: 10,
+        paddingTop: 15,
+      },
+
+      modaltext: {
+        color:'white',
+        padding: 5,
+        fontFamily: 'Roboto',
+        marginBottom: 13,
       },
 });
