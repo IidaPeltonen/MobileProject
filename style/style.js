@@ -22,9 +22,9 @@ export default StyleSheet.create({
 
       footer: {
         alignItems: 'center',
-        padding: 15,
         backgroundColor: '#FFC300',
         borderRadius: 3,
+        padding: 10,
       },
 
       team: {
@@ -60,8 +60,6 @@ export default StyleSheet.create({
 
       square: {
         backgroundColor: '#2B2B2B',
-        paddingTop: 10,
-        paddingBottom: 20,
         height: '100%',
         flexDirection: 'column',
         alignItems: 'center',

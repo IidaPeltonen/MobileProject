@@ -21,8 +21,6 @@ import Footer from "./components/Footer";
 import styles from './style/style'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import Loading from './components/Loading';
-import { lazy } from 'react';
 
 const Tab = createMaterialTopTabNavigator();
 
