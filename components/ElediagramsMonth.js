@@ -199,6 +199,7 @@ export default function ElediagramsMonth() {
           fromZero='true' //näyttää y-akselin nollasta asti
           chartConfig={chartConfig}
           bezier
+          withDots={false}
           style={{
             paddingRight: 35,
             borderRadius: 16
