@@ -147,13 +147,12 @@ export default function ElediagramsDay() {
     const tempAvg = []
     let avg = 0
 
-    for (let length = 0; length <= 1; length++) {
-      for (let a = 0; a <= 23; a++) {
-        let price = Number(prices[a].value)
+    for (let length = 0; length < 1; length++) {
+      for (let a = 0; a < 24; a++) {
+        let price = Number(prices[a])
         avg += price
       }
-      prices.splice(0,24)
-      let dailyAvg = (avg / 24 / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
+      let dailyAvg = (avg / 24).toFixed(2) //alv laskettu jo hinta-taulukkoon valmiiksi
       tempAvg.push(dailyAvg)
     }
     setAvgs(tempAvg)
@@ -162,13 +161,11 @@ export default function ElediagramsDay() {
   function getPriceOfTheDay(prices) {
     setDates(day + '.' + month + '.' + year)
     const tempArr = []
-    tempArr.push(Number(prices[0].value / 10 * 1.10).toFixed(2) -1) // tää on silkka huijaus,
-    //kannasta ei saa tällä meidän nykyisellä osoitteella hintaa eiliseltä 23-00
     for (let i = 0; i < 24; i++) {
       tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
-    console.log(tempArr[0])
     }
-
+    //haetaan saaduista luvuista keskiarvot
+    getAvgs(tempArr)
     setNewPrices(tempArr)
   }
 
@@ -226,7 +223,6 @@ export default function ElediagramsDay() {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
         getPriceOfTheDay(temp)
-        getAvgs(temp, dates)
         setIsLoading(false);
       })
       .catch(err => console.log(err));
