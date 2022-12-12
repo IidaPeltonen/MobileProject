@@ -2,6 +2,7 @@ import { ScrollView, Text, View, Dimensions } from 'react-native';
 import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
+import { ActivityIndicator } from 'react-native-paper';
 import styles from '../style/style';
 import MonthList from './MonthList';
 
@@ -139,6 +140,7 @@ export default function ElediagramsMonth() {
   const [newPrices, setNewPrices] = useState([]); //tyhjä hinta-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
   const [dates, setDates] = useState([]); //tyhjä aika-taulukko, johon päivän hinnat tallennetaan muutoksen jälkeen
   const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
+  const [isLoading, setIsLoading] = useState(false); // Spinnerille
 
   function getAvgs(prices, dates) {
     const tempAvg = []
@@ -220,6 +222,7 @@ export default function ElediagramsMonth() {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(URL, {
       headers: {
         'method': 'GET',
@@ -236,6 +239,7 @@ export default function ElediagramsMonth() {
         setNewPrices([])
         getpriceOfTheMonth(temp, temp2)
         getAvgs(temp, temp2)
+        setIsLoading(false);
       })
       .catch(err => console.log(err));
   }, [])
@@ -249,7 +253,7 @@ export default function ElediagramsMonth() {
           <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
         </View>
         <Text style={styles.text}>viimeisen kuukauden aikana </Text>
-        {priceOfTheMonth()}
+        {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheMonth()}
         <MonthList newPrices={newPrices} dates={dates} avgs={avgs} />
       </ScrollView>
     </View>

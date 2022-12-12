@@ -2,6 +2,7 @@ import { ScrollView, Text, View, Dimensions, } from 'react-native';
 import { useState, useEffect, useCallback } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
+import { ActivityIndicator } from 'react-native-paper';
 import styles from '../style/style';
 import { SelectList } from 'react-native-dropdown-select-list'
 import YearList from './YearList'
@@ -22,6 +23,7 @@ export default function ElediagramsYear() {
   const [months, setMonths] = useState([]) //taulukko, johon haetaan valittavat kuukaudet
   const [isSelected, setIsSelected] = useState(false);
   const [avgs, setAvgs] = useState([]); //tyhjä taulukko päiväkeskiarvoille
+  const [isLoading, setIsLoading] = useState(false); // Spinnerille
 
   function getAvgs(prices, dates) {
     const tempAvg = []
@@ -86,6 +88,7 @@ export default function ElediagramsYear() {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     getYear()
   }, [])
 
@@ -167,6 +170,7 @@ export default function ElediagramsYear() {
         dates.splice(0, 2)
         getpriceOfTheMonth(prices, dates)
         getAvgs(prices, dates)
+        setIsLoading(false);
       })
       .catch(err => console.log(err));
   }
@@ -239,7 +243,7 @@ export default function ElediagramsYear() {
             save="value"
             placeholder='Valitse kuukausi'
           />
-          {priceOfTheMonth()}
+          {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheMonth()}
           <YearList newPrices={newPrices} dates={timesArr} avgs={avgs} />
         </ScrollView>
       </View>
