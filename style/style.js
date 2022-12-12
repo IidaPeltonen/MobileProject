@@ -136,5 +136,30 @@ export default StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: '#808080',
         fontFamily: 'Roboto',
-      }
+      },
+
+      modal: {
+        flex: 4,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+      },
+
+      modalcontent: {
+        marginTop: 300,
+        width: '100%',
+        height: 200,
+        backgroundColor: '#5F5F5F',
+        borderRadius: 3,
+        padding: 10,
+        paddingTop: 15,
+      },
+
+      modaltext: {
+        color:'white',
+        padding: 5,
+        fontFamily: 'Roboto',
+        marginBottom: 13,
+      },
 });

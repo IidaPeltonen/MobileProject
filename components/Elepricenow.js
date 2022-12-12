@@ -150,6 +150,7 @@ export default function Elepricenow() {
   const [avg, setAvg] = useState(0)
   const [highTime, setHighTime] = useState(0)
   const [lowTime, setLowTime] = useState(0)
+  const [modalOpen, setModalOpen] = useState(false);
 
   function compare(priceNow, priceNextHour) {
     //jos hinta nyt on suurempi kuin hinta tunnin päästä, kääntää nuolen alas ja muuttaa värin vihreäksi
@@ -262,7 +263,18 @@ export default function Elepricenow() {
               size={40}
               style={styles.icon}
             ></MaterialCommunityIcons></Text>
-        </Text>
+        <Modal presentationStyle="overFullScreen" transparent style={styles.modalcontent} visible={modalOpen}>
+              <View style={styles.modal}>
+              <View style={styles.modalcontent}>
+              <Text style={styles.modaltext}>Vihreänuoli alas = hinta on suurempi kuin tunnin päästä</Text>
+              <Text style={styles.modaltext}>Punainen nuoli ylös = hinta on pienenpi kuin tunnin päästä</Text>
+              <Text style={styles.modaltext}>Keltainen oikealle = hinta on nyt sama kuin tunnin päästä</Text>
+              <Button color='grey' title='sulje' onPress={() => setModalOpen(false)}></Button>
+              </View>
+              </View>
+            </Modal>
+            <MaterialCommunityIcons name='chat-question'  size={40}  color={'white'} onPress={() => setModalOpen(true)}></MaterialCommunityIcons>
+          </Text>
         <Text style={styles.flex1}>
           <Text style={styles.text}>Päivän ylin (klo: {highTime}-{highTime + 1}):  </Text>
           <Text style={styles.notimportant}>{maxPrice ? maxPrice : <ActivityIndicator size="small" color="#ffffff" />}</Text>
