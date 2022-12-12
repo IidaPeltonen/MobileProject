@@ -197,6 +197,8 @@ export default function ElediagramsWeek() {
     if (newPrices.length) {
       return (
         <LineChart
+        withVerticalLines={false}
+        
           data={{
             labels: [sevenDaysAgoDay + '.' + sevenDaysAgoMonth, sixDaysAgoDay + '.' + sixDaysAgoMonth,
             fiveDaysAgoDay + '.' + fiveDaysAgoMonth, fourDaysAgoDay + '.' + fourDaysAgoMonth,

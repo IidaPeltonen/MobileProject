@@ -202,6 +202,7 @@ export default function ElediagramsYear() {
     if (newPrices.length) {
       return (
         <LineChart
+        withVerticalLines={false}
           data={{
             labels: [times[0], times[4], times[9], times[14], times[19], times[24], times[lastIndex]],
             datasets: [

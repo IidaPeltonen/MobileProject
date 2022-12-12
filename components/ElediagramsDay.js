@@ -176,6 +176,8 @@ export default function ElediagramsDay() {
     if (newPrices.length) {
       return (
         <LineChart
+  
+        withHorizontalLines={false}
           data={{
             labels: ["23", "01", "03", "05", "07", "09", "11", "13", "15", "17", "19", "21", "23"],
             datasets: [

@@ -182,6 +182,8 @@ export default function ElediagramsMonth() {
     if (newPrices.length) {
       return (
         <LineChart
+        withVerticalLines={false}
+       
           data={{
             labels: [dates[0], dates[4], dates[9], dates[14], dates[19], dates[24], dates[29]],
             datasets: [
