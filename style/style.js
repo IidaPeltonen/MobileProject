@@ -37,11 +37,13 @@ export default StyleSheet.create({
         color: 'white',
         fontFamily: 'Orbitronbold',
       },
+
       title2: {
         fontSize: 20,
         color: 'white',
         fontFamily: 'Orbitronbold',
       },
+
       lowkey: {
         fontSize: 12,
         color: 'white',
@@ -50,7 +52,6 @@ export default StyleSheet.create({
       },
 
       titlepos: {
-        // flexDirection: 'row',
         paddingLeft: 20,
         paddingBottom: 60,
         paddingTop: 35,
