@@ -145,6 +145,8 @@ const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documen
 // tällä alla olevalla osoitteella tulee suunniteltu tuotanto päivän ajalta suomessa.
 const URL2 = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType2 + processType2 + in_Domain + start + end
 
+console.log('url: ' + URL) //tämä ei saa mitään arvoja, mutta kello onkin 02 kuluvaa päivää..
+//console.log('url2: ' + URL2)
 export default function Eleproduce() {
   const [lastLoad, setLastLoad] = useState(''); //viimeisin toteutunut kokonaiskulutus
   const [lastGeneration, setLastGeneration] = useState(''); //ennustettu kokonaistuotanto

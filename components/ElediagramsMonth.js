@@ -196,12 +196,11 @@ export default function ElediagramsMonth() {
           }}
           width={Dimensions.get("window").width - 10} // from react-native
           height={220}
-          withDots='false'
           yAxisInterval={1} // optional, defaults to 1
           fromZero='true' //näyttää y-akselin nollasta asti
           chartConfig={chartConfig}
-          bezier
           withDots={false}
+          bezier
           style={{
             paddingRight: 35,
             borderRadius: 16
