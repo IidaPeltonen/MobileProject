@@ -260,20 +260,20 @@ export default function Elepricenow() {
             <MaterialCommunityIcons
               name={'arrow-' + arrow + '-bold'}
               color={color}
-              size={40}
+              size={48}
               style={styles.icon}
             ></MaterialCommunityIcons></Text>
         <Modal presentationStyle="overFullScreen" transparent style={styles.modalcontent} visible={modalOpen}>
               <View style={styles.modal}>
               <View style={styles.modalcontent}>
-              <Text style={styles.modaltext}>Vihreänuoli alas = hinta on suurempi kuin tunnin päästä</Text>
-              <Text style={styles.modaltext}>Punainen nuoli ylös = hinta on pienenpi kuin tunnin päästä</Text>
-              <Text style={styles.modaltext}>Keltainen oikealle = hinta on nyt sama kuin tunnin päästä</Text>
+              <Text style={styles.modaltext}>Vihreä nuoli alas = Hinta tulee laskemaan</Text>
+              <Text style={styles.modaltext}>Punainen nuoli ylös = Hinta tulee nousemaan</Text>
+              <Text style={styles.modaltext}>Keltainen oikealle = Hinta on pysynyt samana</Text>
               <Button color='grey' title='sulje' onPress={() => setModalOpen(false)}></Button>
               </View>
               </View>
             </Modal>
-            <MaterialCommunityIcons name='chat-question'  size={40}  color={'white'} onPress={() => setModalOpen(true)}></MaterialCommunityIcons>
+            <MaterialCommunityIcons name='information-outline'  size={25}  color={'#5F5F5F'} onPress={() => setModalOpen(true)}></MaterialCommunityIcons>
           </Text>
         <Text style={styles.flex1}>
           <Text style={styles.text}>Päivän ylin (klo: {highTime}-{highTime + 1}):  </Text>

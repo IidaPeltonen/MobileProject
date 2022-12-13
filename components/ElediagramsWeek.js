@@ -230,15 +230,10 @@ export default function ElediagramsWeek() {
 
   const chartConfig = {
     backgroundColor: "black",
-    backgroundGradientFrom: "#2B2B2B",
-    backgroundGradientTo: "#808080",
+    backgroundGradientFrom: "#171717",
+    backgroundGradientTo: "#5c5b5b",
     decimalPlaces: 0, // optional, defaults to 2dp
     color: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //viivojen väri
-    labelColor: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //labeleiden väri
-    propsForDots: {
-      strokeWidth: "1", //palleroiden paksuus
-      stroke: "black" //palleroiden väri,
-    }
   }
 
   useEffect(() => {
@@ -271,8 +266,10 @@ export default function ElediagramsWeek() {
           <Text style={styles.title}>Sähkön hintakehitys </Text>
           <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
         </View>
-        <Text style={styles.text}>viimeisen viikon aikana </Text>
-        {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheWeek()}
+        <Text style={styles.text}>Viimeisen viikon aikana </Text>
+        <Text style={styles.flex2}>
+        {isLoading ? <ActivityIndicator size="large" color="#ffffff"/> : priceOfTheWeek()}
+        </Text>
         <Weeklist newPrices={newPrices} dates={dates} avgs={avgs} />
       </ScrollView>
     </View>

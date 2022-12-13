@@ -33,11 +33,15 @@ export default StyleSheet.create({
       },
 
       title: {
-        fontSize: 25,
+        fontSize: 27,
         color: 'white',
-        fontFamily: 'Roboto',
+        fontFamily: 'Orbitronbold',
       },
-
+      title2: {
+        fontSize: 20,
+        color: 'white',
+        fontFamily: 'Orbitronbold',
+      },
       lowkey: {
         fontSize: 12,
         color: 'white',
@@ -46,16 +50,18 @@ export default StyleSheet.create({
       },
 
       titlepos: {
-        flexDirection: 'row',
+        // flexDirection: 'row',
         paddingLeft: 20,
-        paddingBottom: 50,
-        paddingTop: 20,
+        paddingBottom: 60,
+        paddingTop: 35,
+        padding: 10
       },
 
       titleposdia: {
         paddingTop: 20,
         paddingLeft: 20,
-        flexDirection: 'row',
+        paddingBottom: 5
+        // flexDirection: 'row',
       },
 
       square: {
@@ -69,7 +75,7 @@ export default StyleSheet.create({
       important: {
         paddingBottom: 40,
         paddingLeft: 40,
-        fontSize: 40,
+        fontSize: 45,
         color: 'white',
         fontFamily: 'Orbitronbold'
       },
@@ -77,6 +83,7 @@ export default StyleSheet.create({
       notimportant: {
         color: 'white',
         fontFamily: 'Orbitronbold',
+        fontSize: 25
       },
 
       text:{
@@ -91,11 +98,13 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: 20,
-        paddingBottom: 40,
+        paddingBottom: 50,
       },
 
       flex2:{
+        paddingTop: 5,
         paddingLeft: 5,
+        paddingBottom: 15
       },
 
       flex3:{
@@ -115,6 +124,7 @@ export default StyleSheet.create({
         backgroundColor:'#808080',
         alignSelf: 'center',
         fontFamily: 'Roboto',
+        fontSize: 20
       },
       //tuntihinnat
       descriptionStyleItems: {
@@ -137,15 +147,15 @@ export default StyleSheet.create({
       },
 
       modal: {
-        flex: 4,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
+        // flex: 4,
+       // flexDirection: 'column',
+       // justifyContent: 'center',
+       // alignItems: 'center',
+       // height: '100%',
       },
 
       modalcontent: {
-        marginTop: 300,
+        marginTop: 340,
         width: '100%',
         height: 200,
         backgroundColor: '#5F5F5F',

@@ -1,4 +1,4 @@
-import { List } from 'react-native-paper';
+import { Divider, List } from 'react-native-paper';
 import { useState } from 'react';
 import style from '../style/style';
 

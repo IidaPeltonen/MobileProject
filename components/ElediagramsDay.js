@@ -236,7 +236,7 @@ export default function ElediagramsDay() {
           <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
         </View>
         
-        <Text style={styles.text}>viimeisen vuorokauden aikana</Text>
+        <Text style={styles.text}>Viimeisen vuorokauden aikana</Text>
         <Text style={styles.flex2}>
         {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheDay()}
         </Text>

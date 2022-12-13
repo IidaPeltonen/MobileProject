@@ -76,15 +76,10 @@ export default function ElediagramsYear() {
 
   const chartConfig = {
     backgroundColor: "black",
-    backgroundGradientFrom: "#2B2B2B",
-    backgroundGradientTo: "#808080",
+    backgroundGradientFrom: "#171717",
+    backgroundGradientTo: "#5c5b5b",
     decimalPlaces: 0, // optional, defaults to 2dp
     color: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //viivojen väri
-    labelColor: (opacity = 1) => `rgba(255, 195, 0, ${opacity})`, //labeleiden väri,
-    propsForDots: {
-      strokeWidth: "1",
-      stroke: "black" //palleroiden väri,
-    }
   }
 
   useEffect(() => {
@@ -236,16 +231,23 @@ export default function ElediagramsYear() {
         <ScrollView>
           <View style={styles.titleposdia}>
             <Text style={styles.title}>Sähkön hintakehitys </Text>
+            <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
           </View>
           <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
           <SelectList
+            boxStyles={{backgroundColor: '#5F5F5F'}}
+            inputStyles={{fontSize: 15, color: 'white'}}
+            dropdownStyles={{backgroundColor: '#808080'}}
+            dropdownTextStyles= {{color: 'white'}}
             setSelected={(val) => setSelected(val)}
             onSelect={() => checkTime(selected)}
             data={data}
             save="value"
             placeholder='Valitse kuukausi'
           />
+          <Text style={styles.flex2}>
           {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheMonth()}
+          </Text>
           <YearList newPrices={newPrices} dates={timesArr} avgs={avgs} />
         </ScrollView>
       </View>
@@ -258,16 +260,23 @@ export default function ElediagramsYear() {
         <ScrollView>
           <View style={styles.titleposdia}>
             <Text style={styles.title}>Sähkön hintakehitys </Text>
+            <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
           </View>
           <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
           <SelectList
+            boxStyles={{backgroundColor: '#5F5F5F'}}
+            inputStyles={{fontSize: 15, color: 'white'}}
+            dropdownStyles={{backgroundColor: '#808080'}}
+            dropdownTextStyles= {{color: 'white'}}
             setSelected={(val) => setSelected(val)}
             onSelect={() => checkTime(selected)}
             data={data}
             save="value"
             placeholder='Valitse kuukausi'
           />
+          <Text style={styles.flex2}>
           {priceOfTheMonth()}
+          </Text>
         </ScrollView>
       </View>
     )
