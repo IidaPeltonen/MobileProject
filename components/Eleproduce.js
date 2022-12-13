@@ -16,6 +16,7 @@ const processType2 = '&processType=A01' // minkä tyyppistä tuotantotietoa haet
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 let day = new Date().getDate()
+
 if (day === 1) {
   day = '01'
 }
@@ -133,20 +134,54 @@ if (previousMonth === 9) {
 }
 
 const previousYear = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getFullYear();
-const StartTime = '2300'
-const EndTime = '2300'
+//haetaan kellonaika 24h sitten
+const dAgo = (new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getHours())
+//jos aika on yksinumeroinen
+if (dAgo === 1) {
+  dAgo = '01'
+}
+if (dAgo === 2) {
+  dAgo = '02'
+}
+if (dAgo === 3) {
+  dAgo = '03'
+}
+if (dAgo === 4) {
+  dAgo = '04'
+}
+if (dAgo === 5) {
+  dAgo = '05'
+}
+if (dAgo === 6) {
+  dAgo = '06'
+}
+if (dAgo === 7) {
+  dAgo = '07'
+}
+if (dAgo === 8) {
+  dAgo = '08'
+}
+if (dAgo === 9) {
+  dAgo = '09'
+}
+const minutes = '00'
+const StartTime = dAgo + minutes
+//kellonaika nyt
+const hours = new Date().getHours()
+const EndTime = hours+ minutes
 const start = '&periodStart=' + previousYear + previousMonth + previousDay + StartTime
 const end = '&periodEnd=' + year + month + day + EndTime
-const time = new Date().getHours()
-const index = time - 2
 
-// tällä saa Suomen toteutuneen kokonaiskulutuksen tuntitasolla kuluvalta päivältä
+const StartTime2 = '2300'
+const EndTime2 = '2300'
+const start2 = '&periodStart=' + previousYear + previousMonth + previousDay + StartTime2
+const end2 = '&periodEnd=' + year + month + day + EndTime2
+
+// tällä saa Suomen toteutuneen kokonaiskulutuksen tuntitasolla viimeiseltä 24 hlta
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + processType + outBiddingZone_Domain + start + end
 // tällä alla olevalla osoitteella tulee suunniteltu tuotanto päivän ajalta suomessa.
-const URL2 = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType2 + processType2 + in_Domain + start + end
+const URL2 = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType2 + processType2 + in_Domain + start2 + end2
 
-console.log('url: ' + URL) //tämä ei saa mitään arvoja, mutta kello onkin 02 kuluvaa päivää..
-//console.log('url2: ' + URL2)
 export default function Eleproduce() {
   const [lastLoad, setLastLoad] = useState(''); //viimeisin toteutunut kokonaiskulutus
   const [lastGeneration, setLastGeneration] = useState(''); //ennustettu kokonaistuotanto
@@ -154,10 +189,13 @@ export default function Eleproduce() {
 
   // funktio tuontisähkön tarpeen laskentaan
   function importNeedCalculation(lastLoad, lastGeneration) {
-    let situation = lastLoad - lastGeneration
+    lastLoad = Number(lastLoad)
+    lastGeneration = Number(lastGeneration)
+    let situation = Number(lastLoad - lastGeneration)
     if (situation >= 0) {
       setImportNeed(Number(situation));
-    } else {
+    } 
+    else {
       setImportNeed(Number(0));
     }
   }
@@ -178,13 +216,16 @@ export default function Eleproduce() {
       .then(([dataLoad, dataGeneration]) => {
         let json = new XMLParser().parseFromString(dataLoad);
         let loadTemp = json.getElementsByTagName('quantity')
-        let lastLoadTemp = Number(loadTemp[index].value)
-        setLastLoad(Number(loadTemp[index].value));
+        let length = loadTemp.length
+        let lastLoadTemp = Number(loadTemp[length-1].value)
+        setLastLoad(Number(lastLoadTemp));
+
         let json2 = new XMLParser().parseFromString(dataGeneration);
         let generationsTemp = json2.getElementsByTagName('quantity')
-        let lastGenerationTemp = Number(generationsTemp[index].value)
+        let lastGenerationTemp = Number(generationsTemp[hours-2].value)
+
         importNeedCalculation(lastLoadTemp, lastGenerationTemp)
-        setLastGeneration(Number(generationsTemp[index].value));
+        setLastGeneration(Number(generationsTemp[hours-2].value));
       })
       .catch(err => console.log(err));
   }, [])
@@ -203,18 +244,18 @@ export default function Eleproduce() {
       <View style={styles.square}>
         <ScrollView>
         <Text style={styles.flex3}>
-          <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {index} - {index + 1} (MWh/h)</Text>
+          <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa kello {hours -2} - {hours - 1} (MWh/h)</Text>
         </Text>
           <Text style={styles.flex3}>
-            <Text style={styles.text}>Toteutunut kokonaiskulutus  </Text>
+            <Text style={styles.text}>Toteutunut kokonaiskulutus  {"\n"}</Text>
             <Text style={styles.notimportant}>{lastLoad ? lastLoad : <ActivityIndicator size="small" color="#ffffff" />}</Text>
           </Text>
           <Text style={styles.flex3}>
-            <Text style={styles.text}>Suunniteltu kokonaistuotanto  </Text>
+            <Text style={styles.text}>Suunniteltu kokonaistuotanto  {"\n"}</Text>
             <Text style={styles.notimportant}>{lastGeneration ? lastGeneration : <ActivityIndicator size="small" color="#ffffff" />}</Text>
           </Text>
           <Text style={styles.flex3}>
-            <Text style={styles.text}>Laskennallinen tuontisähkön tarve  </Text>
+            <Text style={styles.text}>Laskennallinen tuontisähkön tarve  {"\n"}</Text>
             <Text style={styles.notimportant}>{importNeed ? importNeed : <ActivityIndicator size="small" color="#ffffff" />}</Text>
           </Text>
         </ScrollView>
