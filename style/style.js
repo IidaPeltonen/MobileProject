@@ -112,7 +112,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: 20,
-        paddingBottom: 40,
+        paddingBottom: 60,
       },
       //näytä-otsikko, päivämäärät
       descriptionStyle: {

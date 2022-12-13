@@ -244,19 +244,19 @@ export default function Eleproduce() {
       <View style={styles.square}>
         <ScrollView>
         <View style={styles.titlepos}>
-          <Text style={styles.title}>Sähkön kokonaiskulutus ja -tuotanto Suomessa </Text>
+          <Text style={styles.title2}>Sähkön kokonaiskulutus ja -tuotanto Suomessa </Text>
           <Text style={styles.lowkey}>Tämän päivän aikana (MWh/h)</Text>
         </View>
           <Text style={styles.flex3}>
-            <Text style={styles.text}>Toteutunut kokonaiskulutus  {"\n"}</Text>
+            <Text style={styles.text}>Toteutunut kokonaiskulutus:  {"\n"}</Text>
             <Text style={styles.notimportant}>{lastLoad ? lastLoad : <ActivityIndicator size="small" color="#ffffff" />}</Text>
           </Text>
           <Text style={styles.flex3}>
-            <Text style={styles.text}>Suunniteltu kokonaistuotanto  {"\n"}</Text>
+            <Text style={styles.text}>Suunniteltu kokonaistuotanto:  {"\n"}</Text>
             <Text style={styles.notimportant}>{lastGeneration ? lastGeneration : <ActivityIndicator size="small" color="#ffffff" />}</Text>
           </Text>
           <Text style={styles.flex3}>
-            <Text style={styles.text}>Laskennallinen tuontisähkön tarve  {"\n"}</Text>
+            <Text style={styles.text}>Laskennallinen tuontisähkön tarve:  {"\n"}</Text>
             <Text style={styles.notimportant}>{importNeed ? importNeed : <ActivityIndicator size="small" color="#ffffff" />}</Text>
           </Text>
         </ScrollView>
