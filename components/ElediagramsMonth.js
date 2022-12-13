@@ -179,13 +179,14 @@ export default function ElediagramsMonth() {
   }
 
   const priceOfTheMonth = () => {
+    const lastOne = Number(dates.length)
     if (newPrices.length) {
       return (
         <LineChart
         withVerticalLines={false}
        
           data={{
-            labels: [dates[0], dates[4], dates[9], dates[14], dates[19], dates[24], dates[29]],
+            labels: [dates[0], dates[4], dates[9], dates[14], dates[19], dates[24], dates[lastOne-1]],
             datasets: [
               {
                 data: newPrices.map(item => {
