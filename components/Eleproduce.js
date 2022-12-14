@@ -245,7 +245,7 @@ export default function Eleproduce() {
         <ScrollView>
         <View style={styles.titlepos}>
           <Text style={styles.title2}>Sähkön kokonaiskulutus ja -tuotanto Suomessa</Text>
-          <Text style={styles.lowkey}>Aikavälillä {hours -2} - {hours - 1} (MWh/h)</Text>
+          <Text style={styles.lowkey}>{day}.{month}.{year} aikavälillä {hours -2} - {hours - 1} (MWh/h)</Text>
         </View>
           <Text style={styles.flex3}>
             <Text style={styles.text}>Toteutunut kokonaiskulutus:  {"\n"}</Text>
