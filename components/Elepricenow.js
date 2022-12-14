@@ -269,7 +269,7 @@ export default function Elepricenow() {
               <Text style={styles.modaltext}>Vihreä nuoli alas = Hinta tulee laskemaan</Text>
               <Text style={styles.modaltext}>Punainen nuoli ylös = Hinta tulee nousemaan</Text>
               <Text style={styles.modaltext}>Keltainen oikealle = Hinta on pysynyt samana</Text>
-              <Button color='grey' title='sulje' onPress={() => setModalOpen(false)}></Button>
+              <Button color='#757575' title='sulje' onPress={() => setModalOpen(false)}></Button>
               </View>
               </View>
             </Modal>
