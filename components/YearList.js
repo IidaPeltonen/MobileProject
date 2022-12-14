@@ -14,10 +14,10 @@ const YearList = ({ newPrices, dates, avgs }) => {
   return (
     <List.Section title="">
       <List.Accordion
-        title="Näytä tuntihinnat" disabled='true' descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} >
+        title="Näytä tuntihinnat" disabled='true' descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} >
           <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[0]} description={'Päivän ka: ' + avgs[0] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[0]} description={'Päivän ka: ' + avgs[0] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[24] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[27] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -69,7 +69,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[1]} description={'Päivän ka: ' + avgs[1] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[1]} description={'Päivän ka: ' + avgs[1] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[48] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[49] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -121,7 +121,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[2]} description={'Päivän ka: ' + avgs[2] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[2]} description={'Päivän ka: ' + avgs[2] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[72] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[73] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -173,7 +173,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[3]} description={'Päivän ka: ' + avgs[3] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[3]} description={'Päivän ka: ' + avgs[3] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[96] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[97] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -225,7 +225,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[4]} description={'Päivän ka: ' + avgs[4] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[4]} description={'Päivän ka: ' + avgs[4] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[120] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[121] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -277,7 +277,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[5]} description={'Päivän ka: ' + avgs[5] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[5]} description={'Päivän ka: ' + avgs[5] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[144] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[145] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -329,7 +329,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[6]} description={'Päivän ka: ' + avgs[6] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[6]} description={'Päivän ka: ' + avgs[6] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[168] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[169] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -381,7 +381,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[7]} description={'Päivän ka: ' + avgs[7] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[7]} description={'Päivän ka: ' + avgs[7] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[192] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[193] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -433,7 +433,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[8]} description={'Päivän ka: ' + avgs[8] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[8]} description={'Päivän ka: ' + avgs[8] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[216] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[217] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -485,7 +485,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[9]} description={'Päivän ka: ' + avgs[9] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[9]} description={'Päivän ka: ' + avgs[9] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[240] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[241] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -537,7 +537,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[10]} description={'Päivän ka: ' + avgs[10] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[10]} description={'Päivän ka: ' + avgs[10] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[264] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[265] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -589,7 +589,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[11]} description={'Päivän ka: ' + avgs[11] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[11]} description={'Päivän ka: ' + avgs[11] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[288]} />
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[289] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
@@ -640,7 +640,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[12]} description={'Päivän ka: ' + avgs[12] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[12]} description={'Päivän ka: ' + avgs[12] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[312] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[313] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -692,7 +692,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[13]} description={'Päivän ka: ' + avgs[13] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[13]} description={'Päivän ka: ' + avgs[13] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[336] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[337] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -744,7 +744,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[14]} description={'Päivän ka: ' + avgs[14] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[14]} description={'Päivän ka: ' + avgs[14] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[360] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[361] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -796,7 +796,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[15]} description={'Päivän ka: ' + avgs[15]+ 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[15]} description={'Päivän ka: ' + avgs[15]+ 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[384] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[385] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -848,7 +848,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[16]} description={'Päivän ka: ' + avgs[16] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[16]} description={'Päivän ka: ' + avgs[16] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[408] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[409] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -900,7 +900,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[17]} description={'Päivän ka: ' + avgs[17] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[17]} description={'Päivän ka: ' + avgs[17] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[432] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[433] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -952,7 +952,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[18]} description={'Päivän ka: ' + avgs[18] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[18]} description={'Päivän ka: ' + avgs[18] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[457] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[457] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1004,7 +1004,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[19]} description={'Päivän ka: ' + avgs[19] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[19]} description={'Päivän ka: ' + avgs[19] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[480] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[481] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1056,7 +1056,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[20]} description={'Päivän ka: ' + avgs[20] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[20]} description={'Päivän ka: ' + avgs[20] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[504] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[505] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1108,7 +1108,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[21]} description={'Päivän ka: ' + avgs[21] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[21]} description={'Päivän ka: ' + avgs[21] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[528] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[529] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1160,7 +1160,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[22]} description={'Päivän ka: ' + avgs[22] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[22]} description={'Päivän ka: ' + avgs[22] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[552] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[553] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1212,7 +1212,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[23]} description={'Päivän ka: ' + avgs[23] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[23]} description={'Päivän ka: ' + avgs[23] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[576] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[577] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1264,7 +1264,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[24]} description={'Päivän ka: ' + avgs[24] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[24]} description={'Päivän ka: ' + avgs[24] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[600] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[601] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1316,7 +1316,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[25]} description={'Päivän ka: ' + avgs[25] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[25]} description={'Päivän ka: ' + avgs[25] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[624] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[625] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1368,7 +1368,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[26]} description={'Päivän ka: ' + avgs[26] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[26]} description={'Päivän ka: ' + avgs[26] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[648] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[649] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1420,7 +1420,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[27]} description={'Päivän ka: ' + avgs[27] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[27]} description={'Päivän ka: ' + avgs[27] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[672] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[673] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1472,7 +1472,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[29]} description={'Päivän ka: ' + avgs[29] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[29]} description={'Päivän ka: ' + avgs[29] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[696] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[697] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
@@ -1524,7 +1524,7 @@ const YearList = ({ newPrices, dates, avgs }) => {
         </List.Accordion>
         <Divider style={{backgroundColor: '#2B2B2B' }}/>
         <List.Accordion
-          title={dates[30]} description={'Päivän ka: ' + avgs[30] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} >
+          title={dates[30]} description={'Päivän ka: ' + avgs[30] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} >
           <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[720] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
           <Divider style={{backgroundColor: 'grey' }}/>
           <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[721] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />

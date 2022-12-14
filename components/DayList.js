@@ -14,10 +14,10 @@ const DayList = ({ newPrices, dates, avgs }) => {
   return (
     <List.Section title="">
       <List.Accordion
-        title="Näytä tuntihinnat" descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }}>
+        title="Näytä tuntihinnat" descriptionStyle={style.descriptionStyle} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }}>
       {/* style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} > */}
 
-        <List.Item title={dates}  description={'Päivän ka: ' + avgs[0] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#808080' }} descriptionStyle={style.titleDescriptionStyle} />
+        <List.Item title={dates}  description={'Päivän ka: ' + avgs[0] + 'snt/kWh'} titleStyle={style.titleStyle} style={{ backgroundColor: '#757575' }} descriptionStyle={style.titleDescriptionStyle} />
         <List.Item title={times[0]} titleStyle={style.titleStyleItems} description={newPrices[0] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />
         <Divider style={{backgroundColor: 'grey' }}/>
         <List.Item title={times[1]} titleStyle={style.titleStyleItems} description={newPrices[1] + 'snt/kWh'} descriptionStyle={style.descriptionStyleItems} />

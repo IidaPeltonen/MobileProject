@@ -122,7 +122,7 @@ export default StyleSheet.create({
       //näytä-otsikko, päivämäärät
       titleStyle: {
         color:'white', 
-        backgroundColor:'#808080',
+        backgroundColor:'#757575',
         alignSelf: 'center',
         fontFamily: 'Roboto',
         fontSize: 20
@@ -143,7 +143,7 @@ export default StyleSheet.create({
       titleDescriptionStyle: {
         color: 'white',
         alignSelf: 'center',
-        backgroundColor: '#808080',
+        backgroundColor: '#757575',
         fontFamily: 'Roboto',
       },
 

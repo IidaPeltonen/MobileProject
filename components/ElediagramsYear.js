@@ -237,7 +237,7 @@ export default function ElediagramsYear() {
           <SelectList
             boxStyles={{backgroundColor: '#5F5F5F'}}
             inputStyles={{fontSize: 15, color: 'white'}}
-            dropdownStyles={{backgroundColor: '#808080'}}
+            dropdownStyles={{backgroundColor: '#757575'}}
             dropdownTextStyles= {{color: 'white'}}
             setSelected={(val) => setSelected(val)}
             onSelect={() => checkTime(selected)}

@@ -29,7 +29,7 @@ function Development() {
   return (
     <Tab.Navigator  screenOptions= {{ 
       tabBarLabelStyle: { fontSize: 13 , fontFamily: 'Robotobold', color: 'white' },
-      tabBarStyle: { backgroundColor: '#808080', borderWidth: 2, borderColor: '#5F5F5F'},
+      tabBarStyle: { backgroundColor: '#757575', borderWidth: 2, borderColor: '#5F5F5F'},
       tabBarIndicatorStyle: {backgroundColor: '#FFC300', height: 2}, 
       lazy:true,
       swipeEnabled:false
