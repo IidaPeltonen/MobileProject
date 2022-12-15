@@ -89,65 +89,91 @@ export default function ElediagramsYear() {
 
   function checkTime(selected) {
     setIsSelected(true)
-    var monthNumber = 0
-    var monthsLast = 0
+  /*   var monthNumber = 0
+    var monthsLast = 0 */
+    var nxtMonth = 0
+    var nxtMontYear = 0
     var y = Number(selected.substring(selected.length - 4)) //hakee kk-tekstin vuosiluvun
     var m = selected.substring(0, 3) //hakee kk-tekstin 3 ekaa merkkiä
     //loputon iffi tarkistamaan mikä kk on ja mitä se on numerona
     if (m === 'Tam') {
       monthNumber = '01'
       monthsLast = Number(31)
+      nxtMonth = '02'
+      nxtMontYear = y
     }
     if (m === 'Hel') {
       monthNumber = '02'
       monthsLast = Number(28)
+      nxtMonth = '03'
+      nxtMontYear = y
     }
     if (m === 'Maa') {
       monthNumber = '03'
       monthsLast = Number(31)
+      nxtMonth = '04'      
+      nxtMontYear = y
     }
     if (m === 'Huh') {
       monthNumber = '04'
       monthsLast = Number(30)
+      nxtMonth = '05'
+      nxtMontYear = y
     }
     if (m === 'Tou') {
       monthNumber = '05'
       monthsLast = Number(31)
+      nxtMonth =  '06'
+      nxtMontYear = y
     }
     if (m === 'Kes') {
       monthNumber = '06'
       monthsLast = Number(30)
+      nxtMonth = '07'
+      nxtMontYear = y
     }
     if (m === 'Hei') {
       monthNumber = '07'
       monthsLast = Number(31)
+      nxtMonth = '08'
+      nxtMontYear = y
     }
     if (m === 'Elo') {
       monthNumber = '08'
       monthsLast = Number(31)
+      nxtMonth = '09'
+      nxtMontYear = y
     }
     if (m === 'Syy') {
       monthNumber = '09'
       monthsLast = Number(30)
+      nxtMonth = '10'
+      nxtMontYear = y
     }
     if (m === 'Lok') {
       monthNumber = '10'
       monthsLast = Number(31)
+      nxtMonth = '11'
+      nxtMontYear = y
     }
     if (m === 'Mar') {
       monthNumber = '11'
       monthsLast = Number(30)
+      nxtMonth = '12'
+      nxtMontYear = y
     }
     if (m === 'Jou') {
       monthNumber = '12'
       monthsLast = Number(31)
+      nxtMonth = '01'
+      nxtMontYear = Number(y + 1)
     }
-    getData(monthNumber, monthsLast, y)
+    getData(monthNumber, monthsLast, y, nxtMontYear, nxtMonth)
   }
 
-  function getData(monthNumber, monthsLast, y) {
+  function getData(monthNumber, monthsLast, y,nxtMontYear, nxtMonth) {
     let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
-    let end = 'periodEnd=' + y + monthNumber + monthsLast + EndTime
+    let end = 'periodEnd=' + nxtMontYear + nxtMonth +  Firstday + EndTime
 
     const tempURL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain
       + out_Domain + '' + start + end
@@ -157,6 +183,7 @@ export default function ElediagramsYear() {
         'Content-Type': 'application/xml',
       },
     })
+
       .then(res => res.text())
       .then(data => {
         let json = new XMLParser().parseFromString(data);
