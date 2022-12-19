@@ -13,6 +13,8 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 let day = new Date().getDate()
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (day === 1) {
   day = '01'
 }
@@ -40,7 +42,8 @@ if (day === 8) {
 if (day === 9) {
   day = '09'
 }
-
+//jos kk on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (month === 1) {
   month = '01'
 }
@@ -71,7 +74,8 @@ if (month === 9) {
 let sevenDaysAgoDay = (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getDate()
 const sevenDaysAgoMonth = (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getMonth() + 1
 const sevenDaysAgoYear = (new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)).getFullYear()
-
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (sevenDaysAgoDay === 1) {
   sevenDaysAgoDay = '01'
 }
@@ -99,7 +103,8 @@ if (sevenDaysAgoDay === 8) {
 if (sevenDaysAgoDay === 9) {
   sevenDaysAgoDay = '09'
 }
-
+//jos kk on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (sevenDaysAgoMonth === 1) {
   sevenDaysAgoMonth = '01'
 }
@@ -127,6 +132,7 @@ if (sevenDaysAgoMonth === 8) {
 if (sevenDaysAgoMonth === 9) {
   sevenDaysAgoMonth = '09'
 }
+//muuttujat diagrammin labelia varten
 let sixDaysAgoDay = (new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)).getDate()
 let sixDaysAgoMonth = (new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)).getMonth() + 1
 let fiveDaysAgoDay = (new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)).getDate()
@@ -155,6 +161,7 @@ export default function ElediagramsWeek() {
   const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
   const [isLoading, setIsLoading] = useState(false); // Spinnerille
 
+  //funktio keskiarvon laskentaan
   function getAvgs(prices, dates) {
     const tempAvg = []
     let avg = 0
@@ -172,6 +179,7 @@ export default function ElediagramsWeek() {
     setAvgs(tempAvg)
   }
 
+  //funktio päivän hintojen muuttamiseen oikeaan muotoon
   function getPriceOfTheWeek(prices) {
     const tempArr = []
     for (let i = 0; i < (prices.length - 24); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
@@ -180,6 +188,7 @@ export default function ElediagramsWeek() {
     setNewPrices(tempArr)
   }
 
+  //funktio päivämäärien hakemiseen taulukosta, näitä käytetään alasvetovalikossa
   function getDates(dates) {
     const tempArr2 = []
     for (let x = 0; x < (dates.length); x++) {
@@ -193,13 +202,14 @@ export default function ElediagramsWeek() {
     setDates(tempArr2)
   }
 
+  //funktio, joka muodostaa diagrammin
   const priceOfTheWeek = () => {
     if (newPrices.length) {
       return (
         <LineChart
-        withVerticalLines={false}
-        
+          withVerticalLines={false}
           data={{
+            //labelit päivämäärille
             labels: [sevenDaysAgoDay + '.' + sevenDaysAgoMonth, sixDaysAgoDay + '.' + sixDaysAgoMonth,
             fiveDaysAgoDay + '.' + fiveDaysAgoMonth, fourDaysAgoDay + '.' + fourDaysAgoMonth,
             threeDaysAgoDay + '.' + threeDaysAgoMonth, twDaysAgoDay + '.' + twoDaysAgoMonth,
@@ -228,6 +238,7 @@ export default function ElediagramsWeek() {
     }
   }
 
+  //diagrammin ulkoasu
   const chartConfig = {
     backgroundColor: "black",
     backgroundGradientFrom: "#171717",
@@ -249,7 +260,7 @@ export default function ElediagramsWeek() {
         let json = new XMLParser().parseFromString(data);
         const temp = json.getElementsByTagName('price')
         const temp2 = json.getElementsByTagName('start')
-        //poistetaan taulukosta eka, turha startti
+        //poistetaan taulukosta kaksi ekaa, turhaa starttia
         temp2.splice(0, 2);
         getPriceOfTheWeek(temp)
         getDates(temp2)
@@ -268,7 +279,7 @@ export default function ElediagramsWeek() {
         </View>
         <Text style={styles.text}>Viimeisen viikon aikana </Text>
         <Text style={styles.flex2}>
-        {isLoading ? <ActivityIndicator size="large" color="#ffffff"/> : priceOfTheWeek()}
+          {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheWeek()}
         </Text>
         <Weeklist newPrices={newPrices} dates={dates} avgs={avgs} />
       </ScrollView>

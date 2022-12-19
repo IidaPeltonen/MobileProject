@@ -13,6 +13,8 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 let day = new Date().getDate()
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (day === 1) {
   day = '01'
 }
@@ -40,7 +42,6 @@ if (day === 8) {
 if (day === 9) {
   day = '09'
 }
-
 if (month === 1) {
   month = '01'
 }
@@ -143,6 +144,7 @@ export default function ElediagramsDay() {
   const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
   const [isLoading, setIsLoading] = useState(false); // Spinnerille
 
+  //funktio keskiarvon laskentaan
   function getAvgs(prices) {
     const tempAvg = []
     let avg = 0
@@ -158,6 +160,7 @@ export default function ElediagramsDay() {
     setAvgs(tempAvg)
   }
 
+  //funktio päivän hintojen muuttamiseen oikeaan muotoon
   function getPriceOfTheDay(prices) {
     setDates(day + '.' + month + '.' + year)
     const tempArr = []
@@ -169,12 +172,13 @@ export default function ElediagramsDay() {
     setNewPrices(tempArr)
   }
 
+  //funktio, joka muodostaa diagrammin
   const priceOfTheDay = () => {
     if (newPrices.length) {
       return (
         <LineChart
-  
-        withHorizontalLines={false}
+          withHorizontalLines={false}
+          //labelit kellonajoille
           data={{
             labels: ["23", "01", "03", "05", "07", "09", "11", "13", "15", "17", "19", "21", "23"],
             datasets: [
@@ -196,12 +200,12 @@ export default function ElediagramsDay() {
             paddingRight: 35,
             borderRadius: 16
           }}
-
         />
       )
     }
   }
 
+  //diagrammin ulkoasu
   const chartConfig = {
     backgroundColor: "black",
     backgroundGradientFrom: "#171717",
@@ -235,13 +239,11 @@ export default function ElediagramsDay() {
           <Text style={styles.title}>Sähkön hintakehitys </Text>
           <Text style={styles.lowkey}>(snt/kWh,sis. Alv 10%)</Text>
         </View>
-        
         <Text style={styles.text}>Viimeisen vuorokauden aikana</Text>
         <Text style={styles.flex2}>
-        {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheDay()}
+          {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheDay()}
         </Text>
         <DayList newPrices={newPrices} dates={dates} avgs={avgs} />
-        
       </ScrollView>
     </View>
   )

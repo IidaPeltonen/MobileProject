@@ -1,5 +1,5 @@
 import { ScrollView, Text, View, Dimensions, } from 'react-native';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import { LineChart } from "react-native-chart-kit";
 import { ActivityIndicator } from 'react-native-paper';
@@ -24,8 +24,9 @@ export default function ElediagramsYear() {
   const [isSelected, setIsSelected] = useState(false);
   const [avgs, setAvgs] = useState([]); //tyhjä taulukko päiväkeskiarvoille
   const [isLoading, setIsLoading] = useState(false); // Spinnerille
-  const [monthsLast, setMonthsLast] = useState(0)
+  const [monthsLast, setMonthsLast] = useState(0) //kkn vika päivä
 
+  //funktio keskiarvon laskentaan
   function getAvgs(prices, dates) {
     const tempAvg = []
     let avg = 0
@@ -42,7 +43,6 @@ export default function ElediagramsYear() {
     }
     setAvgs(tempAvg)
   }
-
 
   //tämä rakentaa vuoden kuukauden nimillä, aloittaen edellisestä kuukaudesta
   function getYear() {
@@ -75,6 +75,7 @@ export default function ElediagramsYear() {
 
   ]
 
+  //diagrammin ulkoasu
   const chartConfig = {
     backgroundColor: "black",
     backgroundGradientFrom: "#171717",
@@ -88,6 +89,7 @@ export default function ElediagramsYear() {
     getYear()
   }, [])
 
+  //tutkii mikä kuukausi on valittu ja muuttaa tekstin luvuiksi ja oikeaan muotoon
   function checkTime(selected) {
     setIsSelected(true)
     var monthNumber = 0
@@ -111,7 +113,7 @@ export default function ElediagramsYear() {
     if (m === 'Maa') {
       monthNumber = '03'
       setMonthsLast(Number(31))
-      nxtMonth = '04'      
+      nxtMonth = '04'
       nxtMontYear = y
     }
     if (m === 'Huh') {
@@ -123,7 +125,7 @@ export default function ElediagramsYear() {
     if (m === 'Tou') {
       monthNumber = '05'
       setMonthsLast(Number(31))
-      nxtMonth =  '06'
+      nxtMonth = '06'
       nxtMontYear = y
     }
     if (m === 'Kes') {
@@ -171,9 +173,10 @@ export default function ElediagramsYear() {
     getData(monthNumber, y, nxtMontYear, nxtMonth)
   }
 
-  function getData(monthNumber, y,nxtMontYear, nxtMonth) {
+  //hakee valitun kuukauden perusteella datan
+  function getData(monthNumber, y, nxtMontYear, nxtMonth) {
     let start = 'periodStart=' + y + monthNumber + Firstday + StartTime + '&'
-    let end = 'periodEnd=' + nxtMontYear + nxtMonth +  Firstday + EndTime
+    let end = 'periodEnd=' + nxtMontYear + nxtMonth + Firstday + EndTime
 
     const tempURL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain
       + out_Domain + '' + start + end
@@ -189,6 +192,7 @@ export default function ElediagramsYear() {
         let json = new XMLParser().parseFromString(data);
         const prices = json.getElementsByTagName('price')
         const dates = json.getElementsByTagName('start')
+        //poistetaan datesista kaksi ekaa, turhaa kenttää
         dates.splice(0, 2)
         getpriceOfTheMonth(prices, dates)
         getAvgs(prices, dates)
@@ -197,11 +201,13 @@ export default function ElediagramsYear() {
       .catch(err => console.log(err));
   }
 
+  //muuttaa valitun kkn hinnat oikeaan muotoon
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
-    for (let i = 0; i < (prices.length); i++) { //jostain syystä prices-taulussa on yksi vuorukausi enemmän
+    for (let i = 0; i < (prices.length); i++) {
       tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
     }
+    //hoidetaan samalla päivämäärät
     const tempDatesArr = [] // labelia varten
     const tempDatesArr2 = [] // alasvetovalikkoa varten
     for (let x = 0; x < dates.length; x++) {
@@ -219,12 +225,13 @@ export default function ElediagramsYear() {
     setTimesArr(tempDatesArr2)
   }
 
+  //muodostaa valitun kkn diagrammin
   const priceOfTheMonth = () => {
     let lastIndex = times.length - 1
     if (newPrices.length) {
       return (
         <LineChart
-        withVerticalLines={false}
+          withVerticalLines={false}
           data={{
             labels: [times[0], times[4], times[9], times[14], times[19], times[24], times[lastIndex]],
             datasets: [
@@ -262,18 +269,18 @@ export default function ElediagramsYear() {
           </View>
           <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
           <SelectList
-            boxStyles={{backgroundColor: '#5F5F5F'}}
-            inputStyles={{fontSize: 15, color: 'white'}}
-            dropdownStyles={{backgroundColor: '#757575'}}
-            dropdownTextStyles= {{color: 'white'}}
+            boxStyles={{ backgroundColor: '#5F5F5F' }}
+            inputStyles={{ fontSize: 15, color: 'white' }}
+            dropdownStyles={{ backgroundColor: '#757575' }}
+            dropdownTextStyles={{ color: 'white' }}
             setSelected={(val) => setSelected(val)}
-            onSelect={() => checkTime(selected)}
+            onSelect={(val) => checkTime(selected)}
             data={data}
             save="value"
             placeholder='Valitse kuukausi'
           />
           <Text style={styles.flex2}>
-          {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheMonth()}
+            {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheMonth()}
           </Text>
           <YearList newPrices={newPrices} dates={timesArr} avgs={avgs} monthsLast={monthsLast} />
         </ScrollView>
@@ -291,18 +298,18 @@ export default function ElediagramsYear() {
           </View>
           <Text style={styles.text}>Valitse kuukausi, jonka hintoja haluat tarkastella</Text>
           <SelectList
-            boxStyles={{backgroundColor: '#5F5F5F'}}
-            inputStyles={{fontSize: 15, color: 'white'}}
-            dropdownStyles={{backgroundColor: '#808080'}}
-            dropdownTextStyles= {{color: 'white'}}
+            boxStyles={{ backgroundColor: '#5F5F5F' }}
+            inputStyles={{ fontSize: 15, color: 'white' }}
+            dropdownStyles={{ backgroundColor: '#808080' }}
+            dropdownTextStyles={{ color: 'white' }}
             setSelected={(val) => setSelected(val)}
-            onSelect={() => checkTime(selected)}
+            onSelect={() => checkTime(selected, isSelected)}
             data={data}
             save="value"
             placeholder='Valitse kuukausi'
           />
           <Text style={styles.flex2}>
-          {priceOfTheMonth()}
+            {priceOfTheMonth()}
           </Text>
         </ScrollView>
       </View>

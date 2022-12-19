@@ -13,6 +13,8 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 let day = new Date().getDate()
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (day === 1) {
   day = '01'
 }
@@ -40,7 +42,6 @@ if (day === 8) {
 if (day === 9) {
   day = '09'
 }
-
 if (month === 1) {
   month = '01'
 }
@@ -71,7 +72,8 @@ if (month === 9) {
 let monthAgoDay = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getDate()
 const monthAgoMonth = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getMonth() + 1
 const monthAgoYear = (new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)).getFullYear()
-
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (monthAgoDay === 1) {
   monthAgoDay = '01'
 }
@@ -99,10 +101,11 @@ if (monthAgoDay === 8) {
 if (monthAgoDay === 9) {
   monthAgoDay = '09'
 }
-
 if (monthAgoMonth === 1) {
   monthAgoMonth = '01'
 }
+//jos kk on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (monthAgoMonth === 2) {
   monthAgoMonth = '02'
 }
@@ -142,6 +145,7 @@ export default function ElediagramsMonth() {
   const [avgs, setAvgs] = useState([]); //tyhjä taulukko vrkn keskiarvoille
   const [isLoading, setIsLoading] = useState(false); // Spinnerille
 
+  //funktio keskiarvon laskentaan
   function getAvgs(prices, dates) {
     const tempAvg = []
     let avg = 0
@@ -159,12 +163,13 @@ export default function ElediagramsMonth() {
     setAvgs(tempAvg)
   }
 
-
+  //funktio päivän hintojen muuttamiseen oikeaan muotoon
   function getpriceOfTheMonth(prices, dates) {
     const tempArr = []
     for (let i = 0; i < (prices.length); i++) {
       tempArr.push(Number(prices[i].value / 10 * 1.10).toFixed(2)) //alv 10% 1.12 alkaen
     }
+    //haetaan samalla päivämäärät
     const tempDatesArr = []
     for (let x = 0; x < dates.length; x++) {
       //muutetaan päivämäärä suomalaiseen muotoon
@@ -178,15 +183,16 @@ export default function ElediagramsMonth() {
     setDates(tempDatesArr)
   }
 
+  //funktio, joka muodostaa diagrammin
   const priceOfTheMonth = () => {
     const lastOne = Number(dates.length)
     if (newPrices.length) {
       return (
         <LineChart
-        withVerticalLines={false}
-       
+          withVerticalLines={false}
           data={{
-            labels: [dates[0], dates[4], dates[9], dates[14], dates[19], dates[24], dates[lastOne-1]],
+            //labelit päivämäärille
+            labels: [dates[0], dates[4], dates[9], dates[14], dates[19], dates[24], dates[lastOne - 1]],
             datasets: [
               {
                 data: newPrices.map(item => {
@@ -211,6 +217,7 @@ export default function ElediagramsMonth() {
     }
   }
 
+  //diagrammin ulkoasu
   const chartConfig = {
     backgroundColor: "black",
     backgroundGradientFrom: "#171717",
@@ -252,7 +259,7 @@ export default function ElediagramsMonth() {
         </View>
         <Text style={styles.text}>Viimeisen kuukauden aikana </Text>
         <Text style={styles.flex2}>
-        {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheMonth()}
+          {isLoading ? <ActivityIndicator size="large" color="#ffffff" /> : priceOfTheMonth()}
         </Text>
         <MonthList newPrices={newPrices} dates={dates} avgs={avgs} />
       </ScrollView>
