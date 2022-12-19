@@ -13,6 +13,8 @@ const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 let day = new Date().getDate()
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (day === 1) {
   day = '01'
 }
@@ -40,7 +42,8 @@ if (day === 8) {
 if (day === 9) {
   day = '09'
 }
-
+//jos kk on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (month === 1) {
   month = '01'
 }
@@ -137,7 +140,16 @@ const end = 'periodEnd=' + nextDayYear + nextDayMonth + nextDayDay + EndTime
 const URL = 'https://web-api.tp.entsoe.eu/api?securityToken=' + APIKEY + documentType + in_Domain + out_Domain
   + start + end
 const time = new Date().getHours() // current time, tunti. Toimii myös seuraavan tunnin hinnanhakua varten
-const index = time - 1 // tästä taulukon indeksistä haetaan hinta
+let index = 0 // tästä taulukon indeksistä haetaan hinta
+//jos kello on 0
+if (time === 0) {
+  index = 23
+}
+//muuten
+else {
+  index = time -1
+}
+
 
 export default function Elepricenow() {
   const [data, setData] = useState([])
@@ -145,13 +157,14 @@ export default function Elepricenow() {
   const [priceNextHour, setPriceNextHour] = useState(0); //hinta seuraavalla tunnilla
   const [arrow, setArrow] = useState('left') //nuolen suunnan määrittävä
   const [color, setColor] = useState('blue') //nuolen värin määrittävä
-  const [maxPrice, setMaxPrice] = useState(0)
-  const [minPrice, setMinPrice] = useState(0)
-  const [avg, setAvg] = useState(0)
-  const [highTime, setHighTime] = useState(0)
-  const [lowTime, setLowTime] = useState(0)
+  const [maxPrice, setMaxPrice] = useState(0) //korkein hinta
+  const [minPrice, setMinPrice] = useState(0) //matalin hinta
+  const [avg, setAvg] = useState(0) //keskiarvot
+  const [highTime, setHighTime] = useState(0) //korkeimman hinnan kellonaika
+  const [lowTime, setLowTime] = useState(0) //matalimman hinnan kellonaika
   const [modalOpen, setModalOpen] = useState(false);
 
+  //vertaa hintaa nyt tunninpäästä-hintaan
   function compare(priceNow, priceNextHour) {
     //jos hinta nyt on suurempi kuin hinta tunnin päästä, kääntää nuolen alas ja muuttaa värin vihreäksi
     if (priceNow > priceNextHour) {
@@ -171,6 +184,7 @@ export default function Elepricenow() {
     return arrow, color
   }
 
+  //etsii korkeimman hinnan
   function findMaxPrice(prices) {
     let bigPrice = 0
     let timeUp = 0
@@ -187,6 +201,7 @@ export default function Elepricenow() {
     return maxPrice
   }
 
+  //etsii matalimman hinnan
   function findMinPrice(prices) {
     let smallPrice = 20000
     let timeDown = 0
@@ -203,6 +218,7 @@ export default function Elepricenow() {
     return minPrice
   }
 
+  //laskee päivän keskiarvon
   function findAvg(prices) {
     let average = 0
     for (let i = 0; i < 24; i++) {
@@ -263,18 +279,18 @@ export default function Elepricenow() {
               size={48}
               style={styles.icon}
             ></MaterialCommunityIcons></Text>
-        <Modal presentationStyle="overFullScreen" transparent style={styles.modalcontent} visible={modalOpen}>
-              <View style={styles.modal}>
+          <Modal presentationStyle="overFullScreen" transparent style={styles.modalcontent} visible={modalOpen}>
+            <View style={styles.modal}>
               <View style={styles.modalcontent}>
-              <Text style={styles.modaltext}>Vihreä nuoli alas = Hinta tulee laskemaan</Text>
-              <Text style={styles.modaltext}>Punainen nuoli ylös = Hinta tulee nousemaan</Text>
-              <Text style={styles.modaltext}>Keltainen oikealle = Hinta on pysynyt samana</Text>
-              <Button color='#757575' title='sulje' onPress={() => setModalOpen(false)}></Button>
+                <Text style={styles.modaltext}>Vihreä nuoli alas = Hinta tulee laskemaan</Text>
+                <Text style={styles.modaltext}>Punainen nuoli ylös = Hinta tulee nousemaan</Text>
+                <Text style={styles.modaltext}>Keltainen oikealle = Hinta pysyy samana</Text>
+                <Button color='#757575' title='sulje' onPress={() => setModalOpen(false)}></Button>
               </View>
-              </View>
-            </Modal>
-            <MaterialCommunityIcons name='information-outline'  size={25}  color={'#5F5F5F'} onPress={() => setModalOpen(true)}></MaterialCommunityIcons>
-          </Text>
+            </View>
+          </Modal>
+          <MaterialCommunityIcons name='information-outline' size={25} color={'#5F5F5F'} onPress={() => setModalOpen(true)}></MaterialCommunityIcons>
+        </Text>
         <Text style={styles.flex1}>
           <Text style={styles.text}>Päivän ylin (klo: {highTime}-{highTime + 1}):  </Text>
           <Text style={styles.notimportant}>{maxPrice ? maxPrice : <ActivityIndicator size="small" color="#ffffff" />}</Text>

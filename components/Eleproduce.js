@@ -16,7 +16,8 @@ const processType2 = '&processType=A01' // minkä tyyppistä tuotantotietoa haet
 const year = new Date().getFullYear()
 const month = new Date().getMonth() + 1
 let day = new Date().getDate()
-
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (day === 1) {
   day = '01'
 }
@@ -44,6 +45,8 @@ if (day === 8) {
 if (day === 9) {
   day = '09'
 }
+//jos kk on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
 if (month === 1) {
   month = '01'
 }
@@ -101,9 +104,8 @@ if (previousDay === 8) {
 if (previousDay === 9) {
   previousDay = '09'
 }
-
 let previousMonth = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getMonth() + 1;
-//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//jos kk on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
 //joten muutetaan ne kaksinumeroiseksi
 if (previousMonth === 1) {
   previousMonth = '01'
@@ -135,8 +137,12 @@ if (previousMonth === 9) {
 
 const previousYear = new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getFullYear();
 //haetaan kellonaika 24h sitten
-const dAgo = (new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getHours())
-//jos aika on yksinumeroinen
+let dAgo = (new Date(new Date().getTime() - (24 * 60 * 60 * 1000)).getHours())
+//jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
+if (dAgo === 0) {
+  dAgo = '00'
+}
 if (dAgo === 1) {
   dAgo = '01'
 }
@@ -167,8 +173,50 @@ if (dAgo === 9) {
 const minutes = '00'
 const StartTime = dAgo + minutes
 //kellonaika nyt
-const hours = new Date().getHours()
-const EndTime = hours+ minutes
+let hours = new Date().getHours()
+let hoursNumber = 0
+// jos on vrkn eka tunti
+if (hours === 0) {
+  hoursNumber = 23
+}
+else {
+  hoursNumber = new Date().getHours()
+}
+
+//jos tunnit on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
+//joten muutetaan ne kaksinumeroiseksi
+if (hours === 0) {
+  hours = '00'
+}
+if (hours === 1) {
+  hours = '01'
+}
+if (hours === 2) {
+  hours = '02'
+}
+if (hours === 3) {
+  hours = '03'
+}
+if (hours === 4) {
+  hours = '04'
+}
+if (hours === 5) {
+  hours = '05'
+}
+if (hours === 6) {
+  hours = '06'
+}
+if (hours === 7) {
+  hours = '07'
+}
+if (hours === 8) {
+  hours = '08'
+}
+if (hours === 9) {
+  hours = '09'
+}
+
+const EndTime = hours + minutes
 const start = '&periodStart=' + previousYear + previousMonth + previousDay + StartTime
 const end = '&periodEnd=' + year + month + day + EndTime
 
@@ -192,9 +240,10 @@ export default function Eleproduce() {
     lastLoad = Number(lastLoad)
     lastGeneration = Number(lastGeneration)
     let situation = Number(lastLoad - lastGeneration)
+    //jos tarve on alle 0
     if (situation >= 0) {
       setImportNeed(Number(situation));
-    } 
+    }
     else {
       setImportNeed(Number(0));
     }
@@ -216,16 +265,22 @@ export default function Eleproduce() {
       .then(([dataLoad, dataGeneration]) => {
         let json = new XMLParser().parseFromString(dataLoad);
         let loadTemp = json.getElementsByTagName('quantity')
-        let length = loadTemp.length
-        let lastLoadTemp = Number(loadTemp[length-1].value)
+        let length = 0  
+        if (loadTemp.length === 0) {
+          length = 23
+        }
+        else {
+          length = loadTemp.length 
+        }
+        let lastLoadTemp = Number(loadTemp[length - 1].value)
         setLastLoad(Number(lastLoadTemp));
 
         let json2 = new XMLParser().parseFromString(dataGeneration);
         let generationsTemp = json2.getElementsByTagName('quantity')
-        let lastGenerationTemp = Number(generationsTemp[hours-2].value)
+        let lastGenerationTemp = Number(generationsTemp[hoursNumber - 2].value)
 
         importNeedCalculation(lastLoadTemp, lastGenerationTemp)
-        setLastGeneration(Number(generationsTemp[hours-2].value));
+        setLastGeneration(Number(generationsTemp[hoursNumber - 2].value));
       })
       .catch(err => console.log(err));
   }, [])
@@ -243,10 +298,10 @@ export default function Eleproduce() {
     <View>
       <View style={styles.square}>
         <ScrollView>
-        <View style={styles.titlepos}>
-          <Text style={styles.title2}>Sähkön kokonaiskulutus ja -tuotanto Suomessa</Text>
-          <Text style={styles.lowkey}>{day}.{month}.{year} aikavälillä {hours -2} - {hours - 1} (MWh/h)</Text>
-        </View>
+          <View style={styles.titlepos}>
+            <Text style={styles.title2}>Sähkön kokonaiskulutus ja -tuotanto Suomessa</Text>
+            <Text style={styles.lowkey}>{day}.{month}.{year} aikavälillä {hoursNumber - 2} - {hoursNumber - 1} (MWh/h)</Text>
+          </View>
           <Text style={styles.flex3}>
             <Text style={styles.text}>Toteutunut kokonaiskulutus:  {"\n"}</Text>
             <Text style={styles.notimportant}>{lastLoad ? lastLoad : <ActivityIndicator size="small" color="#ffffff" />}</Text>
