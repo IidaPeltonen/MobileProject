@@ -182,6 +182,21 @@ if (hours === 0) {
 else {
   hoursNumber = new Date().getHours()
 }
+//muuttujat otsikkoa varten
+let hoursForTopicStart = 0
+let hoursForTopicEnd = 0
+if (hours === 0) {
+  hoursForTopicStart = 22
+  hoursForTopicEnd = 23
+}
+if (hours === 1) {
+  hoursForTopicStart = 23
+  hoursForTopicEnd = 0
+}
+else {
+  hoursForTopicStart = hours -2
+  hoursForTopicEnd = hours -1
+}
 
 //jos tunnit on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
 //joten muutetaan ne kaksinumeroiseksi
@@ -300,7 +315,7 @@ export default function Eleproduce() {
         <ScrollView>
           <View style={styles.titlepos}>
             <Text style={styles.title2}>Sähkön kokonaiskulutus ja -tuotanto Suomessa</Text>
-            <Text style={styles.lowkey}>{day}.{month}.{year} aikavälillä {hoursNumber - 2} - {hoursNumber - 1} (MWh/h)</Text>
+            <Text style={styles.lowkey}>{day}.{month}.{year} aikavälillä {hoursForTopicStart} - {hoursForTopicEnd} (MWh/h)</Text>
           </View>
           <Text style={styles.flex3}>
             <Text style={styles.text}>Toteutunut kokonaiskulutus:  {"\n"}</Text>
