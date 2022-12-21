@@ -160,9 +160,13 @@ export default function Elepricenow() {
   const [maxPrice, setMaxPrice] = useState(0) //korkein hinta
   const [minPrice, setMinPrice] = useState(0) //matalin hinta
   const [avg, setAvg] = useState(0) //keskiarvot
-  const [highTime, setHighTime] = useState(0) //korkeimman hinnan kellonaika
   const [lowTime, setLowTime] = useState(0) //matalimman hinnan kellonaika
-  const [modalOpen, setModalOpen] = useState(false);
+  const [highTime, setHighTime] = useState(0) //korkeimman hinnan kellonaika
+  const [timeStart, setTimeStart] = useState(0) 
+  const [timeEnd, setTimeEnd] = useState(0) 
+  const [timeStart2, setTimeStart2] = useState(0) 
+  const [timeEnd2, setTimeEnd2] = useState(0) 
+   const [modalOpen, setModalOpen] = useState(false);
 
   //vertaa hintaa nyt tunninpäästä-hintaan
   function compare(priceNow, priceNextHour) {
@@ -198,6 +202,14 @@ export default function Elepricenow() {
     bigPrice = (bigPrice / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setMaxPrice(bigPrice)
     setHighTime(timeUp)
+    if (timeUp === 24) {
+      setTimeStart(0)
+      setTimeEnd(1)
+    }
+    else {
+      setTimeStart(timeUp)
+      setTimeEnd(timeUp + 1)
+  }
     return maxPrice
   }
 
@@ -215,6 +227,14 @@ export default function Elepricenow() {
     smallPrice = (smallPrice / 10 * 1.10).toFixed(2) //alv 10% 1.12 alkaen
     setMinPrice(smallPrice)
     setLowTime(timeDown)
+    if (timeDown === 24) {
+      setTimeStart2(0)
+      setTimeEnd2(1)
+    }
+    else {
+      setTimeStart2(timeDown)
+      setTimeEnd2(timeDown + 1)
+  }
     return minPrice
   }
 
@@ -292,11 +312,11 @@ export default function Elepricenow() {
           <MaterialCommunityIcons name='information-outline' size={25} color={'#5F5F5F'} onPress={() => setModalOpen(true)}></MaterialCommunityIcons>
         </Text>
         <Text style={styles.flex1}>
-          <Text style={styles.text}>Päivän ylin (klo: {highTime}-{highTime + 1}):  </Text>
+          <Text style={styles.text}>Päivän ylin (klo: {timeStart}-{timeEnd}):  </Text>
           <Text style={styles.notimportant}>{maxPrice ? maxPrice : <ActivityIndicator size="small" color="#ffffff" />}</Text>
         </Text>
         <Text style={styles.flex1}>
-          <Text style={styles.text}>Päivän alin (klo: {lowTime}-{lowTime + 1}):  </Text>
+          <Text style={styles.text}>Päivän alin (klo: {timeStart2}-{timeEnd2}):  </Text>
           <Text style={styles.notimportant}>{minPrice ? minPrice : <ActivityIndicator size="small" color="#ffffff" />}</Text>
         </Text>
         <Text style={styles.flex1}>
