@@ -14,7 +14,7 @@ const in_Domain = '&in_Domain=10YFI-1--------U' // maakoodi, "FI"
 const processType = '&processType=A16' // minkä tyyppistä kulutustietoa haetaan, "realised"
 const processType2 = '&processType=A01' // minkä tyyppistä tuotantotietoa haetaan, "day ahead"
 const year = new Date().getFullYear()
-const month = new Date().getMonth() + 1
+let month = new Date().getMonth() + 1
 let day = new Date().getDate()
 //jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
 //joten muutetaan ne kaksinumeroiseksi

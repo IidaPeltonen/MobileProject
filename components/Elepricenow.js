@@ -11,7 +11,7 @@ const documentType = '&documentType=A44&' //mitä tietoaineistoa luetaan
 const in_Domain = 'in_Domain=10YFI-1--------U&' // maakoodi
 const out_Domain = 'out_Domain=10YFI-1--------U&'
 const year = new Date().getFullYear()
-const month = new Date().getMonth() + 1
+let month = new Date().getMonth() + 1
 let day = new Date().getDate()
 //jos päivä on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
 //joten muutetaan ne kaksinumeroiseksi
@@ -101,7 +101,7 @@ if (nextDayDay === 8) {
 if (nextDayDay === 9) {
   nextDayDay = '09'
 }
-const nextDayMonth = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).getMonth() + 1;
+let nextDayMonth = new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).getMonth() + 1;
 //jos kk on alle 10, se saadaan yksinumeroisena, jolloin url ei toimi
 //joten muutetaan ne kaksinumeroiseksi
 if (nextDayMonth === 1) {
